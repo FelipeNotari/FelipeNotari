@@ -1,4 +1,4 @@
-### Hi there 👋
+### Prazer, Felipe Notari 
 
 <!--
 **FelipeNotari/FelipeNotari** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
@@ -14,3 +14,5 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+![FelipeNotari's GitHub stats](https://github-readme-stats.vercel.app/api?username=FelipeNotari&show_icons=true&theme=chartreuse-dark)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=FelipeNotari&layout=compact&show_icons=true&theme=chartreuse-dark)](https://github.com/FelipeNotari/github-readme-stats)
