@@ -1,8 +1,8 @@
 # Prazer, Felipe Notari 
 
-Considero meu conhecimento em HTML, CSS, JavaScript, Git e GitHub intermediráio.
+Possuo conhecimento intermediário em HTML, CSS, JavaScript, PHP, Git e GitHub.
 
-Estou buscando aprender: Bootstrap, React e PHP.
+Estou buscando aprender: Bootstrap, React e MySQL.
 
 Meu interesse pela programação é com ela, poder melhorar a vida de muitas pessoas.
 
