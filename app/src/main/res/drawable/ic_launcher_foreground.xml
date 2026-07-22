@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Pao de cima -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M30,46 C30,38 40,33 54,33 C68,33 78,38 78,46 L78,49 L30,49 Z" />
+    <!-- Alface -->
+    <path
+        android:fillColor="#B2F2BB"
+        android:pathData="M30,51 L78,51 L74,58 C70,55 66,60 62,57 C58,54 54,60 50,57 C46,54 42,60 38,57 L30,54 Z" />
+    <!-- Hamburguer (carne) -->
+    <path
+        android:fillColor="#7B4B27"
+        android:pathData="M31,59 L77,59 A4,4 0 0,1 77,67 L31,67 A4,4 0 0,1 31,59 Z" />
+    <!-- Pao de baixo -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M31,69 L77,69 C77,74 70,77 54,77 C38,77 31,74 31,69 Z" />
+</vector>

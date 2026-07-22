@@ -1,0 +1,58 @@
+name: Gerar APK
+
+on:
+  push:
+    branches:
+      - "claude/lanchonete-sales-expenses-app-80kcf4"
+    paths-ignore:
+      - "README.md"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Configurar Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Dar permissao ao gradlew
+        run: chmod +x ./gradlew
+
+      - name: Compilar APK (debug, instalavel)
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Renomear APK
+        run: cp app/build/outputs/apk/debug/app-debug.apk lanchonete.apk
+
+      - name: Publicar Release com o APK
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: apk-latest
+          name: Lanchonete - ultimo APK
+          body: |
+            APK do aplicativo Lanchonete (versao de teste, instalavel no Android).
+
+            Como instalar:
+            1. Baixe o arquivo `lanchonete.apk` abaixo pelo celular.
+            2. Abra o arquivo. Se pedir, permita "instalar de fontes desconhecidas".
+            3. Pronto! O app fica na tela inicial.
+          files: lanchonete.apk
+          make_latest: true
+
+      - name: Guardar APK como artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: lanchonete-apk
+          path: lanchonete.apk
