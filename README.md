@@ -6,11 +6,12 @@ Aplicativo Android simples para anotar, dia a dia, **quanto você vendeu** e
 
 ## Funciona assim
 
-- **Lançar**: escolha a data, digite o valor de vendas e o valor de gastos do
-  dia, e toque em **Salvar**.
-- **Resumo**: escolha o mês e veja os totais de **vendas**, **gastos** e o
-  **lucro** (vendas − gastos), com a lista de todos os dias. Dá para editar ou
-  apagar cada dia.
+- **Lançar**: escolha a data, escreva uma **descrição do dia** (opcional),
+  informe as vendas separadas por **Pix**, **Dinheiro** e **Cartão**, o valor
+  de **gastos** do dia, e toque em **Salvar**.
+- **Resumo**: escolha o mês e veja os totais de **vendas**, o resumo **por tipo
+  de venda** (Pix, Dinheiro e Cartão), os **gastos** e o **lucro** (vendas −
+  gastos), com o histórico de todos os dias. Dá para editar ou apagar cada dia.
 - **Backup**: exporte todos os dados para um arquivo (guarde no Google Drive,
   Downloads etc.) e importe depois — útil ao trocar de celular.
 

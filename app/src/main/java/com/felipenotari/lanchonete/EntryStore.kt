@@ -6,15 +6,20 @@ import org.json.JSONObject
 import java.io.File
 
 /**
- * Um lancamento de um dia: vendas e gastos guardados em centavos (para evitar
- * erros de arredondamento com valores em dinheiro).
+ * Um lancamento de um dia. As vendas sao separadas por tipo de pagamento
+ * (Pix, Dinheiro e Cartao) e os valores sao guardados em centavos (para
+ * evitar erros de arredondamento com dinheiro).
  */
 data class DayEntry(
-    val date: String,        // formato "yyyy-MM-dd"
-    val salesCents: Long,    // valor vendido no dia, em centavos
-    val expensesCents: Long  // valor gasto no dia, em centavos
+    val date: String,            // formato "yyyy-MM-dd"
+    val description: String,     // descricao/observacao do dia
+    val salesPixCents: Long,     // vendas no Pix
+    val salesCashCents: Long,    // vendas em Dinheiro
+    val salesCardCents: Long,    // vendas no Cartao
+    val expensesCents: Long      // gastos do dia
 ) {
-    val profitCents: Long get() = salesCents - expensesCents
+    val salesTotalCents: Long get() = salesPixCents + salesCashCents + salesCardCents
+    val profitCents: Long get() = salesTotalCents - expensesCents
 }
 
 /**
@@ -34,13 +39,8 @@ class EntryStore(private val context: Context) {
             val json = JSONObject(file.readText())
             val arr = json.optJSONArray("entries") ?: JSONArray()
             for (i in 0 until arr.length()) {
-                val o = arr.getJSONObject(i)
-                val date = o.getString("date")
-                map[date] = DayEntry(
-                    date = date,
-                    salesCents = o.getLong("salesCents"),
-                    expensesCents = o.getLong("expensesCents")
-                )
+                val e = parseEntry(arr.getJSONObject(i))
+                map[e.date] = e
             }
             map
         } catch (e: Exception) {
@@ -79,18 +79,32 @@ class EntryStore(private val context: Context) {
         val json = JSONObject(text)
         val arr = json.optJSONArray("entries") ?: JSONArray()
         for (i in 0 until arr.length()) {
-            val o = arr.getJSONObject(i)
-            val date = o.getString("date")
-            incoming[date] = DayEntry(
-                date = date,
-                salesCents = o.getLong("salesCents"),
-                expensesCents = o.getLong("expensesCents")
-            )
+            val e = parseEntry(arr.getJSONObject(i))
+            incoming[e.date] = e
         }
         val result = if (replace) LinkedHashMap() else loadAll()
         result.putAll(incoming)
         saveAll(result)
         return incoming.size
+    }
+
+    /**
+     * Le um lancamento do JSON. Mantem compatibilidade com o formato antigo,
+     * em que havia apenas "salesCents" (esse valor vira venda em Dinheiro).
+     */
+    private fun parseEntry(o: JSONObject): DayEntry {
+        val date = o.getString("date")
+        val hasSplit = o.has("salesPixCents") ||
+            o.has("salesCashCents") || o.has("salesCardCents")
+        val cashLegacy = if (!hasSplit && o.has("salesCents")) o.getLong("salesCents") else 0L
+        return DayEntry(
+            date = date,
+            description = o.optString("description", ""),
+            salesPixCents = o.optLong("salesPixCents", 0L),
+            salesCashCents = o.optLong("salesCashCents", cashLegacy),
+            salesCardCents = o.optLong("salesCardCents", 0L),
+            expensesCents = o.optLong("expensesCents", 0L)
+        )
     }
 
     private fun mapToJson(map: Map<String, DayEntry>): String {
@@ -100,13 +114,16 @@ class EntryStore(private val context: Context) {
             .forEach { e ->
                 val o = JSONObject()
                 o.put("date", e.date)
-                o.put("salesCents", e.salesCents)
+                o.put("description", e.description)
+                o.put("salesPixCents", e.salesPixCents)
+                o.put("salesCashCents", e.salesCashCents)
+                o.put("salesCardCents", e.salesCardCents)
                 o.put("expensesCents", e.expensesCents)
                 arr.put(o)
             }
         val root = JSONObject()
         root.put("app", "Lanchonete")
-        root.put("version", 1)
+        root.put("version", 2)
         root.put("entries", arr)
         return root.toString(2)
     }

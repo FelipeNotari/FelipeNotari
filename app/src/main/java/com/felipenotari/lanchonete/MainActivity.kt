@@ -1,6 +1,5 @@
 package com.felipenotari.lanchonete
 
-import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -32,6 +31,8 @@ import java.util.TimeZone
 private val Laranja = Color(0xFFE8590C)
 private val Verde = Color(0xFF2B8A3E)
 private val Vermelho = Color(0xFFC92A2A)
+private val Pix = Color(0xFF0C8577)      // Pix (verde-agua)
+private val Cartao = Color(0xFF1971C2)   // Cartao (azul)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -125,8 +126,9 @@ fun App(store: EntryStore) {
                 0 -> LancarScreen(
                     initialDate = editDate,
                     entries = entries,
-                    onSaved = { date ->
-                        editDate = date
+                    onSave = { entry ->
+                        store.put(entry)
+                        editDate = entry.date
                         refresh()
                         Toast.makeText(context, "Dia salvo!", Toast.LENGTH_SHORT).show()
                     }
@@ -162,18 +164,24 @@ fun App(store: EntryStore) {
 fun LancarScreen(
     initialDate: String,
     entries: Map<String, DayEntry>,
-    onSaved: (String) -> Unit
+    onSave: (DayEntry) -> Unit
 ) {
     val context = LocalContext.current
     var date by remember(initialDate) { mutableStateOf(initialDate) }
-    var sales by remember(initialDate) { mutableStateOf("") }
+    var description by remember(initialDate) { mutableStateOf("") }
+    var pix by remember(initialDate) { mutableStateOf("") }
+    var cash by remember(initialDate) { mutableStateOf("") }
+    var card by remember(initialDate) { mutableStateOf("") }
     var expenses by remember(initialDate) { mutableStateOf("") }
     var showPicker by remember { mutableStateOf(false) }
 
     // Carrega os valores do dia selecionado (se ja houver lancamento).
     LaunchedEffect(date, entries) {
         val e = entries[date]
-        sales = e?.let { centsToEdit(it.salesCents) } ?: ""
+        description = e?.description ?: ""
+        pix = e?.let { centsToEdit(it.salesPixCents) } ?: ""
+        cash = e?.let { centsToEdit(it.salesCashCents) } ?: ""
+        card = e?.let { centsToEdit(it.salesCardCents) } ?: ""
         expenses = e?.let { centsToEdit(it.expensesCents) } ?: ""
     }
 
@@ -197,16 +205,42 @@ fun LancarScreen(
             Text(isoToBr(date), fontSize = 18.sp)
         }
 
-        Spacer(Modifier.height(20.dp))
-        MoneyField("Quanto vendeu hoje", sales, Verde) { sales = it }
-
         Spacer(Modifier.height(16.dp))
-        MoneyField("Quanto gastou hoje", expenses, Vermelho) { expenses = it }
+        OutlinedTextField(
+            value = description,
+            onValueChange = { description = it },
+            label = { Text("Descricao do dia (opcional)") },
+            placeholder = { Text("Ex.: dia de feira, promocao de coxinha...") },
+            minLines = 2,
+            maxLines = 4,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(Modifier.height(20.dp))
+        Text("Quanto entrou (vendas)", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+        Spacer(Modifier.height(8.dp))
+        MoneyField("Pix", pix, Pix) { pix = it }
+        Spacer(Modifier.height(12.dp))
+        MoneyField("Dinheiro", cash, Verde) { cash = it }
+        Spacer(Modifier.height(12.dp))
+        MoneyField("Cartao", card, Cartao) { card = it }
+
+        val vendas = (parseToCents(pix) ?: 0L) +
+            (parseToCents(cash) ?: 0L) + (parseToCents(card) ?: 0L)
+        Spacer(Modifier.height(8.dp))
+        Text(
+            "Total de vendas: ${formatCents(vendas)}",
+            fontWeight = FontWeight.Bold,
+            color = Verde
+        )
+
+        Spacer(Modifier.height(20.dp))
+        Text("Quanto saiu (gastos)", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+        Spacer(Modifier.height(8.dp))
+        MoneyField("Gastos do dia", expenses, Vermelho) { expenses = it }
 
         Spacer(Modifier.height(12.dp))
-        val previewSales = parseToCents(sales) ?: 0L
-        val previewExpenses = parseToCents(expenses) ?: 0L
-        val lucro = previewSales - previewExpenses
+        val lucro = vendas - (parseToCents(expenses) ?: 0L)
         Text(
             "Lucro do dia: ${formatCents(lucro)}",
             fontSize = 16.sp,
@@ -217,14 +251,22 @@ fun LancarScreen(
         Spacer(Modifier.height(24.dp))
         Button(
             onClick = {
-                val s = parseToCents(sales)
-                val g = parseToCents(expenses)
-                if ((sales.isNotBlank() && s == null) || (expenses.isNotBlank() && g == null)) {
+                val fields = listOf(pix, cash, card, expenses)
+                val invalido = fields.any { it.isNotBlank() && parseToCents(it) == null }
+                if (invalido) {
                     Toast.makeText(context, "Digite um valor valido.", Toast.LENGTH_SHORT).show()
                     return@Button
                 }
-                store_put(context, DayEntry(date, s ?: 0L, g ?: 0L))
-                onSaved(date)
+                onSave(
+                    DayEntry(
+                        date = date,
+                        description = description.trim(),
+                        salesPixCents = parseToCents(pix) ?: 0L,
+                        salesCashCents = parseToCents(cash) ?: 0L,
+                        salesCardCents = parseToCents(card) ?: 0L,
+                        expensesCents = parseToCents(expenses) ?: 0L
+                    )
+                )
             },
             modifier = Modifier.fillMaxWidth().height(56.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Laranja)
@@ -292,13 +334,21 @@ fun ResumoScreen(
         .filter { monthKeyOf(it.date) == key }
         .sortedByDescending { it.date }
 
-    val totalSales = monthEntries.sumOf { it.salesCents }
-    val totalExpenses = monthEntries.sumOf { it.expensesCents }
-    val lucro = totalSales - totalExpenses
+    val totPix = monthEntries.sumOf { it.salesPixCents }
+    val totCash = monthEntries.sumOf { it.salesCashCents }
+    val totCard = monthEntries.sumOf { it.salesCardCents }
+    val totSales = totPix + totCash + totCard
+    val totExpenses = monthEntries.sumOf { it.expensesCents }
+    val lucro = totSales - totExpenses
 
     var confirmDelete by remember { mutableStateOf<String?>(null) }
 
-    Column(Modifier.fillMaxSize().padding(16.dp)) {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp)
+    ) {
         // Seletor de mes
         Row(
             Modifier.fillMaxWidth(),
@@ -321,9 +371,27 @@ fun ResumoScreen(
         }
 
         Spacer(Modifier.height(12.dp))
-        TotalCard("Vendas do mes", totalSales, Verde)
+        TotalCard("Vendas do mes", totSales, Verde, big = true)
+
         Spacer(Modifier.height(8.dp))
-        TotalCard("Gastos do mes", totalExpenses, Vermelho)
+        // Resumo por tipo de venda
+        Card(
+            Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFFF1F3F5))
+        ) {
+            Column(Modifier.padding(16.dp)) {
+                Text("Vendas por tipo", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                Spacer(Modifier.height(8.dp))
+                BreakdownRow("Pix", totPix, Pix)
+                Spacer(Modifier.height(6.dp))
+                BreakdownRow("Dinheiro", totCash, Verde)
+                Spacer(Modifier.height(6.dp))
+                BreakdownRow("Cartao", totCard, Cartao)
+            }
+        }
+
+        Spacer(Modifier.height(8.dp))
+        TotalCard("Gastos do mes", totExpenses, Vermelho)
         Spacer(Modifier.height(8.dp))
         TotalCard(
             if (lucro >= 0) "Lucro do mes" else "Prejuizo do mes",
@@ -333,7 +401,7 @@ fun ResumoScreen(
         )
 
         Spacer(Modifier.height(16.dp))
-        Text("Dias lancados", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+        Text("Historico de dias", fontWeight = FontWeight.Bold, fontSize = 16.sp)
         Spacer(Modifier.height(8.dp))
 
         if (monthEntries.isEmpty()) {
@@ -342,11 +410,9 @@ fun ResumoScreen(
                 color = Color.Gray
             )
         } else {
-            Column(Modifier.verticalScroll(rememberScrollState())) {
-                monthEntries.forEach { e ->
-                    DayRow(e, onClick = { onEditDay(e.date) }, onDelete = { confirmDelete = e.date })
-                    HorizontalDivider()
-                }
+            monthEntries.forEach { e ->
+                DayRow(e, onClick = { onEditDay(e.date) }, onDelete = { confirmDelete = e.date })
+                HorizontalDivider()
             }
         }
     }
@@ -365,6 +431,17 @@ fun ResumoScreen(
                 TextButton(onClick = { confirmDelete = null }) { Text("Cancelar") }
             }
         )
+    }
+}
+
+@Composable
+private fun BreakdownRow(label: String, cents: Long, color: Color) {
+    Row(
+        Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(label, fontSize = 15.sp, color = Color.DarkGray)
+        Text(formatCents(cents), fontSize = 15.sp, fontWeight = FontWeight.Bold, color = color)
     }
 }
 
@@ -394,10 +471,17 @@ private fun DayRow(e: DayEntry, onClick: () -> Unit, onDelete: () -> Unit) {
     ) {
         Column(Modifier.weight(1f)) {
             Text(isoToBr(e.date), fontWeight = FontWeight.Bold, fontSize = 16.sp)
+            if (e.description.isNotBlank()) {
+                Text(e.description, fontSize = 13.sp, color = Color.Gray)
+            }
+            Spacer(Modifier.height(2.dp))
             Text(
-                "Vendas ${formatCents(e.salesCents)}  |  Gastos ${formatCents(e.expensesCents)}",
-                fontSize = 13.sp,
-                color = Color.DarkGray
+                "Pix ${formatCents(e.salesPixCents)}   Dinheiro ${formatCents(e.salesCashCents)}",
+                fontSize = 12.sp, color = Color.DarkGray
+            )
+            Text(
+                "Cartao ${formatCents(e.salesCardCents)}   Gastos ${formatCents(e.expensesCents)}",
+                fontSize = 12.sp, color = Color.DarkGray
             )
             Text(
                 "Lucro ${formatCents(e.profitCents)}",
@@ -462,12 +546,9 @@ fun BackupScreen(onExport: () -> Unit, onImport: () -> Unit) {
 
 /* ----------------------- Utilidades ----------------------- */
 
-private fun store_put(context: android.content.Context, entry: DayEntry) {
-    EntryStore(context.applicationContext).put(entry)
-}
-
-/** Converte centavos para o texto de edicao "150,50". */
+/** Converte centavos para o texto de edicao "150,50". Vazio quando for zero. */
 private fun centsToEdit(cents: Long): String {
+    if (cents == 0L) return ""
     val reais = cents / 100
     val c = (cents % 100).let { if (it < 0) -it else it }
     return "$reais," + c.toString().padStart(2, '0')
