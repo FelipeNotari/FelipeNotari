@@ -221,9 +221,9 @@ fun LancarScreen(
         Spacer(Modifier.height(8.dp))
         MoneyField("Pix", pix, Pix) { pix = it }
         Spacer(Modifier.height(12.dp))
-        MoneyField("Dinheiro", cash, Verde) { cash = it }
-        Spacer(Modifier.height(12.dp))
         MoneyField("Cartao", card, Cartao) { card = it }
+        Spacer(Modifier.height(12.dp))
+        MoneyField("Dinheiro", cash, Verde) { cash = it }
 
         val vendas = (parseToCents(pix) ?: 0L) +
             (parseToCents(cash) ?: 0L) + (parseToCents(card) ?: 0L)
@@ -384,9 +384,9 @@ fun ResumoScreen(
                 Spacer(Modifier.height(8.dp))
                 BreakdownRow("Pix", totPix, Pix)
                 Spacer(Modifier.height(6.dp))
-                BreakdownRow("Dinheiro", totCash, Verde)
-                Spacer(Modifier.height(6.dp))
                 BreakdownRow("Cartao", totCard, Cartao)
+                Spacer(Modifier.height(6.dp))
+                BreakdownRow("Dinheiro", totCash, Verde)
             }
         }
 
@@ -476,11 +476,11 @@ private fun DayRow(e: DayEntry, onClick: () -> Unit, onDelete: () -> Unit) {
             }
             Spacer(Modifier.height(2.dp))
             Text(
-                "Pix ${formatCents(e.salesPixCents)}   Dinheiro ${formatCents(e.salesCashCents)}",
+                "Pix ${formatCents(e.salesPixCents)}   Cartao ${formatCents(e.salesCardCents)}",
                 fontSize = 12.sp, color = Color.DarkGray
             )
             Text(
-                "Cartao ${formatCents(e.salesCardCents)}   Gastos ${formatCents(e.expensesCents)}",
+                "Dinheiro ${formatCents(e.salesCashCents)}   Gastos ${formatCents(e.expensesCents)}",
                 fontSize = 12.sp, color = Color.DarkGray
             )
             Text(
