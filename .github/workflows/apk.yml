@@ -80,7 +80,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
-          TAG="v1.0.${{ github.run_number }}"
+          # Tag propria deste app. O repositorio tem releases de outros apps,
+          # entao nada de tag generica: assim o link de download nunca muda e
+          # nunca esbarra na publicacao de outro projeto.
+          TAG="escala-apoio-latest"
           NOTAS=$(cat <<'TXT'
           **Escala do Apoio — Igreja Meta** (app Android)
 
@@ -96,10 +99,21 @@ jobs:
           Android 6.0 ou mais novo.
           TXT
           )
-          gh release create "$TAG" escala-do-apoio.apk \
-            --title "Escala do Apoio $TAG" \
-            --notes "$NOTAS" \
-            --latest \
-          || gh release upload "$TAG" escala-do-apoio.apk --clobber
+          # apaga a publicacao anterior deste app (com a tag) para que a nova
+          # aponte para o commit atual, mantendo o mesmo link de download
+          gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
 
-          echo "Link fixo: https://github.com/${{ github.repository }}/releases/latest/download/escala-do-apoio.apk"
+          gh release create "$TAG" escala-do-apoio.apk \
+            --target "$GITHUB_SHA" \
+            --title "Escala do Apoio — última versão" \
+            --notes "$NOTAS" \
+            --latest
+
+          # limpeza da primeira publicacao, que caiu numa tag ja existente do
+          # repositorio; so apaga se o release for mesmo deste app
+          ANTIGO=$(gh release view v1.0.1 --json name -q .name 2>/dev/null || true)
+          case "$ANTIGO" in
+            "Escala do Apoio"*) gh release delete v1.0.1 --yes || true ;;
+          esac
+
+          echo "Link fixo: https://github.com/${{ github.repository }}/releases/download/$TAG/escala-do-apoio.apk"
