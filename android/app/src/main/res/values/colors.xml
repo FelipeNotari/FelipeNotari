@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- mesmas cores do design da pagina -->
+    <color name="tinta">#0E1726</color>
+    <color name="topo">#16233A</color>
+    <color name="dock">#101B2C</color>
+    <color name="chama">#E2703A</color>
+    <color name="ambar">#E9B44C</color>
+</resources>

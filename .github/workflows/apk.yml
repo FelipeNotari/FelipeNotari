@@ -1,0 +1,105 @@
+name: APK do Escala do Apoio
+
+on:
+  push:
+    branches:
+      - main
+      - claude/android-app-local-storage-cq2haz
+    paths:
+      - 'android/**'
+      - '.github/workflows/apk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    name: Gerar APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar o codigo
+        uses: actions/checkout@v4
+
+      - name: Preparar o Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: Gerar o APK assinado
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon --stacktrace clean assembleRelease
+
+      - name: Conferir o APK
+        run: |
+          set -e
+          APK=android/app/build/outputs/apk/release/app-release.apk
+          test -f "$APK" || { echo "APK nao foi gerado"; exit 1; }
+
+          FERRAMENTAS="$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -1)"
+          echo "build-tools: $FERRAMENTAS"
+
+          echo "--- assinatura ---"
+          "$FERRAMENTAS/apksigner" verify --verbose --print-certs "$APK"
+
+          echo "--- identidade do app ---"
+          "$FERRAMENTAS/aapt2" dump badging "$APK" | head -5
+
+          echo "--- arquivos empacotados ---"
+          for f in assets/index.html assets/bridge.js assets/fonts.css \
+                   assets/fonts/archivo-latin.woff2 assets/fonts/inter-latin.woff2 \
+                   assets/fonts/jbmono-latin.woff2 classes.dex; do
+            unzip -l "$APK" | grep -q " $f\$" || { echo "FALTANDO no APK: $f"; exit 1; }
+            echo "ok: $f"
+          done
+
+          # a pagina nao pode ter sobrado nenhuma referencia a internet
+          unzip -p "$APK" assets/index.html > /tmp/index.html
+          if grep -q "fonts.googleapis.com\|fonts.gstatic.com" /tmp/index.html; then
+            echo "a pagina ainda aponta para fontes online"; exit 1
+          fi
+          echo "ok: pagina 100% offline"
+
+          cp "$APK" escala-do-apoio.apk
+          ls -lh escala-do-apoio.apk
+
+      - name: Guardar o APK como artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: escala-do-apoio-apk
+          path: escala-do-apoio.apk
+          if-no-files-found: error
+
+      - name: Publicar para download
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          TAG="v1.0.${{ github.run_number }}"
+          NOTAS=$(cat <<'TXT'
+          **Escala do Apoio — Igreja Meta** (app Android)
+
+          A mesma tela de sempre, agora como aplicativo: os dados ficam salvos no
+          proprio celular, funciona sem internet e nada e enviado para fora.
+
+          ### Como instalar
+          1. Baixe o arquivo `escala-do-apoio.apk` aqui embaixo, pelo celular.
+          2. Toque no arquivo baixado.
+          3. Se o Android pedir, autorize "instalar apps desconhecidos" para o
+             navegador ou para o gerenciador de arquivos e confirme a instalacao.
+
+          Android 6.0 ou mais novo.
+          TXT
+          )
+          gh release create "$TAG" escala-do-apoio.apk \
+            --title "Escala do Apoio $TAG" \
+            --notes "$NOTAS" \
+            --latest \
+          || gh release upload "$TAG" escala-do-apoio.apk --clobber
+
+          echo "Link fixo: https://github.com/${{ github.repository }}/releases/latest/download/escala-do-apoio.apk"

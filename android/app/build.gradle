@@ -1,0 +1,59 @@
+plugins {
+    id 'com.android.application'
+}
+
+// chave de assinatura do app (ver android/keystore.properties)
+def arquivoChave = rootProject.file('keystore.properties')
+def temChave = arquivoChave.exists()
+def dadosChave = new Properties()
+if (temChave) {
+    arquivoChave.withInputStream { dadosChave.load(it) }
+    temChave = rootProject.file(dadosChave['storeFile'] as String).exists()
+}
+
+android {
+    namespace 'com.igrejameta.escalaapoio'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.igrejameta.escalaapoio'
+        minSdk 23
+        targetSdk 34
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    signingConfigs {
+        release {
+            if (temChave) {
+                storeFile rootProject.file(dadosChave['storeFile'] as String)
+                storePassword dadosChave['storePassword'] as String
+                keyAlias dadosChave['keyAlias'] as String
+                keyPassword dadosChave['keyPassword'] as String
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            signingConfig = temChave ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    androidResources {
+        // fontes woff2 ja vem comprimidas
+        noCompress 'woff2'
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}

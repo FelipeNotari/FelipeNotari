@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>Escala do Apoio — Igreja Meta</title>
+<link href="fonts.css" rel="stylesheet">
+<script src="bridge.js"></script>
+<style>
+:root{
+  --ink:#0E1726;
+  --panel:#172336;
+  --panel-2:#1E2C42;
+  --line:#2A3A54;
+  --amber:#E9B44C;
+  --flame:#E2703A;
+  --flame-d:#C05423;
+  --text:#F2F5FA;
+  --muted:#8FA3BE;
+  --ok:#4CAF82;
+  --r:12px;
+  --dock:132px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;overscroll-behavior-y:none}
+body{
+  background:var(--ink);color:var(--text);
+  font-family:"Inter",system-ui,sans-serif;font-size:15px;line-height:1.45;
+  padding-bottom:calc(var(--dock) + env(safe-area-inset-bottom) + 12px);
+  overflow-x:hidden;
+}
+button{font-family:inherit;color:inherit;border:0;background:none;cursor:pointer}
+input{font-family:inherit}
+body.arrastando{user-select:none;-webkit-user-select:none}
+
+/* cabeçalho */
+.topo{padding:18px 14px 12px;border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,#16233A 0%,var(--ink) 100%)}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--amber);margin:0 0 5px}
+.titulo{font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 112,"wght" 800;
+  font-size:clamp(25px,8vw,38px);line-height:.95;letter-spacing:-.015em;
+  text-transform:uppercase;margin:0}
+.titulo span{color:var(--flame)}
+.periodo{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--muted);margin:8px 0 0}
+
+/* barra */
+.barra{display:flex;gap:7px;padding:11px 14px;overflow-x:auto;scrollbar-width:none}
+.barra::-webkit-scrollbar{display:none}
+.chip-a{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;padding:8px 12px;
+  border-radius:999px;background:var(--panel);border:1px solid var(--line);
+  font-size:12.5px;font-weight:500}
+.chip-a:active{background:var(--panel-2)}
+.chip-a svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round}
+
+/* grade */
+.rolagem{overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch}
+.grade{border-collapse:separate;border-spacing:0;min-width:100%}
+.grade td,.grade th{padding:0;border-bottom:1px solid var(--line)}
+.col-func{position:sticky;left:0;z-index:2;background:#101B2C;
+  border-right:1px solid var(--line);min-width:76px;width:76px}
+thead th{background:#101B2C;z-index:3}
+thead .col-func{z-index:4}
+.rot-func{width:100%;padding:14px 8px;text-align:left;
+  font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 86,"wght" 700;
+  font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--amber)}
+.rot-topo{padding:12px 8px;font-family:"Archivo",sans-serif;
+  font-variation-settings:"wdth" 86,"wght" 700;font-size:10px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);text-align:left}
+
+.data-topo{min-width:106px;padding:8px 5px 9px;position:relative;text-align:center}
+.data-inp{width:100%;background:transparent;border:1px solid transparent;border-radius:8px;
+  color:var(--text);font-family:"JetBrains Mono",monospace;font-weight:700;font-size:18px;
+  text-align:center;padding:5px 2px;outline:none}
+.data-inp:focus{background:var(--ink);border-color:var(--flame)}
+.data-mes{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin-top:1px}
+.data-topo.hoje .data-inp{color:var(--amber)}
+.tirar-dia{position:absolute;top:2px;right:2px;width:22px;height:22px;border-radius:6px;
+  color:var(--line);font-size:16px;line-height:1;display:grid;place-items:center}
+.tirar-dia:active{color:#FF9E70;background:var(--ink)}
+
+.cel{padding:5px;min-width:106px}
+.slot{width:100%;min-height:54px;border-radius:var(--r);display:flex;align-items:center;
+  justify-content:center;padding:8px 5px;text-align:center;font-weight:600;font-size:13.5px;
+  line-height:1.15;touch-action:pan-x;
+  background:linear-gradient(178deg,var(--flame) 0%,var(--flame-d) 100%);color:#fff;
+  box-shadow:0 1px 0 rgba(255,255,255,.16) inset,0 2px 6px rgba(0,0,0,.28);
+  transition:transform .1s,box-shadow .1s}
+.slot:active{transform:scale(.97)}
+.slot.vazio{background:transparent;border:1.5px dashed var(--line);color:var(--muted);
+  font-weight:500;font-size:12.5px;box-shadow:none}
+.slot.repetido{box-shadow:0 0 0 2px var(--amber) inset,0 2px 6px rgba(0,0,0,.28)}
+.slot.alvo{box-shadow:0 0 0 2.5px var(--amber) inset,0 0 0 4px rgba(233,180,76,.25);
+  transform:scale(1.04)}
+body.arrastando .slot.vazio{border-color:var(--amber);color:var(--amber)}
+.slot.saindo{opacity:.35}
+
+/* equilíbrio */
+.secao{padding:20px 14px 0}
+.secao-tit{font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 95,"wght" 700;
+  font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 3px}
+.secao-sub{font-size:12px;color:var(--muted);margin:0 0 13px}
+.balanca{display:flex;flex-direction:column;gap:7px}
+.linha-bal{display:grid;grid-template-columns:1fr 54px;align-items:center;gap:10px}
+.nome-bal{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.trilha{height:7px;border-radius:99px;background:var(--panel-2);overflow:hidden;margin-top:4px}
+.preenche{height:100%;background:var(--flame);border-radius:99px}
+.preenche.zero{background:var(--line)}
+.cont-bal{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--muted);text-align:right}
+.vazio-msg{border:1.5px dashed var(--line);border-radius:var(--r);padding:16px;
+  text-align:center;color:var(--muted);font-size:13px}
+
+/* dock de nomes */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#101B2C;
+  border-top:1px solid var(--line);padding:9px 0 calc(9px + env(safe-area-inset-bottom));
+  box-shadow:0 -10px 24px rgba(6,10,18,.5)}
+.dica{font-size:10.5px;color:var(--muted);padding:0 14px 7px;
+  font-family:"JetBrains Mono",monospace;letter-spacing:.04em}
+.nomes{display:flex;gap:7px;overflow-x:auto;padding:0 14px 9px;scrollbar-width:none}
+.nomes::-webkit-scrollbar{display:none}
+.pin{flex:0 0 auto;padding:9px 14px;border-radius:999px;background:var(--panel);
+  border:1px solid var(--line);font-size:13.5px;font-weight:500;white-space:nowrap;
+  touch-action:pan-x;transition:background .12s,border-color .12s,transform .1s}
+.pin:active{transform:scale(.96)}
+.pin.sel{background:var(--flame);border-color:var(--flame);color:#fff}
+.pin .n{font-family:"JetBrains Mono",monospace;font-size:10px;opacity:.55;margin-left:6px}
+.acoes{display:flex;gap:8px;padding:0 14px}
+.btn{flex:1;padding:12px;border-radius:var(--r);font-weight:600;font-size:14px;text-align:center}
+.btn-1{background:var(--flame);color:#fff}
+.btn-2{background:var(--panel);border:1px solid var(--line)}
+
+.fantasma{position:fixed;z-index:70;pointer-events:none;padding:10px 16px;border-radius:999px;
+  background:var(--flame);color:#fff;font-weight:600;font-size:14px;white-space:nowrap;
+  box-shadow:0 8px 22px rgba(0,0,0,.5);transform:translate(-50%,-140%)}
+
+/* painel */
+.fundo{position:fixed;inset:0;z-index:40;background:rgba(6,10,18,.66);opacity:0;
+  pointer-events:none;transition:opacity .2s}
+.fundo.aberto{opacity:1;pointer-events:auto}
+.painel{position:fixed;left:0;right:0;bottom:0;z-index:50;max-height:84vh;display:flex;
+  flex-direction:column;background:var(--panel);border-top:1px solid var(--line);
+  border-radius:20px 20px 0 0;transform:translateY(101%);
+  transition:transform .25s cubic-bezier(.2,.8,.3,1);padding-bottom:env(safe-area-inset-bottom)}
+.painel.aberto{transform:translateY(0)}
+.puxador{width:38px;height:4px;border-radius:99px;background:var(--line);margin:10px auto 4px}
+.painel-topo{padding:6px 16px 11px;border-bottom:1px solid var(--line)}
+.painel-tit{font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 100,"wght" 700;
+  font-size:16px;margin:0}
+.painel-sub{font-size:12.5px;color:var(--muted);margin:2px 0 0}
+.painel-corpo{overflow-y:auto;padding:10px 12px 22px}
+.campo{width:100%;padding:12px 14px;border-radius:10px;background:var(--ink);
+  border:1px solid var(--line);color:var(--text);font-size:15px;outline:none}
+.campo:focus{border-color:var(--flame)}
+.form-linha{display:flex;gap:8px;margin-bottom:12px}
+.form-linha .campo{flex:1}
+.add{flex:0 0 auto;padding:0 16px;border-radius:10px;background:var(--flame);color:#fff;
+  font-weight:600;font-size:14px}
+.item{display:flex;align-items:center;gap:8px;padding:11px 10px;border-radius:10px;
+  border:1px solid transparent;width:100%;text-align:left}
+.item:active{background:var(--panel-2)}
+.item.sel{border-color:var(--flame);background:rgba(226,112,58,.12)}
+.item-nome{flex:1;font-size:14.5px;font-weight:500}
+.item-cont{font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--muted);
+  padding:3px 7px;border-radius:99px;background:var(--ink)}
+.icone-btn{flex:0 0 auto;width:34px;height:34px;border-radius:8px;display:grid;
+  place-items:center;color:var(--muted)}
+.icone-btn:active{background:var(--ink);color:#FF9E70}
+.icone-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round}
+
+.toast{position:fixed;left:50%;bottom:calc(var(--dock) + 16px);transform:translate(-50%,14px);
+  z-index:60;padding:10px 18px;border-radius:99px;background:var(--ok);color:#08150F;
+  font-weight:600;font-size:13px;opacity:0;pointer-events:none;
+  transition:opacity .2s,transform .2s}
+.toast.aberto{opacity:1;transform:translate(-50%,0)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (min-width:780px){
+  .topo,.barra,.secao,.rolagem,.dock>*{max-width:940px;margin-left:auto;margin-right:auto}
+  .data-topo,.cel{min-width:130px}
+}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <p class="eyebrow">Igreja Meta · Equipe de apoio</p>
+  <h1 class="titulo">Escala do <span>Apoio</span></h1>
+  <p class="periodo" id="periodo">—</p>
+</header>
+
+<nav class="barra">
+  <button class="chip-a" id="btnDomingo"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>Domingo</button>
+  <button class="chip-a" id="btnPessoas"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Pessoas</button>
+  <button class="chip-a" id="btnLimpar"><svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>Limpar escala</button>
+  <button class="chip-a" id="btnRestaurar"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Recomeçar</button>
+</nav>
+
+<div class="rolagem" id="rolagem"><table class="grade" id="grade"></table></div>
+
+<section class="secao">
+  <h2 class="secao-tit">Equilíbrio da equipe</h2>
+  <p class="secao-sub">Quantos domingos cada pessoa está servindo neste período.</p>
+  <div class="balanca" id="balanca"></div>
+</section>
+
+<div class="dock">
+  <p class="dica" id="dica">Arraste um nome até o quadro — ou toque no nome e depois no quadro</p>
+  <div class="nomes" id="nomes"></div>
+  <div class="acoes">
+    <button class="btn btn-2" id="btnAddNome">Novo nome</button>
+    <button class="btn btn-1" id="btnCopiar">Copiar para o WhatsApp</button>
+  </div>
+</div>
+
+<div class="fundo" id="fundo"></div>
+<div class="painel" id="painel" role="dialog" aria-modal="true">
+  <div class="puxador"></div>
+  <div class="painel-topo">
+    <h2 class="painel-tit" id="painelTit"></h2>
+    <p class="painel-sub" id="painelSub"></p>
+  </div>
+  <div class="painel-corpo" id="painelCorpo"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+var CHAVE="escala-apoio-meta-v2";
+var MES=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+var DIA=["dom","seg","ter","qua","qui","sex","sáb"];
+
+function uid(){return Math.random().toString(36).slice(2,9)}
+function hoje(){var d=new Date();d.setHours(0,0,0,0);return d}
+function proxDom(base){var d=new Date(base.getTime());var f=(7-d.getDay())%7;
+  d.setDate(d.getDate()+(f===0?7:f));d.setHours(0,0,0,0);return d}
+function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function deIso(s){var p=s.split("-");return new Date(+p[0],+p[1]-1,+p[2])}
+function curto(s){var d=deIso(s);return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+function padrao(){
+  var ds=[],b=hoje();
+  for(var i=0;i<5;i++){b=proxDom(b);ds.push({id:uid(),data:iso(b)})}
+  var nomes=["Notari","Brendha","Erick","Jeferson","Emili","Emily T.","Gabi","Isabel",
+             "Marcella","Lari","Lucas V.","Lucas F.","Gabriel","Pedro","Àurea"];
+  return{
+    funcoes:[{id:uid(),nome:"Diretor"},{id:uid(),nome:"Apoio 1"},{id:uid(),nome:"Apoio 2"}],
+    datas:ds,
+    pessoas:nomes.map(function(n){return{id:uid(),nome:n}}),
+    escala:{}
+  };
+}
+var S=padrao(), selecionado=null;
+
+function salvar(){
+  try{ if(window.storage&&window.storage.set)
+    window.storage.set(CHAVE,JSON.stringify(S),false).catch(function(){}); }catch(e){}
+}
+function carregar(){
+  return new Promise(function(res){
+    if(!(window.storage&&window.storage.get))return res();
+    window.storage.get(CHAVE,false).then(function(r){
+      if(r&&r.value){try{var d=JSON.parse(r.value);
+        if(d&&d.funcoes&&d.datas&&d.pessoas){d.escala=d.escala||{};
+          d.funcoes.forEach(function(f){delete f.obs});S=d}}catch(e){}}
+      res();
+    }).catch(res);
+  });
+}
+
+function K(f,d){return f+"|"+d}
+function nomeDe(pid){for(var i=0;i<S.pessoas.length;i++)if(S.pessoas[i].id===pid)return S.pessoas[i].nome;return null}
+function total(pid){var n=0;for(var k in S.escala)if(S.escala[k]===pid)n++;return n}
+function noDia(dataId,pid){var n=0;S.funcoes.forEach(function(f){if(S.escala[K(f.id,dataId)]===pid)n++});return n}
+
+/* ---------- desenho ---------- */
+function periodo(){
+  var el=document.getElementById("periodo");
+  if(!S.datas.length){el.textContent="Nenhuma data na escala";return}
+  var a=deIso(S.datas[0].data),b=deIso(S.datas[S.datas.length-1].data);
+  el.textContent=S.datas.length+" cultos · "+a.getDate()+" de "+MES[a.getMonth()]+" a "+
+    b.getDate()+" de "+MES[b.getMonth()]+" de "+b.getFullYear();
+}
+
+function desenhar(){
+  S.datas.sort(function(a,b){return a.data<b.data?-1:1});
+  var t=document.getElementById("grade");t.innerHTML="";
+  var hj=iso(hoje());
+
+  var thead=document.createElement("thead"),tr=document.createElement("tr");
+  var th0=document.createElement("th");th0.className="col-func";
+  th0.innerHTML='<div class="rot-topo">Função</div>';tr.appendChild(th0);
+
+  S.datas.forEach(function(dt){
+    var d=deIso(dt.data);
+    var th=document.createElement("th");
+    th.className="data-topo"+(dt.data===hj?" hoje":"");
+
+    var inp=document.createElement("input");
+    inp.className="data-inp";inp.value=curto(dt.data);
+    inp.setAttribute("inputmode","numeric");inp.setAttribute("aria-label","Data do culto");
+    inp.onfocus=function(){inp.select()};
+    inp.onkeydown=function(e){if(e.key==="Enter")inp.blur()};
+    inp.onblur=function(){aplicarData(dt,inp)};
+    th.appendChild(inp);
+
+    var m=document.createElement("div");m.className="data-mes";
+    m.textContent=DIA[d.getDay()]+" · "+MES[d.getMonth()];
+    th.appendChild(m);
+
+    var x=document.createElement("button");
+    x.className="tirar-dia";x.textContent="×";x.title="Remover este culto";
+    x.onclick=function(){
+      confirmar("Remover "+curto(dt.data)+"?","Este culto sai da escala.","Remover culto",function(){
+        S.datas=S.datas.filter(function(v){return v.id!==dt.id});
+        for(var k in S.escala)if(k.split("|")[1]===dt.id)delete S.escala[k];
+        salvar();desenhar();
+      });
+    };
+    th.appendChild(x);
+    tr.appendChild(th);
+  });
+  thead.appendChild(tr);t.appendChild(thead);
+
+  var tb=document.createElement("tbody");
+  if(!S.funcoes.length||!S.datas.length){
+    var trv=document.createElement("tr"),tdv=document.createElement("td");
+    tdv.colSpan=S.datas.length+1;
+    tdv.innerHTML='<div style="padding:18px 14px"><div class="vazio-msg">Adicione uma data e uma função para começar.</div></div>';
+    trv.appendChild(tdv);tb.appendChild(trv);
+  }
+
+  S.funcoes.forEach(function(f){
+    var lin=document.createElement("tr");
+    var tdf=document.createElement("td");tdf.className="col-func";
+    var bf=document.createElement("button");bf.className="rot-func";bf.textContent=f.nome;
+    bf.onclick=function(){editarFuncao(f)};
+    tdf.appendChild(bf);lin.appendChild(tdf);
+
+    S.datas.forEach(function(dt){
+      var td=document.createElement("td");td.className="cel";
+      var k=K(f.id,dt.id),pid=S.escala[k],nome=pid?nomeDe(pid):null;
+      if(pid&&!nome){delete S.escala[k];pid=null}
+      var b=document.createElement("button");
+      b.className="slot"+(pid?"":" vazio")+(pid&&noDia(dt.id,pid)>1?" repetido":"");
+      b.textContent=nome||"+ escalar";
+      b.dataset.k=k;
+      b.setAttribute("aria-label",f.nome+" em "+curto(dt.data)+": "+(nome||"vago"));
+      if(pid)arrastavel(b,pid,k);
+      b.onclick=function(){
+        if(b.dataset.arrastou==="1"){b.dataset.arrastou="";return}
+        if(selecionado){S.escala[k]=selecionado;selecionado=null;salvar();desenhar();return}
+        abrirSlot(f,dt,k);
+      };
+      td.appendChild(b);lin.appendChild(td);
+    });
+    tb.appendChild(lin);
+  });
+  t.appendChild(tb);
+  periodo();balanca();dockNomes();
+}
+
+function aplicarData(dt,inp){
+  var v=inp.value.replace(/[^0-9\/\-\.]/g,"").replace(/[\-\.]/g,"/");
+  var p=v.split("/").filter(Boolean);
+  if(p.length<2){inp.value=curto(dt.data);return}
+  var d=parseInt(p[0],10),m=parseInt(p[1],10),y=p[2]?parseInt(p[2],10):deIso(dt.data).getFullYear();
+  if(y<100)y+=2000;
+  if(!(d>=1&&d<=31&&m>=1&&m<=12)){inp.value=curto(dt.data);aviso("Use o formato dia/mês");return}
+  var nova=new Date(y,m-1,d);
+  if(isNaN(nova)){inp.value=curto(dt.data);return}
+  dt.data=iso(nova);salvar();desenhar();
+  if(nova.getDay()!==0)aviso("Atenção: "+curto(dt.data)+" não é domingo");
+}
+
+function balanca(){
+  var el=document.getElementById("balanca");el.innerHTML="";
+  if(!S.pessoas.length){el.innerHTML='<div class="vazio-msg">Nenhuma pessoa cadastrada.</div>';return}
+  var l=S.pessoas.map(function(p){return{nome:p.nome,n:total(p.id)}});
+  var max=Math.max(1,Math.max.apply(null,l.map(function(x){return x.n})));
+  l.sort(function(a,b){return b.n-a.n||a.nome.localeCompare(b.nome)});
+  l.forEach(function(x){
+    var d=document.createElement("div");d.className="linha-bal";
+    d.innerHTML='<div><div class="nome-bal">'+esc(x.nome)+'</div><div class="trilha">'+
+      '<div class="preenche'+(x.n?"":" zero")+'" style="width:'+(x.n?Math.round(x.n/max*100):100)+'%"></div>'+
+      '</div></div><div class="cont-bal">'+x.n+(x.n===1?" culto":" cultos")+'</div>';
+    el.appendChild(d);
+  });
+}
+
+function dockNomes(){
+  var el=document.getElementById("nomes");el.innerHTML="";
+  if(!S.pessoas.length){
+    var p=document.createElement("div");p.style.cssText="color:var(--muted);font-size:13px;padding:6px 0";
+    p.textContent="Nenhum nome ainda. Toque em “Novo nome”.";el.appendChild(p);return;
+  }
+  S.pessoas.forEach(function(p){
+    var b=document.createElement("button");
+    b.className="pin"+(selecionado===p.id?" sel":"");
+    b.innerHTML=esc(p.nome)+'<span class="n">'+total(p.id)+"</span>";
+    arrastavel(b,p.id,null);
+    b.onclick=function(){
+      if(b.dataset.arrastou==="1"){b.dataset.arrastou="";return}
+      selecionado=(selecionado===p.id)?null:p.id;
+      dockNomes();
+      document.getElementById("dica").textContent=selecionado
+        ? "Agora toque no quadro do dia para escalar "+p.nome
+        : "Arraste um nome até o quadro — ou toque no nome e depois no quadro";
+    };
+    b.oncontextmenu=function(e){e.preventDefault();editarPessoa(p)};
+    el.appendChild(b);
+  });
+}
+
+/* ---------- arrastar e soltar ---------- */
+var arr=null,fant=null;
+function arrastavel(elem,pid,origem){
+  elem.addEventListener("pointerdown",function(e){
+    if(e.button&&e.button!==0)return;
+    arr={pid:pid,origem:origem,x0:e.clientX,y0:e.clientY,ativo:false,elem:elem,alvo:null};
+  });
+}
+document.addEventListener("pointermove",function(e){
+  if(!arr)return;
+  if(!arr.ativo){
+    var dx=Math.abs(e.clientX-arr.x0),dy=Math.abs(e.clientY-arr.y0);
+    if(dy<10||dy<dx)return;
+    arr.ativo=true;
+    document.body.classList.add("arrastando");
+    if(arr.origem)arr.elem.classList.add("saindo");
+    fant=document.createElement("div");
+    fant.className="fantasma";fant.textContent=nomeDe(arr.pid)||"";
+    document.body.appendChild(fant);
+    try{arr.elem.setPointerCapture(e.pointerId)}catch(err){}
+  }
+  e.preventDefault();
+  fant.style.left=e.clientX+"px";fant.style.top=e.clientY+"px";
+  if(arr.alvo)arr.alvo.classList.remove("alvo");
+  fant.style.display="none";
+  var sob=document.elementFromPoint(e.clientX,e.clientY);
+  fant.style.display="";
+  var slot=sob&&sob.closest?sob.closest(".slot"):null;
+  arr.alvo=slot||null;
+  if(slot)slot.classList.add("alvo");
+  autoScroll(e.clientX);
+},{passive:false});
+
+function autoScroll(x){
+  var r=document.getElementById("rolagem"),b=r.getBoundingClientRect();
+  if(x<b.left+46)r.scrollLeft-=12;
+  else if(x>b.right-46)r.scrollLeft+=12;
+}
+function fimArrasto(){
+  if(!arr)return;
+  var a=arr;arr=null;
+  if(fant){fant.remove();fant=null}
+  document.body.classList.remove("arrastando");
+  a.elem.classList.remove("saindo");
+  if(a.alvo)a.alvo.classList.remove("alvo");
+  if(!a.ativo)return;
+  a.elem.dataset.arrastou="1";
+  setTimeout(function(){a.elem.dataset.arrastou=""},400);
+  if(a.alvo&&a.alvo.dataset.k){
+    if(a.origem&&a.origem!==a.alvo.dataset.k)delete S.escala[a.origem];
+    S.escala[a.alvo.dataset.k]=a.pid;
+    selecionado=null;salvar();desenhar();
+  }
+}
+document.addEventListener("pointerup",fimArrasto);
+document.addEventListener("pointercancel",fimArrasto);
+
+/* ---------- painel ---------- */
+var painel=document.getElementById("painel"),fundo=document.getElementById("fundo"),
+    corpo=document.getElementById("painelCorpo");
+function abrir(t,s,montar){
+  document.getElementById("painelTit").textContent=t;
+  document.getElementById("painelSub").textContent=s||"";
+  corpo.innerHTML="";montar(corpo);
+  painel.classList.add("aberto");fundo.classList.add("aberto");
+}
+function fechar(){painel.classList.remove("aberto");fundo.classList.remove("aberto")}
+fundo.onclick=fechar;
+document.addEventListener("keydown",function(e){if(e.key==="Escape")fechar()});
+function confirmar(t,s,rotulo,acao){
+  abrir(t,s,function(c){
+    var b=document.createElement("button");b.className="btn btn-1";
+    b.style.cssText="width:100%;margin-bottom:9px";b.textContent=rotulo;
+    b.onclick=function(){fechar();acao()};
+    var n=document.createElement("button");n.className="btn btn-2";n.style.width="100%";
+    n.textContent="Cancelar";n.onclick=fechar;
+    c.appendChild(b);c.appendChild(n);
+  });
+}
+var LIXO='<svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>';
+var LAPIS='<svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>';
+
+function abrirSlot(f,dt,k){
+  abrir(f.nome+" · "+curto(dt.data),"Toque em quem vai servir.",function(c){
+    if(S.escala[k]){
+      var v=document.createElement("button");
+      v.className="btn btn-2";v.style.cssText="width:100%;margin-bottom:12px";
+      v.textContent="Deixar vago";
+      v.onclick=function(){delete S.escala[k];salvar();desenhar();fechar()};
+      c.appendChild(v);
+    }
+    if(!S.pessoas.length){c.innerHTML+='<div class="vazio-msg">Cadastre a equipe primeiro.</div>';return}
+    S.pessoas.slice().sort(function(a,b){return total(a.id)-total(b.id)||a.nome.localeCompare(b.nome)})
+    .forEach(function(p){
+      var b=document.createElement("button");
+      b.className="item"+(S.escala[k]===p.id?" sel":"");
+      b.innerHTML='<span class="item-nome">'+esc(p.nome)+'</span><span class="item-cont">'+total(p.id)+" cultos</span>";
+      b.onclick=function(){S.escala[k]=p.id;salvar();desenhar();fechar()};
+      c.appendChild(b);
+    });
+  });
+}
+
+function removerPessoa(p,depois){
+  confirmar("Remover "+p.nome+"?","Os quadros dessa pessoa ficam vagos.","Remover da equipe",function(){
+    S.pessoas=S.pessoas.filter(function(x){return x.id!==p.id});
+    for(var k in S.escala)if(S.escala[k]===p.id)delete S.escala[k];
+    if(selecionado===p.id)selecionado=null;
+    salvar();desenhar();
+    if(depois)depois();
+  });
+}
+function editarPessoa(p,voltar){
+  abrir("Editar nome","Toque no campo, corrija e salve.",function(c){
+    var i=document.createElement("input");
+    i.className="campo";i.value=p.nome;i.maxLength=22;i.setAttribute("autocomplete","off");
+    function salvarNome(){
+      var v=i.value.trim();if(!v)return;
+      p.nome=v;salvar();desenhar();
+      if(voltar)voltar();else fechar();
+    }
+    i.onkeydown=function(e){if(e.key==="Enter")salvarNome()};
+    var b=document.createElement("button");b.className="btn btn-1";
+    b.style.cssText="width:100%;margin:12px 0 9px";b.textContent="Salvar nome";
+    b.onclick=salvarNome;
+    var r=document.createElement("button");r.className="btn btn-2";r.style.width="100%";
+    r.textContent="Remover da equipe";
+    r.onclick=function(){removerPessoa(p,voltar)};
+    c.appendChild(i);c.appendChild(b);c.appendChild(r);
+    setTimeout(function(){i.focus();i.select()},260);
+  });
+}
+
+function pessoas(){
+  abrir("Pessoas da equipe","Adicione, renomeie ou remova quem serve.",function(c){
+    var f=document.createElement("div");f.className="form-linha";
+    var i=document.createElement("input");i.className="campo";i.placeholder="Nome da pessoa";i.maxLength=22;
+    var b=document.createElement("button");b.className="add";b.textContent="Adicionar";
+    function add(){var v=i.value.trim();if(!v)return;
+      S.pessoas.push({id:uid(),nome:v});salvar();desenhar();pessoas()}
+    b.onclick=add;i.onkeydown=function(e){if(e.key==="Enter")add()};
+    f.appendChild(i);f.appendChild(b);c.appendChild(f);
+    S.pessoas.forEach(function(p){
+      var row=document.createElement("div");row.className="item";
+      row.innerHTML='<span class="item-nome">'+esc(p.nome)+'</span><span class="item-cont">'+total(p.id)+" cultos</span>";
+      var e1=document.createElement("button");e1.className="icone-btn";e1.innerHTML=LAPIS;
+      e1.title="Renomear";
+      e1.onclick=function(){editarPessoa(p,pessoas)};
+      var e2=document.createElement("button");e2.className="icone-btn";e2.innerHTML=LIXO;
+      e2.title="Remover";
+      e2.onclick=function(){removerPessoa(p,pessoas)};
+      row.firstChild.style.cursor="pointer";
+      row.firstChild.onclick=function(){editarPessoa(p,pessoas)};
+      row.appendChild(e1);row.appendChild(e2);c.appendChild(row);
+    });
+  });
+}
+
+function editarFuncao(f){
+  abrir("Função “"+f.nome+"”","Renomeie ou remova a linha.",function(c){
+    var i=document.createElement("input");i.className="campo";i.value=f.nome;i.maxLength=16;
+    var b=document.createElement("button");b.className="btn btn-1";
+    b.style.cssText="width:100%;margin:12px 0";b.textContent="Salvar função";
+    b.onclick=function(){if(!i.value.trim())return;f.nome=i.value.trim();salvar();desenhar();fechar()};
+    var n=document.createElement("button");n.className="btn btn-2";
+    n.style.cssText="width:100%;margin-bottom:9px";n.textContent="Adicionar outra função";
+    n.onclick=function(){
+      S.funcoes.push({id:uid(),nome:"Apoio "+(S.funcoes.length)});
+      salvar();desenhar();fechar();aviso("Função adicionada — toque nela para renomear");
+    };
+    var r=document.createElement("button");r.className="btn btn-2";r.style.width="100%";
+    r.textContent="Remover função";
+    r.onclick=function(){
+      confirmar("Remover “"+f.nome+"”?","A linha inteira sai da escala.","Remover função",function(){
+        S.funcoes=S.funcoes.filter(function(x){return x.id!==f.id});
+        for(var k in S.escala)if(k.split("|")[0]===f.id)delete S.escala[k];
+        salvar();desenhar();
+      });
+    };
+    c.appendChild(i);c.appendChild(b);c.appendChild(n);c.appendChild(r);
+  });
+}
+
+/* ---------- ações ---------- */
+document.getElementById("btnPessoas").onclick=pessoas;
+document.getElementById("btnAddNome").onclick=pessoas;
+document.getElementById("btnDomingo").onclick=function(){
+  var base=S.datas.length?deIso(S.datas[S.datas.length-1].data):hoje();
+  var d=proxDom(base);S.datas.push({id:uid(),data:iso(d)});salvar();desenhar();
+  var r=document.getElementById("rolagem");r.scrollLeft=r.scrollWidth;
+  aviso("Culto de "+curto(iso(d))+" adicionado");
+};
+document.getElementById("btnLimpar").onclick=function(){
+  confirmar("Limpar a escala?","Os nomes saem dos quadros. Datas, funções e equipe continuam.",
+  "Limpar escala",function(){
+    S.escala={};selecionado=null;salvar();desenhar();aviso("Escala limpa");
+  });
+};
+document.getElementById("btnRestaurar").onclick=function(){
+  confirmar("Recomeçar do zero?","Volta para os próximos 5 domingos e a equipe padrão.",
+  "Recomeçar",function(){
+    S=padrao();selecionado=null;salvar();desenhar();aviso("Escala recomeçada");
+  });
+};
+document.getElementById("btnCopiar").onclick=function(){
+  var t="*ESCALA DO APOIO — Igreja Meta*\n";
+  S.datas.forEach(function(dt){
+    t+="\n*"+DIA[deIso(dt.data).getDay()]+" "+curto(dt.data)+"*\n";
+    S.funcoes.forEach(function(f){
+      t+=f.nome+": "+(nomeDe(S.escala[K(f.id,dt.id)])||"—")+"\n";
+    });
+  });
+  copiar(t.trim());
+};
+function copiar(txt){
+  if(navigator.clipboard&&navigator.clipboard.writeText)
+    navigator.clipboard.writeText(txt).then(function(){aviso("Escala copiada")}).catch(function(){man(txt)});
+  else man(txt);
+}
+function man(txt){
+  var a=document.createElement("textarea");a.value=txt;
+  a.style.cssText="position:fixed;opacity:0";document.body.appendChild(a);a.select();
+  try{document.execCommand("copy");aviso("Escala copiada")}catch(e){aviso("Não deu para copiar aqui")}
+  document.body.removeChild(a);
+}
+var tmr;
+function aviso(m){
+  var el=document.getElementById("toast");el.textContent=m;el.classList.add("aberto");
+  clearTimeout(tmr);tmr=setTimeout(function(){el.classList.remove("aberto")},2200);
+}
+
+desenhar();
+carregar().then(desenhar);
+})();
+</script>
+</body>
+</html>
