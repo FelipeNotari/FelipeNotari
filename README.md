@@ -25,8 +25,21 @@ Aplicativo Android simples para anotar, dia a dia, **quanto você vendeu** e
 4. Confirme a instalação. O app aparece na tela inicial com o ícone do
    hambúrguer.
 
-> É uma versão de teste assinada com a chave de depuração — instala e roda
-> normalmente. Não é publicada na Play Store.
+> É uma versão de teste assinada com uma chave própria do projeto — instala e
+> roda normalmente. Não é publicada na Play Store.
+
+### Atualizando sem perder os dados
+
+A partir da versão **1.3** o app usa sempre a mesma chave de assinatura, então
+basta baixar o novo `lanchonete.apk` e instalar **por cima** — os lançamentos
+continuam salvos.
+
+Se estiver vindo de uma versão **anterior à 1.3**, a assinatura mudou e o
+Android pode recusar a instalação. Nesse caso:
+
+1. Abra o app antigo → aba **Backup** → **Exportar backup** e salve o arquivo.
+2. Desinstale o app antigo e instale o novo APK.
+3. Abra o app → aba **Backup** → **Importar backup** e escolha o arquivo salvo.
 
 ## Para desenvolvedores
 

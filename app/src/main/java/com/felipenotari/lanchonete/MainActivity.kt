@@ -484,10 +484,10 @@ private fun DayRow(e: DayEntry, onClick: () -> Unit, onDelete: () -> Unit) {
                 fontSize = 12.sp, color = Color.DarkGray
             )
             Text(
-                "Lucro ${formatCents(e.profitCents)}",
+                "Total de vendas ${formatCents(e.salesTotalCents)}",
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
-                color = if (e.profitCents >= 0) Verde else Vermelho
+                color = Verde
             )
         }
         IconButton(onClick = onClick) { Icon(Icons.Filled.Edit, "Editar") }

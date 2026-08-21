@@ -12,12 +12,27 @@ android {
         applicationId = "com.felipenotari.lanchonete"
         minSdk = 24
         targetSdk = 34
-        versionCode = 3
-        versionName = "1.2"
+        versionCode = 4
+        versionName = "1.3"
+    }
+
+    signingConfigs {
+        create("lanchonete") {
+            storeFile = file("lanchonete.keystore")
+            storePassword = "lanchonete123"
+            keyAlias = "lanchonete"
+            keyPassword = "lanchonete123"
+        }
     }
 
     buildTypes {
+        debug {
+            // Assinatura fixa: garante que uma nova versao instale POR CIMA da
+            // anterior, sem desinstalar e sem perder os lancamentos salvos.
+            signingConfig = signingConfigs.getByName("lanchonete")
+        }
         release {
+            signingConfig = signingConfigs.getByName("lanchonete")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
