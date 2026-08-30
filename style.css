@@ -1,0 +1,409 @@
+/* =========================================================================
+   Sinais da Banda — estilo único do app.
+   Tema escuro, alto contraste, mobile-first, sem scroll na tela principal.
+   ========================================================================= */
+
+:root {
+  --fundo:        #0b0d12;
+  --superficie:   #161a23;
+  --superficie-2: #1e2431;
+  --borda:        #2a3242;
+  --texto:        #e9edf6;
+  --texto-fraco:  #8b94a7;
+
+  /* Cores por categoria de sinal */
+  --tom:      #3b6fe0;
+  --tom-bg:   #16264a;
+  --vol:      #d2801a;
+  --vol-bg:   #402a0d;
+  --din:      #1f9e63;
+  --din-bg:   #0d3324;
+  --perigo:   #e0473b;
+
+  --ok:       #22c55e;
+  --aviso:    #eab308;
+  --off:      #ef4444;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+body { touch-action: manipulation; }
+
+.oculto { display: none !important; }
+
+/* =========================================================================
+   TELA DE ENTRADA
+   ========================================================================= */
+
+#tela-entrada {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  overflow-y: auto;
+}
+
+#form-entrada {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+#form-entrada h1 {
+  margin: 0;
+  font-size: 26px;
+  letter-spacing: .5px;
+}
+
+#form-entrada .sub {
+  margin: 4px 0 18px;
+  color: var(--texto-fraco);
+  font-size: 14px;
+}
+
+#form-entrada label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: var(--texto-fraco);
+  margin-bottom: 5px;
+}
+
+#form-entrada input,
+#form-entrada select {
+  height: 52px;
+  margin-bottom: 14px;
+  padding: 0 12px;
+  font-size: 17px;
+  color: var(--texto);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  appearance: none;
+}
+
+#form-entrada input:focus,
+#form-entrada select:focus { outline: 2px solid var(--tom); outline-offset: 1px; }
+
+#btn-entrar {
+  height: 64px;
+  margin-top: 6px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  color: #fff;
+  background: var(--tom);
+  border: 0;
+  border-radius: 12px;
+}
+
+#btn-entrar:disabled { opacity: .5; }
+
+.erro {
+  min-height: 20px;
+  margin: 12px 0 0;
+  font-size: 14px;
+  color: var(--perigo);
+  text-align: center;
+}
+
+/* =========================================================================
+   TELA PRINCIPAL — estrutura vertical sem scroll
+   ========================================================================= */
+
+#tela-principal {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* --- Barra do topo --- */
+
+#barra {
+  flex: 0 0 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  font-size: 11px;
+  color: var(--texto-fraco);
+}
+
+#rotulo-sala {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+}
+
+#status { display: flex; align-items: center; gap: 5px; flex: 0 0 auto; }
+#status i { width: 8px; height: 8px; border-radius: 50%; background: var(--off); }
+#status.status-ok    i { background: var(--ok); }
+#status.status-poll  i { background: var(--aviso); }
+#status.status-off   i { background: var(--off); }
+#status b { font-weight: 500; font-size: 10px; letter-spacing: .4px; }
+
+/* --- Sinais recebidos (~35% da tela, contando a barra) --- */
+
+#recebidos {
+  /* ~35% da tela (contando a barra). Encolhe se for preciso para garantir
+     os 64px de área de toque dos botões em telas mais baixas. */
+  flex: 0 1 calc(35% - 26px);
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0 8px;
+  overflow: hidden;
+}
+
+#destaque {
+  flex: 0 0 auto;
+  border-radius: 12px;
+  padding: 9px 12px;
+  background: var(--superficie);
+  border-left: 5px solid var(--borda);
+}
+
+#destaque.tipo-tom      { background: var(--tom-bg); border-left-color: var(--tom); }
+#destaque.tipo-volume   { background: var(--vol-bg); border-left-color: var(--vol); }
+#destaque.tipo-dinamica { background: var(--din-bg); border-left-color: var(--din); }
+#destaque.vazio         { background: var(--superficie); border-left-color: var(--borda); }
+#destaque.velho         { opacity: .42; }
+
+.d-rotulo {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#destaque.vazio .d-rotulo { font-size: 20px; font-weight: 600; color: var(--texto-fraco); }
+
+.d-quem   { margin-top: 3px; font-size: 14px; color: var(--texto); opacity: .9; }
+.d-quando { font-size: 12px; color: var(--texto-fraco); }
+
+/* Animação de entrada do sinal novo (150ms) */
+@keyframes entra-sinal {
+  from { opacity: 0; transform: translateY(-7px) scale(.985); }
+  to   { opacity: 1; transform: none; }
+}
+.novo { animation: entra-sinal 150ms ease-out; }
+
+#anteriores {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow: hidden;
+}
+
+#anteriores li {
+  flex: 0 0 auto;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  border-radius: 8px;
+  background: var(--superficie);
+  border-left: 4px solid var(--borda);
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#anteriores li.tipo-tom      { border-left-color: var(--tom); }
+#anteriores li.tipo-volume   { border-left-color: var(--vol); }
+#anteriores li.tipo-dinamica { border-left-color: var(--din); }
+#anteriores li.velho         { opacity: .42; }
+
+#anteriores .a-rotulo {
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#anteriores .a-quem {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--texto-fraco);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#anteriores .a-quando { flex: 0 0 auto; color: var(--texto-fraco); font-size: 11px; }
+
+/* --- Envio (~65% da tela) --- */
+
+#envio {
+  /* min-height garante 64px por botão na aba mais cheia (VOLUME, 7 linhas):
+     4 (padding) + 40 (abas) + 4 (gap) + 7*64 + 6*4 (gaps) + 3 (padding) = 523 */
+  flex: 1 1 auto;
+  min-height: 523px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px 8px 3px;
+}
+
+#abas {
+  flex: 0 0 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.aba {
+  height: 40px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--texto-fraco);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 9px;
+}
+.aba.ativa { color: #fff; background: var(--superficie-2); border-color: #4a5670; }
+
+.painel { display: none; flex: 1 1 auto; min-height: 0; }
+.painel.ativo { display: flex; flex-direction: column; gap: 4px; }
+
+/* Botão base. A altura vem do grid do painel; o min-height de #envio é o que
+   garante os 64px mínimos de área de toque. */
+.bt {
+  min-height: 40px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  color: var(--texto);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  transition: background-color 60ms linear, transform 60ms linear;
+}
+
+/* Estado pintado no toque (envio otimista) */
+.bt.ativo { transform: scale(.97); color: #fff; }
+.bt.tom.ativo { background: var(--tom); border-color: var(--tom); }
+.bt.vol.ativo { background: var(--vol); border-color: var(--vol); }
+.bt.din.ativo { background: var(--din); border-color: var(--din); }
+.bt.perigo.ativo { background: var(--perigo); border-color: var(--perigo); }
+
+/* Aba TOM — 5 linhas: 3 de notas + 2 botões largos */
+#painel-tom { display: none; }
+#painel-tom.ativo {
+  display: grid;
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+}
+.grid-tom {
+  grid-row: span 3;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+.grid-tom .bt { font-size: 22px; border-bottom: 3px solid var(--tom); }
+.bt.largo { font-size: 17px; border-bottom: 3px solid var(--tom); }
+
+/* Aba VOLUME */
+#painel-volume { display: none; }
+#painel-volume.ativo {
+  display: grid;
+  grid-template-rows: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+}
+.linha-vol {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  gap: 4px;
+  min-height: 0;
+}
+.linha-vol .fonte {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--texto);
+  letter-spacing: .3px;
+}
+.linha-vol .bt { min-height: 0; height: 100%; font-size: 30px; border-bottom: 3px solid var(--vol); }
+.destaque-retorno .fonte { color: var(--vol); font-size: 12px; }
+
+/* Aba DINÂMICA */
+.grid-din {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(6, minmax(0, 1fr));
+  gap: 4px;
+}
+.grid-din .bt { font-size: 16px; border-bottom: 3px solid var(--din); }
+.grid-din .bt.perigo { border-bottom-color: var(--perigo); color: #ff8f86; }
+
+/* --- Rodapé --- */
+
+#rodape {
+  flex: 0 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  font-size: 10px;
+  color: var(--texto-fraco);
+}
+#rotulo-eu { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+#btn-trocar {
+  flex: 0 0 auto;
+  height: 20px;
+  padding: 0 10px;
+  font-size: 10px;
+  color: var(--texto-fraco);
+  background: transparent;
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+}
+
+/* Telas muito baixas: afrouxa o mínimo para nunca gerar scroll nem
+   espremer demais a área de sinais recebidos. */
+@media (max-height: 700px) {
+  #envio { min-height: 380px; }
+  .bt { min-height: 34px; }
+  .d-rotulo { font-size: 30px; }
+}

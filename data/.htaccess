@@ -1,0 +1,15 @@
+# Bloqueia acesso direto aos arquivos de dados pelo navegador.
+
+# Apache 2.4
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+
+# Apache 2.2
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>
+
+# Se o servidor ignorar as diretivas acima, ainda assim nada é listado.
+Options -Indexes

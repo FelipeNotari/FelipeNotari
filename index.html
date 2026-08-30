@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b0d12">
+<meta name="color-scheme" content="dark">
+<title>Sinais da Banda</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===================== TELA DE ENTRADA ===================== -->
+<section id="tela-entrada" class="tela">
+  <form id="form-entrada" autocomplete="off">
+    <h1>Sinais da Banda</h1>
+    <p class="sub">Entre na sala do culto</p>
+
+    <label for="in-sala">Nome da sala</label>
+    <input id="in-sala" name="sala" type="text" inputmode="text" autocapitalize="none" maxlength="40" required>
+
+    <label for="in-senha">Senha da sala</label>
+    <input id="in-senha" name="senha" type="password" maxlength="64" required>
+
+    <label for="in-nome">Seu nome</label>
+    <input id="in-nome" name="nome" type="text" maxlength="20" required>
+
+    <label for="in-instrumento">Seu instrumento</label>
+    <select id="in-instrumento" name="instrumento" required>
+      <option value="Voz">Voz</option>
+      <option value="Violão">Violão</option>
+      <option value="Guitarra">Guitarra</option>
+      <option value="Baixo">Baixo</option>
+      <option value="Bateria">Bateria</option>
+      <option value="Teclado">Teclado</option>
+      <option value="Percussão">Percussão</option>
+      <option value="Som/Mesa">Som/Mesa</option>
+      <option value="Outro">Outro</option>
+    </select>
+
+    <button type="submit" id="btn-entrar">Entrar</button>
+    <p id="erro-entrada" class="erro" role="alert"></p>
+  </form>
+</section>
+
+<!-- ===================== TELA PRINCIPAL ===================== -->
+<section id="tela-principal" class="tela oculto">
+
+  <!-- Cabeçalho mínimo: sala + indicador de conexão -->
+  <header id="barra">
+    <span id="rotulo-sala"></span>
+    <span id="status" class="status-off" title="Conexão"><i></i><b id="status-txt">…</b></span>
+  </header>
+
+  <!-- Topo (~35%): sinais recebidos -->
+  <div id="recebidos">
+    <div id="destaque" class="vazio">
+      <div class="d-rotulo">Aguardando sinais</div>
+      <div class="d-quem"></div>
+      <div class="d-quando"></div>
+    </div>
+    <ul id="anteriores"></ul>
+  </div>
+
+  <!-- Baixo (~65%): botões de envio -->
+  <div id="envio">
+    <nav id="abas">
+      <button type="button" class="aba ativa" data-aba="tom">TOM</button>
+      <button type="button" class="aba" data-aba="volume">VOLUME</button>
+      <button type="button" class="aba" data-aba="dinamica">DINÂMICA</button>
+    </nav>
+
+    <!-- Aba TOM -->
+    <div class="painel ativo" id="painel-tom">
+      <div class="grid-tom">
+        <button type="button" class="bt tom" data-tipo="tom" data-rotulo="C">C</button>
+        <button type="button" class="bt tom" data-tipo="tom" data-rotulo="C#">C#</button>
+        <button type="button" class="bt tom" data-tipo="tom" data-rotulo="D">D</button>
+        <button type="button" class="bt tom" data-tipo="tom" data-rotulo="D#">D#</button>
+        <button type="button" class="bt tom" data-tipo="tom" data-rotulo="E">E</button>
+        <button type="button" class="bt tom" data-tipo="tom" data-rotulo="F">F</button>
+        <button type="button" class="bt tom" data-tipo="tom" data-rotulo="F#">F#</button>
+        <button type="button" class="bt tom" data-tipo="tom" data-rotulo="G">G</button>
+        <button type="button" class="bt tom" data-tipo="tom" data-rotulo="G#">G#</button>
+        <button type="button" class="bt tom" data-tipo="tom" data-rotulo="A">A</button>
+        <button type="button" class="bt tom" data-tipo="tom" data-rotulo="A#">A#</button>
+        <button type="button" class="bt tom" data-tipo="tom" data-rotulo="B">B</button>
+      </div>
+      <button type="button" class="bt largo tom" data-tipo="tom" data-rotulo="▲ Meio tom acima">▲ Meio tom acima</button>
+      <button type="button" class="bt largo tom" data-tipo="tom" data-rotulo="▼ Meio tom abaixo">▼ Meio tom abaixo</button>
+    </div>
+
+    <!-- Aba VOLUME -->
+    <div class="painel" id="painel-volume">
+      <div class="linha-vol">
+        <button type="button" class="bt vol menos" data-tipo="volume" data-rotulo="Voz −">−</button>
+        <span class="fonte">Voz</span>
+        <button type="button" class="bt vol mais" data-tipo="volume" data-rotulo="Voz +">+</button>
+      </div>
+      <div class="linha-vol">
+        <button type="button" class="bt vol menos" data-tipo="volume" data-rotulo="Violão −">−</button>
+        <span class="fonte">Violão</span>
+        <button type="button" class="bt vol mais" data-tipo="volume" data-rotulo="Violão +">+</button>
+      </div>
+      <div class="linha-vol">
+        <button type="button" class="bt vol menos" data-tipo="volume" data-rotulo="Guitarra −">−</button>
+        <span class="fonte">Guitarra</span>
+        <button type="button" class="bt vol mais" data-tipo="volume" data-rotulo="Guitarra +">+</button>
+      </div>
+      <div class="linha-vol">
+        <button type="button" class="bt vol menos" data-tipo="volume" data-rotulo="Baixo −">−</button>
+        <span class="fonte">Baixo</span>
+        <button type="button" class="bt vol mais" data-tipo="volume" data-rotulo="Baixo +">+</button>
+      </div>
+      <div class="linha-vol">
+        <button type="button" class="bt vol menos" data-tipo="volume" data-rotulo="Bateria −">−</button>
+        <span class="fonte">Bateria</span>
+        <button type="button" class="bt vol mais" data-tipo="volume" data-rotulo="Bateria +">+</button>
+      </div>
+      <div class="linha-vol">
+        <button type="button" class="bt vol menos" data-tipo="volume" data-rotulo="Teclado −">−</button>
+        <span class="fonte">Teclado</span>
+        <button type="button" class="bt vol mais" data-tipo="volume" data-rotulo="Teclado +">+</button>
+      </div>
+      <div class="linha-vol destaque-retorno">
+        <button type="button" class="bt vol menos" data-tipo="volume" data-rotulo="Meu retorno −">−</button>
+        <span class="fonte">MEU RETORNO</span>
+        <button type="button" class="bt vol mais" data-tipo="volume" data-rotulo="Meu retorno +">+</button>
+      </div>
+    </div>
+
+    <!-- Aba DINÂMICA -->
+    <div class="painel" id="painel-dinamica">
+      <div class="grid-din">
+        <button type="button" class="bt din" data-tipo="dinamica" data-rotulo="Repetir">Repetir</button>
+        <button type="button" class="bt din" data-tipo="dinamica" data-rotulo="Ir pra ponte">Ir pra ponte</button>
+        <button type="button" class="bt din" data-tipo="dinamica" data-rotulo="Refrão">Refrão</button>
+        <button type="button" class="bt din" data-tipo="dinamica" data-rotulo="Último refrão">Último refrão</button>
+        <button type="button" class="bt din" data-tipo="dinamica" data-rotulo="Final">Final</button>
+        <button type="button" class="bt din perigo" data-tipo="dinamica" data-rotulo="CORTAR">CORTAR</button>
+        <button type="button" class="bt din" data-tipo="dinamica" data-rotulo="Mais forte">Mais forte</button>
+        <button type="button" class="bt din" data-tipo="dinamica" data-rotulo="Mais suave">Mais suave</button>
+        <button type="button" class="bt din" data-tipo="dinamica" data-rotulo="Segurar acorde">Segurar acorde</button>
+        <button type="button" class="bt din" data-tipo="dinamica" data-rotulo="Acelerar">Acelerar</button>
+        <button type="button" class="bt din" data-tipo="dinamica" data-rotulo="Diminuir">Diminuir</button>
+        <button type="button" class="bt din" data-tipo="dinamica" data-rotulo="Só voz">Só voz</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rodapé: só o botão de trocar de sala/pessoa -->
+  <footer id="rodape">
+    <span id="rotulo-eu"></span>
+    <button type="button" id="btn-trocar">Trocar</button>
+  </footer>
+
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
