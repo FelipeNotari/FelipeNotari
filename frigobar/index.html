@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Frigobar</title>
+<meta name="description" content="Vendas no Pix e controle de estoque do frigobar.">
+<meta name="theme-color" content="#0B7A8C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Frigobar">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><rect x="14" y="4" width="36" height="56" rx="7" fill="currentColor"/><line x1="14" y1="24" x2="50" y2="24" stroke="#fff" stroke-width="3"/><rect x="19" y="11" width="3.5" height="8" rx="1.7" fill="#fff"/><rect x="19" y="30" width="3.5" height="12" rx="1.7" fill="#fff"/></svg>
+    <div>
+      <div class="brand-name">Frigobar</div>
+      <div class="brand-sub" id="titulo-tela">Vender</div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ VENDER ============ -->
+  <section class="screen" id="tela-vender">
+    <div class="card">
+      <label class="lbl" for="venda-data">Data</label>
+      <input type="date" id="venda-data" class="input">
+    </div>
+
+    <div class="sec-titulo">Toque no produto para adicionar</div>
+    <div class="grid-prod" id="grid-prod"></div>
+    <div class="vazio" id="vender-vazio" hidden>
+      Nenhum produto no estoque.<br>Vá em <b>Estoque</b> e adicione água, Red Bull etc.
+    </div>
+
+    <div class="card carrinho" id="carrinho" hidden>
+      <div class="sec-titulo sem-margem">Venda atual</div>
+      <div id="carrinho-itens"></div>
+      <div class="linha-total">
+        <span>Total</span>
+        <b id="carrinho-total">R$ 0,00</b>
+      </div>
+      <div class="pgto">
+        <span class="pgto-lbl">Pagamento</span>
+        <span class="pix-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.2c.6 0 1.2.2 1.6.7l3.2 3.2h-.9c-.9 0-1.7.4-2.3 1L12 8.6 10.4 7c-.6-.6-1.4-1-2.3-1h-.9l3.2-3.2c.4-.4 1-.6 1.6-.6ZM5.2 7.4h2.9c.5 0 1 .2 1.3.5l2 2c.3.3.8.3 1.1 0l2-2c.3-.3.8-.5 1.3-.5h1.9l2.5 2.5c.9.9.9 2.3 0 3.2l-2.5 2.5h-1.9c-.5 0-1-.2-1.3-.5l-2-2c-.3-.3-.8-.3-1.1 0l-2 2c-.3.3-.8.5-1.3.5H5.2l-2.5-2.5c-.9-.9-.9-2.3 0-3.2l2.5-2.5Zm2 10.4h.9c.9 0 1.7-.4 2.3-1l1.6-1.6 1.6 1.6c.6.6 1.4 1 2.3 1h.9l-3.2 3.2c-.9.9-2.3.9-3.2 0l-3.2-3.2Z"/></svg>Pix</span>
+      </div>
+      <div class="chave-pix" id="chave-pix-box" hidden>
+        <div>
+          <div class="lbl">Chave Pix</div>
+          <div class="chave" id="chave-pix-txt"></div>
+        </div>
+        <button class="btn-mini" id="btn-copiar-chave">Copiar</button>
+      </div>
+      <button class="btn-prim" id="btn-registrar">Registrar venda no Pix</button>
+      <button class="btn-link" id="btn-limpar">Limpar</button>
+    </div>
+  </section>
+
+  <!-- ============ ESTOQUE ============ -->
+  <section class="screen" id="tela-estoque" hidden>
+    <div class="resumo-estoque">
+      <div><b id="est-unidades">0</b><span>unidades</span></div>
+      <div><b id="est-produtos">0</b><span>produtos</span></div>
+      <div><b id="est-valor">R$ 0</b><span>valor em estoque</span></div>
+    </div>
+    <div class="alerta" id="est-alerta" hidden></div>
+    <button class="btn-prim" id="btn-novo-prod">+ Adicionar produto</button>
+    <div id="lista-estoque"></div>
+    <div class="vazio" id="estoque-vazio" hidden>Nenhum produto cadastrado ainda.</div>
+  </section>
+
+  <!-- ============ RESUMO ============ -->
+  <section class="screen" id="tela-resumo" hidden>
+    <div class="mes-nav">
+      <button class="icon-btn" id="mes-ant" aria-label="Mês anterior">‹</button>
+      <div id="mes-label">—</div>
+      <button class="icon-btn" id="mes-prox" aria-label="Próximo mês">›</button>
+    </div>
+    <div class="card total-card">
+      <div class="lbl">Vendas no Pix</div>
+      <div class="grande" id="res-vendas">R$ 0,00</div>
+      <div class="res-linhas">
+        <div><span>Gastos com reposição</span><b id="res-gastos">R$ 0,00</b></div>
+        <div><span id="res-lucro-lbl">Lucro do mês</span><b id="res-lucro">R$ 0,00</b></div>
+        <div><span>Itens vendidos</span><b id="res-itens">0</b></div>
+      </div>
+    </div>
+    <div class="sec-titulo">Mais vendidos</div>
+    <div class="card" id="res-top"></div>
+    <div class="sec-titulo">Histórico de dias</div>
+    <div id="res-dias"></div>
+  </section>
+
+  <!-- ============ BACKUP ============ -->
+  <section class="screen" id="tela-backup" hidden>
+    <div class="card">
+      <div class="sec-titulo sem-margem">Chave Pix</div>
+      <p class="txt2">Aparece na tela de venda para o cliente copiar.</p>
+      <input class="input" id="cfg-chave" placeholder="CPF, celular, e-mail ou aleatória">
+      <button class="btn-sec" id="btn-salvar-chave">Salvar chave</button>
+    </div>
+    <div class="card">
+      <div class="sec-titulo sem-margem">Backup dos dados</div>
+      <p class="txt2">Os dados ficam salvos só neste iPhone. Faça backup de vez em quando e guarde no iCloud Drive ou mande no WhatsApp.</p>
+      <button class="btn-prim" id="btn-exportar">Exportar backup</button>
+      <button class="btn-sec" id="btn-importar">Importar backup</button>
+      <input type="file" id="arq-importar" accept=".json,application/json" hidden>
+    </div>
+    <div class="card">
+      <div class="sec-titulo sem-margem">Apagar tudo</div>
+      <p class="txt2">Remove produtos, vendas e gastos. Essa ação não pode ser desfeita.</p>
+      <button class="btn-perigo" id="btn-apagar-tudo">Apagar todos os dados</button>
+    </div>
+  </section>
+
+</main>
+
+<nav class="tabbar">
+  <button class="tab ativo" data-tela="vender">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.2L20.5 8H6"/><circle cx="9.5" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>
+    <span>Vender</span>
+  </button>
+  <button class="tab" data-tela="estoque">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg>
+    <span>Estoque</span>
+  </button>
+  <button class="tab" data-tela="resumo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+    <span>Resumo</span>
+  </button>
+  <button class="tab" data-tela="backup">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+    <span>Backup</span>
+  </button>
+</nav>
+
+<!-- ============ MODAL PRODUTO ============ -->
+<div class="modal" id="modal-prod" hidden>
+  <div class="sheet">
+    <div class="sheet-topo">
+      <b id="modal-prod-titulo">Novo produto</b>
+      <button class="icon-btn" data-fechar aria-label="Fechar">✕</button>
+    </div>
+    <div class="chips" id="chips-sugestao"></div>
+    <label class="lbl" for="p-nome">Nome</label>
+    <input class="input" id="p-nome" placeholder="Ex.: Água sem gás" autocomplete="off">
+    <div class="duas">
+      <div>
+        <label class="lbl" for="p-preco">Preço de venda</label>
+        <input class="input" id="p-preco" inputmode="decimal" placeholder="0,00">
+      </div>
+      <div>
+        <label class="lbl" for="p-custo">Custo por unidade</label>
+        <input class="input" id="p-custo" inputmode="decimal" placeholder="opcional">
+      </div>
+    </div>
+    <div class="duas">
+      <div>
+        <label class="lbl" for="p-qtd" id="p-qtd-lbl">Unidades em estoque</label>
+        <input class="input" id="p-qtd" inputmode="numeric" placeholder="0">
+      </div>
+      <div>
+        <label class="lbl" for="p-min">Avisar quando tiver</label>
+        <input class="input" id="p-min" inputmode="numeric" placeholder="3">
+      </div>
+    </div>
+    <button class="btn-prim" id="btn-salvar-prod">Salvar</button>
+    <button class="btn-perigo" id="btn-excluir-prod" hidden>Excluir produto</button>
+  </div>
+</div>
+
+<!-- ============ MODAL REPOR ============ -->
+<div class="modal" id="modal-repor" hidden>
+  <div class="sheet">
+    <div class="sheet-topo">
+      <b id="repor-titulo">Repor estoque</b>
+      <button class="icon-btn" data-fechar aria-label="Fechar">✕</button>
+    </div>
+    <p class="txt2" id="repor-atual"></p>
+    <label class="lbl" for="r-qtd">Quantas unidades chegaram?</label>
+    <input class="input" id="r-qtd" inputmode="numeric" placeholder="Ex.: 12">
+    <label class="lbl" for="r-valor">Quanto pagou no total (gasto)</label>
+    <input class="input" id="r-valor" inputmode="decimal" placeholder="opcional">
+    <label class="lbl" for="r-data">Data</label>
+    <input class="input" type="date" id="r-data">
+    <button class="btn-prim" id="btn-confirmar-repor">Adicionar ao estoque</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>
