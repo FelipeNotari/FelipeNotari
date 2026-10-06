@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Frigobar</title>
-<meta name="description" content="Vendas no Pix e controle de estoque do frigobar.">
+<meta name="description" content="Vendas, estoque, compras e resultado financeiro do frigobar.">
 <meta name="theme-color" content="#0B7A8C">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -18,19 +18,46 @@
 <body>
 
 <header class="topbar">
+  <button class="icon-btn voltar" id="btn-voltar" aria-label="Voltar" hidden>‹</button>
   <div class="brand">
     <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><rect x="14" y="4" width="36" height="56" rx="7" fill="currentColor"/><line x1="14" y1="24" x2="50" y2="24" stroke="#fff" stroke-width="3"/><rect x="19" y="11" width="3.5" height="8" rx="1.7" fill="#fff"/><rect x="19" y="30" width="3.5" height="12" rx="1.7" fill="#fff"/></svg>
     <div>
       <div class="brand-name">Frigobar</div>
-      <div class="brand-sub" id="titulo-tela">Vender</div>
+      <div class="brand-sub" id="titulo-tela">Início</div>
     </div>
   </div>
 </header>
 
 <main id="main">
 
+  <!-- ============ INÍCIO (DASHBOARD) ============ -->
+  <section class="screen" id="tela-inicio">
+    <div class="periodo-box"></div>
+    <div class="card hero">
+      <div class="lbl">Lucro líquido operacional</div>
+      <div class="grande" id="ini-lucro">R$ 0,00</div>
+      <div class="hero-sub" id="ini-lucro-sub"></div>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><span>Faturamento esperado</span><b id="ini-esperado">—</b></div>
+      <div class="kpi"><span>Entradas financeiras</span><b id="ini-entradas">—</b></div>
+      <div class="kpi destaque"><span>Ofertas</span><b id="ini-ofertas">—</b></div>
+      <div class="kpi"><span>Faturamento total</span><b id="ini-fattotal">—</b></div>
+      <div class="kpi"><span>Custo dos produtos vendidos</span><b id="ini-cmv">—</b></div>
+      <div class="kpi"><span>Produtos vendidos</span><b id="ini-itens">—</b></div>
+      <div class="kpi"><span>Gastos com compras</span><b id="ini-compras">—</b></div>
+      <div class="kpi" id="ini-div-box"><span>Divergência de entradas</span><b id="ini-div">—</b></div>
+    </div>
+    <div class="alerta" id="ini-semcusto" hidden></div>
+    <div id="ini-dias-box">
+      <div class="sec-titulo">Ofertas por dia</div>
+      <div class="card" id="ini-dias"></div>
+    </div>
+    <p class="nota-rodape">Compras de estoque aparecem em "Gastos com compras" e não são descontadas do lucro: o lucro desconta só o custo médio do que foi vendido.</p>
+  </section>
+
   <!-- ============ VENDER ============ -->
-  <section class="screen" id="tela-vender">
+  <section class="screen" id="tela-vender" hidden>
     <div class="card">
       <label class="lbl" for="venda-data">Data</label>
       <input type="date" id="venda-data" class="input">
@@ -53,6 +80,14 @@
         <span class="pgto-lbl">Pagamento</span>
         <span class="pix-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.2c.6 0 1.2.2 1.6.7l3.2 3.2h-.9c-.9 0-1.7.4-2.3 1L12 8.6 10.4 7c-.6-.6-1.4-1-2.3-1h-.9l3.2-3.2c.4-.4 1-.6 1.6-.6ZM5.2 7.4h2.9c.5 0 1 .2 1.3.5l2 2c.3.3.8.3 1.1 0l2-2c.3-.3.8-.5 1.3-.5h1.9l2.5 2.5c.9.9.9 2.3 0 3.2l-2.5 2.5h-1.9c-.5 0-1-.2-1.3-.5l-2-2c-.3-.3-.8-.3-1.1 0l-2 2c-.3.3-.8.5-1.3.5H5.2l-2.5-2.5c-.9-.9-.9-2.3 0-3.2l2.5-2.5Zm2 10.4h.9c.9 0 1.7-.4 2.3-1l1.6-1.6 1.6 1.6c.6.6 1.4 1 2.3 1h.9l-3.2 3.2c-.9.9-2.3.9-3.2 0l-3.2-3.2Z"/></svg>Pix</span>
       </div>
+      <div class="recebido">
+        <label class="check"><input type="checkbox" id="venda-receber" checked> Lançar a entrada do Pix agora</label>
+        <div id="venda-recebido-box">
+          <label class="lbl" for="venda-recebido">Valor recebido</label>
+          <input class="input" id="venda-recebido" inputmode="decimal">
+          <div class="dica" id="venda-oferta-dica"></div>
+        </div>
+      </div>
       <div class="chave-pix" id="chave-pix-box" hidden>
         <div>
           <div class="lbl">Chave Pix</div>
@@ -63,45 +98,126 @@
       <button class="btn-prim" id="btn-registrar">Registrar venda no Pix</button>
       <button class="btn-link" id="btn-limpar">Limpar</button>
     </div>
+
+    <div class="sec-titulo" id="vendas-dia-titulo">Vendas do dia</div>
+    <div class="card" id="vendas-dia"></div>
+  </section>
+
+  <!-- ============ ENTRADAS FINANCEIRAS ============ -->
+  <section class="screen" id="tela-entradas" hidden>
+    <div class="card">
+      <div class="sec-titulo sem-margem">Nova entrada</div>
+      <p class="txt2">Dinheiro recebido pelas vendas do frigobar. A oferta é calculada sozinha.</p>
+      <div class="duas">
+        <div>
+          <label class="lbl" for="ent-valor">Valor recebido</label>
+          <input class="input" id="ent-valor" inputmode="decimal" placeholder="0,00">
+        </div>
+        <div>
+          <label class="lbl" for="ent-data">Data</label>
+          <input class="input" type="date" id="ent-data">
+        </div>
+      </div>
+      <label class="lbl">Forma</label>
+      <div class="seg" id="ent-forma">
+        <button data-forma="pix" class="ativo">Pix</button><button data-forma="dinheiro">Dinheiro</button><button data-forma="outro">Outro</button>
+      </div>
+      <label class="lbl" for="ent-obs">Observação (opcional)</label>
+      <input class="input" id="ent-obs" placeholder="Ex.: Pix do fim do dia">
+      <button class="btn-prim" id="btn-salvar-entrada">Lançar entrada</button>
+    </div>
+    <div class="periodo-box"></div>
+    <div class="card conf-mini" id="ent-resumo"></div>
+    <div id="lista-entradas"></div>
   </section>
 
   <!-- ============ ESTOQUE ============ -->
   <section class="screen" id="tela-estoque" hidden>
     <div class="resumo-estoque">
       <div><b id="est-unidades">0</b><span>unidades</span></div>
-      <div><b id="est-produtos">0</b><span>produtos</span></div>
-      <div><b id="est-valor">R$ 0</b><span>valor em estoque</span></div>
+      <div><b id="est-valor-custo">R$ 0</b><span>valor pelo custo</span></div>
+      <div><b id="est-valor">R$ 0</b><span>valor de venda</span></div>
     </div>
+    <div class="alerta perigo" id="est-zerado" hidden></div>
     <div class="alerta" id="est-alerta" hidden></div>
     <button class="btn-prim" id="btn-novo-prod">+ Adicionar produto</button>
     <div id="lista-estoque"></div>
     <div class="vazio" id="estoque-vazio" hidden>Nenhum produto cadastrado ainda.</div>
   </section>
 
-  <!-- ============ RESUMO ============ -->
-  <section class="screen" id="tela-resumo" hidden>
-    <div class="mes-nav">
-      <button class="icon-btn" id="mes-ant" aria-label="Mês anterior">‹</button>
-      <div id="mes-label">—</div>
-      <button class="icon-btn" id="mes-prox" aria-label="Próximo mês">›</button>
-    </div>
-    <div class="card total-card">
-      <div class="lbl">Vendas no Pix</div>
-      <div class="grande" id="res-vendas">R$ 0,00</div>
-      <div class="res-linhas">
-        <div><span>Gastos com reposição</span><b id="res-gastos">R$ 0,00</b></div>
-        <div><span id="res-lucro-lbl">Lucro do mês</span><b id="res-lucro">R$ 0,00</b></div>
-        <div><span>Itens vendidos</span><b id="res-itens">0</b></div>
+  <!-- ============ NOTAS FISCAIS ============ -->
+  <section class="screen" id="tela-notas" hidden>
+    <button class="btn-prim" id="btn-nova-nota">+ Nova nota fiscal / compra</button>
+    <div id="notas-anos">
+      <div class="mes-nav">
+        <button class="icon-btn" id="ano-ant" aria-label="Ano anterior">‹</button>
+        <div id="ano-label">—</div>
+        <button class="icon-btn" id="ano-prox" aria-label="Próximo ano">›</button>
       </div>
+      <div class="card total-card">
+        <div class="lbl">Gasto com compras no ano</div>
+        <div class="grande" id="ano-total">R$ 0,00</div>
+        <div class="txt2 sem-margem" id="ano-qtd"></div>
+      </div>
+      <div class="sec-titulo">Meses</div>
+      <div class="card" id="notas-meses"></div>
     </div>
-    <div class="sec-titulo">Mais vendidos</div>
-    <div class="card" id="res-top"></div>
-    <div class="sec-titulo">Histórico de dias</div>
-    <div id="res-dias"></div>
+    <div id="notas-mes" hidden>
+      <div class="mes-nav">
+        <button class="icon-btn" id="mesn-ant" aria-label="Mês anterior">‹</button>
+        <div id="mesn-label">—</div>
+        <button class="icon-btn" id="mesn-prox" aria-label="Próximo mês">›</button>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><span>Total gasto</span><b id="mesn-total">—</b></div>
+        <div class="kpi"><span>Notas</span><b id="mesn-qtd">—</b></div>
+      </div>
+      <div class="sec-titulo">Notas do mês</div>
+      <div id="mesn-lista"></div>
+      <div class="sec-titulo">Gasto por produto</div>
+      <div class="card" id="mesn-prod"></div>
+      <button class="btn-sec" id="btn-ver-anos">Ver todos os meses</button>
+    </div>
   </section>
 
-  <!-- ============ BACKUP ============ -->
-  <section class="screen" id="tela-backup" hidden>
+  <!-- ============ MAIS ============ -->
+  <section class="screen" id="tela-mais" hidden>
+    <button class="menu-item" data-ir="conferencia"><span>⚖️</span><div><b>Conferência financeira</b><small>Esperado × entradas, ofertas e divergências por dia</small></div></button>
+    <button class="menu-item" data-ir="relatorios"><span>📊</span><div><b>Relatórios por produto</b><small>Mais vendidos, maior lucro, margem</small></div></button>
+    <button class="menu-item" data-ir="config"><span>⚙️</span><div><b>Configurações e backup</b><small>Chave Pix, exportar e importar dados</small></div></button>
+    <div class="card glossario">
+      <div class="sec-titulo sem-margem">Como o app calcula</div>
+      <p><b>Faturamento esperado:</b> soma dos preços de venda dos produtos vendidos.</p>
+      <p><b>Entradas:</b> dinheiro recebido e lançado (só vendas do frigobar).</p>
+      <p><b>Ofertas:</b> o que entrou acima do esperado, dia a dia. Nunca é negativa.</p>
+      <p><b>Divergência:</b> o que entrou abaixo do esperado, para conferir.</p>
+      <p><b>Faturamento total:</b> esperado + ofertas.</p>
+      <p><b>Custo dos produtos vendidos:</b> custo médio × quantidade vendida.</p>
+      <p><b>Lucro líquido operacional:</b> faturamento total − custo dos produtos vendidos. A oferta não tem custo.</p>
+      <p><b>Custo médio:</b> total gasto no produto em todas as notas ÷ quantidade comprada.</p>
+      <p><b>Gastos com compras:</b> notas fiscais do período. Não é descontado do lucro; o custo só conta quando o produto é vendido.</p>
+    </div>
+  </section>
+
+  <!-- ============ CONFERÊNCIA ============ -->
+  <section class="screen" id="tela-conferencia" hidden>
+    <div class="periodo-box"></div>
+    <div class="card" id="conf-resumo"></div>
+    <div class="sec-titulo">Dia a dia</div>
+    <div id="conf-dias"></div>
+  </section>
+
+  <!-- ============ RELATÓRIOS ============ -->
+  <section class="screen" id="tela-relatorios" hidden>
+    <div class="periodo-box"></div>
+    <div class="seg" id="rel-ordem">
+      <button data-ordem="qtd" class="ativo">Mais vendidos</button><button data-ordem="lucro">Maior lucro</button><button data-ordem="margem">Margem</button>
+    </div>
+    <div id="rel-lista"></div>
+  </section>
+
+  <!-- ============ CONFIGURAÇÕES ============ -->
+  <section class="screen" id="tela-config" hidden>
     <div class="card">
       <div class="sec-titulo sem-margem">Chave Pix</div>
       <p class="txt2">Aparece na tela de venda para o cliente copiar.</p>
@@ -110,14 +226,20 @@
     </div>
     <div class="card">
       <div class="sec-titulo sem-margem">Backup dos dados</div>
-      <p class="txt2">Os dados ficam salvos só neste iPhone. Faça backup de vez em quando e guarde no iCloud Drive ou mande no WhatsApp.</p>
+      <p class="txt2">Os dados ficam salvos só neste iPhone. Faça backup uma vez por mês e guarde no iCloud Drive ou mande no WhatsApp.</p>
+      <p class="txt2" id="ultimo-backup"></p>
       <button class="btn-prim" id="btn-exportar">Exportar backup</button>
       <button class="btn-sec" id="btn-importar">Importar backup</button>
       <input type="file" id="arq-importar" accept=".json,application/json" hidden>
     </div>
+    <div class="card" id="cfg-copia-box" hidden>
+      <div class="sec-titulo sem-margem">Cópia da versão anterior</div>
+      <p class="txt2">Quando o app foi atualizado, guardamos uma cópia intacta dos dados antigos. Dá para baixar se precisar.</p>
+      <button class="btn-sec" id="btn-baixar-copia">Baixar cópia da versão anterior</button>
+    </div>
     <div class="card">
       <div class="sec-titulo sem-margem">Apagar tudo</div>
-      <p class="txt2">Remove produtos, vendas e gastos. Essa ação não pode ser desfeita.</p>
+      <p class="txt2">Remove produtos, vendas, entradas e notas. Essa ação não pode ser desfeita.</p>
       <button class="btn-perigo" id="btn-apagar-tudo">Apagar todos os dados</button>
     </div>
   </section>
@@ -125,21 +247,29 @@
 </main>
 
 <nav class="tabbar">
-  <button class="tab ativo" data-tela="vender">
+  <button class="tab ativo" data-tela="inicio">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg>
+    <span>Início</span>
+  </button>
+  <button class="tab" data-tela="vender">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.2L20.5 8H6"/><circle cx="9.5" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>
     <span>Vender</span>
+  </button>
+  <button class="tab" data-tela="entradas">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="13" rx="2.5"/><circle cx="12" cy="12.5" r="2.6"/><path d="M6 9.5v.01M18 15.5v.01"/></svg>
+    <span>Entradas</span>
   </button>
   <button class="tab" data-tela="estoque">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg>
     <span>Estoque</span>
   </button>
-  <button class="tab" data-tela="resumo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
-    <span>Resumo</span>
+  <button class="tab" data-tela="notas">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.8h12v18.4l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4Z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>
+    <span>Notas</span>
   </button>
-  <button class="tab" data-tela="backup">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
-    <span>Backup</span>
+  <button class="tab" data-tela="mais">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg>
+    <span>Mais</span>
   </button>
 </nav>
 
@@ -159,10 +289,11 @@
         <input class="input" id="p-preco" inputmode="decimal" placeholder="0,00">
       </div>
       <div>
-        <label class="lbl" for="p-custo">Custo por unidade</label>
+        <label class="lbl" for="p-custo" id="p-custo-lbl">Custo por unidade</label>
         <input class="input" id="p-custo" inputmode="decimal" placeholder="opcional">
       </div>
     </div>
+    <div class="dica" id="p-custo-medio"></div>
     <div class="duas">
       <div>
         <label class="lbl" for="p-qtd" id="p-qtd-lbl">Unidades em estoque</label>
@@ -178,7 +309,7 @@
   </div>
 </div>
 
-<!-- ============ MODAL REPOR ============ -->
+<!-- ============ MODAL REPOR (nota rápida de 1 produto) ============ -->
 <div class="modal" id="modal-repor" hidden>
   <div class="sheet">
     <div class="sheet-topo">
@@ -188,16 +319,146 @@
     <p class="txt2" id="repor-atual"></p>
     <label class="lbl" for="r-qtd">Quantas unidades chegaram?</label>
     <input class="input" id="r-qtd" inputmode="numeric" placeholder="Ex.: 12">
-    <label class="lbl" for="r-valor">Quanto pagou no total (gasto)</label>
+    <label class="lbl" for="r-valor">Quanto pagou no total</label>
     <input class="input" id="r-valor" inputmode="decimal" placeholder="opcional">
-    <label class="lbl" for="r-data">Data</label>
-    <input class="input" type="date" id="r-data">
+    <div class="duas">
+      <div>
+        <label class="lbl" for="r-data">Data</label>
+        <input class="input" type="date" id="r-data">
+      </div>
+      <div>
+        <label class="lbl" for="r-mercado">Mercado</label>
+        <input class="input" id="r-mercado" placeholder="opcional">
+      </div>
+    </div>
+    <p class="dica">Fica salvo em Notas como uma compra e atualiza o custo médio.</p>
     <button class="btn-prim" id="btn-confirmar-repor">Adicionar ao estoque</button>
+  </div>
+</div>
+
+<!-- ============ MODAL NOTA FISCAL ============ -->
+<div class="modal" id="modal-nota" hidden>
+  <div class="sheet alta">
+    <div class="sheet-topo">
+      <b id="nota-titulo">Nova nota fiscal</b>
+      <button class="icon-btn" data-fechar aria-label="Fechar">✕</button>
+    </div>
+    <div class="qr-box">
+      <button class="btn-sec" id="btn-ler-qr">📷 Ler QR Code da nota</button>
+      <input type="file" id="arq-qr" accept="image/*" capture="environment" hidden>
+      <label class="lbl" for="n-link">Link ou chave de acesso da nota</label>
+      <input class="input" id="n-link" placeholder="Cole o link do QR Code" autocomplete="off">
+      <div class="dica" id="n-qr-info"></div>
+    </div>
+    <div class="duas">
+      <div>
+        <label class="lbl" for="n-data">Data da compra</label>
+        <input class="input" type="date" id="n-data">
+      </div>
+      <div>
+        <label class="lbl" for="n-mercado">Mercado</label>
+        <input class="input" id="n-mercado" placeholder="Ex.: Atacadão" list="lista-mercados" autocomplete="off">
+        <datalist id="lista-mercados"></datalist>
+      </div>
+    </div>
+    <div class="sec-titulo">Produtos comprados</div>
+    <div id="n-itens"></div>
+    <datalist id="lista-produtos"></datalist>
+    <button class="btn-sec" id="btn-add-item">+ Adicionar produto</button>
+    <div class="linha-total"><span>Total dos produtos</span><b id="n-total">R$ 0,00</b></div>
+    <label class="lbl" for="n-total-nota">Valor total da nota (conferência, opcional)</label>
+    <input class="input" id="n-total-nota" inputmode="decimal" placeholder="Valor impresso na nota">
+    <div class="dica" id="n-total-aviso"></div>
+    <label class="lbl">Arquivo da nota (foto ou PDF, opcional)</label>
+    <div class="arquivo-linha">
+      <button class="btn-mini" id="btn-anexar">Anexar</button>
+      <span class="txt2 sem-margem" id="n-arquivo-nome">Nenhum arquivo</span>
+      <button class="btn-mini" id="btn-ver-anexo" hidden>Ver</button>
+      <button class="btn-mini perigo" id="btn-remover-anexo" hidden>Remover</button>
+    </div>
+    <input type="file" id="arq-nota" accept="image/*,application/pdf" hidden>
+    <label class="lbl" for="n-obs">Observação</label>
+    <input class="input" id="n-obs" placeholder="opcional">
+    <button class="btn-prim" id="btn-salvar-nota">Salvar nota</button>
+    <button class="btn-perigo" id="btn-excluir-nota" hidden>Excluir nota</button>
+  </div>
+</div>
+
+<!-- ============ MODAL EDITAR VENDA ============ -->
+<div class="modal" id="modal-venda" hidden>
+  <div class="sheet">
+    <div class="sheet-topo">
+      <b>Editar venda</b>
+      <button class="icon-btn" data-fechar aria-label="Fechar">✕</button>
+    </div>
+    <label class="lbl" for="ev-data">Data</label>
+    <input class="input" type="date" id="ev-data">
+    <div class="sec-titulo">Itens</div>
+    <div id="ev-itens"></div>
+    <select class="input" id="ev-add"><option value="">+ Adicionar produto…</option></select>
+    <div class="linha-total"><span>Faturamento esperado</span><b id="ev-total">R$ 0,00</b></div>
+    <label class="lbl" for="ev-recebido">Valor recebido lançado com esta venda</label>
+    <input class="input" id="ev-recebido" inputmode="decimal" placeholder="vazio = sem entrada vinculada">
+    <button class="btn-prim" id="btn-salvar-venda">Salvar alterações</button>
+    <button class="btn-perigo" id="btn-excluir-venda">Excluir venda</button>
+  </div>
+</div>
+
+<!-- ============ MODAL EDITAR ENTRADA ============ -->
+<div class="modal" id="modal-entrada" hidden>
+  <div class="sheet">
+    <div class="sheet-topo">
+      <b>Editar entrada</b>
+      <button class="icon-btn" data-fechar aria-label="Fechar">✕</button>
+    </div>
+    <div class="duas">
+      <div>
+        <label class="lbl" for="ee-valor">Valor</label>
+        <input class="input" id="ee-valor" inputmode="decimal">
+      </div>
+      <div>
+        <label class="lbl" for="ee-data">Data</label>
+        <input class="input" type="date" id="ee-data">
+      </div>
+    </div>
+    <label class="lbl">Forma</label>
+    <div class="seg" id="ee-forma">
+      <button data-forma="pix">Pix</button><button data-forma="dinheiro">Dinheiro</button><button data-forma="outro">Outro</button>
+    </div>
+    <label class="lbl" for="ee-obs">Observação</label>
+    <input class="input" id="ee-obs">
+    <button class="btn-prim" id="btn-salvar-ee">Salvar</button>
+    <button class="btn-perigo" id="btn-excluir-ee">Excluir entrada</button>
+  </div>
+</div>
+
+<!-- ============ MODAL RELATÓRIO DO PRODUTO ============ -->
+<div class="modal" id="modal-relprod" hidden>
+  <div class="sheet">
+    <div class="sheet-topo">
+      <b id="rp-titulo">Produto</b>
+      <button class="icon-btn" data-fechar aria-label="Fechar">✕</button>
+    </div>
+    <div id="rp-corpo"></div>
+    <div class="duas">
+      <button class="btn-sec" id="rp-repor">+ Repor</button>
+      <button class="btn-sec" id="rp-editar">Editar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL AVISO DE ATUALIZAÇÃO ============ -->
+<div class="modal" id="modal-update" hidden>
+  <div class="sheet">
+    <div class="sheet-topo"><b>App atualizado ✅</b></div>
+    <div id="update-corpo"></div>
+    <button class="btn-prim" data-fechar>Entendi</button>
   </div>
 </div>
 
 <div class="toast" id="toast" hidden></div>
 
+<script src="calc.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

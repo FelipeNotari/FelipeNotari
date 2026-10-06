@@ -1,6 +1,6 @@
-const CACHE = 'frigobar-v1';
+const CACHE = 'frigobar-v2';
 const ARQUIVOS = [
-  './', './index.html', './styles.css', './app.js', './manifest.webmanifest',
+  './', './index.html', './styles.css', './calc.js', './app.js', './manifest.webmanifest', './vendor/jsQR.js',
   './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './icons/favicon-32.png'
 ];
 
