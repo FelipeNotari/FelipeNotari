@@ -1,0 +1,8 @@
+{
+  "appId": "com.felipenotari.bastiao",
+  "appName": "Bastião de Aço",
+  "webDir": "dist",
+  "android": {
+    "backgroundColor": "#1b1f22"
+  }
+}

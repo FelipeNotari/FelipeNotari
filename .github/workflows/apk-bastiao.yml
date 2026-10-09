@@ -1,0 +1,79 @@
+name: APK Bastião de Aço
+
+# Gera o APK do jogo e publica numa Release a cada push que mexa no jogo.
+on:
+  push:
+    branches:
+      - '**'
+    paths:
+      - 'bastiao/**'
+      - '.github/workflows/apk-bastiao.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apk-bastiao-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: bastiao
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: bastiao/package-lock.json
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Verificar dados do jogo
+        run: npm test
+
+      - name: Gerar build web
+        run: npm run build
+
+      - name: Sincronizar Capacitor
+        run: npx cap sync android
+
+      - name: Compilar APK assinado
+        working-directory: bastiao/android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease --no-daemon --stacktrace
+
+      - name: Preparar arquivo
+        run: |
+          cp android/app/build/outputs/apk/release/app-release.apk Bastiao-de-Aco.apk
+          ls -la Bastiao-de-Aco.apk
+          BT=$(ls -d $ANDROID_HOME/build-tools/* | sort -V | tail -1)
+          $BT/apksigner verify --print-certs Bastiao-de-Aco.apk | head -5
+
+      - name: Publicar Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: bastiao-v1.0.${{ github.run_number }}
+          name: Bastião de Aço v1.0.${{ github.run_number }}
+          target_commitish: ${{ github.sha }}
+          make_latest: true
+          body: |
+            APK do jogo **Bastião de Aço** (versão 1.0.${{ github.run_number }}).
+            Baixe o arquivo `Bastiao-de-Aco.apk` abaixo no celular Android e instale.
+            Assinado sempre com a mesma chave: instala por cima da versão anterior sem perder o progresso.
+          files: bastiao/Bastiao-de-Aco.apk
