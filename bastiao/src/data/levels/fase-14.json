@@ -1,0 +1,629 @@
+{
+ "id": 14,
+ "name": "Estação Polar",
+ "biome": "neve",
+ "map": {
+  "x": 0.666,
+  "y": 0.51
+ },
+ "startMoney": 820,
+ "lives": 20,
+ "hpMult": 1,
+ "waveGap": 15,
+ "towers": [
+  "mg",
+  "at",
+  "aa",
+  "mo",
+  "sn",
+  "fl",
+  "su",
+  "la"
+ ],
+ "abilities": [
+  "aereo",
+  "minas",
+  "suprimentos",
+  "arame",
+  "napalm",
+  "emp",
+  "reforcos"
+ ],
+ "paths": [
+  [
+   [
+    -1,
+    7
+   ],
+   [
+    4,
+    7
+   ],
+   [
+    4,
+    2
+   ],
+   [
+    10,
+    2
+   ],
+   [
+    10,
+    11
+   ],
+   [
+    16,
+    11
+   ],
+   [
+    16,
+    4
+   ],
+   [
+    23,
+    4
+   ]
+  ],
+  [
+   [
+    19,
+    14
+   ],
+   [
+    19,
+    8
+   ],
+   [
+    16,
+    8
+   ],
+   [
+    16,
+    4
+   ],
+   [
+    23,
+    4
+   ]
+  ]
+ ],
+ "airPaths": [
+  [
+   [
+    -1,
+    13
+   ],
+   [
+    23,
+    4
+   ]
+  ],
+  [
+   [
+    -1,
+    0
+   ],
+   [
+    23,
+    4
+   ]
+  ]
+ ],
+ "obstacles": [
+  {
+   "type": "carcaca",
+   "x": 18,
+   "y": 6
+  },
+  {
+   "type": "carcaca",
+   "x": 17,
+   "y": 6
+  },
+  {
+   "type": "pedra",
+   "x": 18,
+   "y": 5
+  },
+  {
+   "type": "pedra",
+   "x": 17,
+   "y": 5
+  },
+  {
+   "type": "pedra",
+   "x": 17,
+   "y": 7
+  },
+  {
+   "type": "pedra",
+   "x": 19,
+   "y": 6
+  },
+  {
+   "type": "pedra",
+   "x": 15,
+   "y": 6
+  },
+  {
+   "type": "arvore",
+   "x": 18,
+   "y": 3
+  },
+  {
+   "type": "pedra",
+   "x": 18,
+   "y": 7
+  },
+  {
+   "type": "arvore",
+   "x": 19,
+   "y": 5
+  },
+  {
+   "type": "barril",
+   "x": 15,
+   "y": 5
+  },
+  {
+   "type": "arvore",
+   "x": 19,
+   "y": 3
+  },
+  {
+   "type": "arvore",
+   "x": 17,
+   "y": 3
+  },
+  {
+   "type": "barril",
+   "x": 17,
+   "y": 9
+  },
+  {
+   "type": "barril",
+   "x": 12,
+   "y": 9
+  },
+  {
+   "type": "arvore",
+   "x": 14,
+   "y": 8
+  },
+  {
+   "type": "arvore",
+   "x": 9,
+   "y": 1
+  },
+  {
+   "type": "barril",
+   "x": 3,
+   "y": 4
+  },
+  {
+   "type": "barril",
+   "x": 23,
+   "y": 6
+  },
+  {
+   "type": "barril",
+   "x": 12,
+   "y": 1
+  },
+  {
+   "type": "arvore",
+   "x": 18,
+   "y": 1
+  },
+  {
+   "type": "arvore",
+   "x": 23,
+   "y": 1
+  },
+  {
+   "type": "pedra",
+   "x": 0,
+   "y": 3
+  },
+  {
+   "type": "arvore",
+   "x": 23,
+   "y": 0
+  },
+  {
+   "type": "arvore",
+   "x": 22,
+   "y": 13
+  }
+ ],
+ "waves": [
+  {
+   "bonus": 53,
+   "groups": [
+    {
+     "enemy": "moto",
+     "count": 6,
+     "interval": 0.7,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "caminhao",
+     "count": 2,
+     "interval": 3,
+     "delay": 3.6,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 59,
+   "groups": [
+    {
+     "enemy": "elite",
+     "count": 5,
+     "interval": 1,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 4,
+     "interval": 1.5,
+     "delay": 4,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 65,
+   "groups": [
+    {
+     "enemy": "reparo",
+     "count": 1,
+     "interval": 3,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 37,
+     "interval": 0.35,
+     "delay": 1.5,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 71,
+   "groups": [
+    {
+     "enemy": "tanque_leve",
+     "count": 3,
+     "interval": 2.4,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "soldado",
+     "count": 5,
+     "interval": 0.8,
+     "delay": 3.9,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 77,
+   "groups": [
+    {
+     "enemy": "drone",
+     "count": 11,
+     "interval": 0.35,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "heli",
+     "count": 1,
+     "interval": 2.6,
+     "delay": 6.2,
+     "path": 0
+    },
+    {
+     "enemy": "gerador",
+     "count": 3,
+     "interval": 3,
+     "delay": 10.3,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 83,
+   "groups": [
+    {
+     "enemy": "drone",
+     "count": 34,
+     "interval": 0.35,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "jipe",
+     "count": 8,
+     "interval": 1.5,
+     "delay": 7.6,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 89,
+   "groups": [
+    {
+     "enemy": "camuflado",
+     "count": 7,
+     "interval": 1.1,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "caminhao",
+     "count": 4,
+     "interval": 3,
+     "delay": 5.4,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 95,
+   "groups": [
+    {
+     "enemy": "camuflado",
+     "count": 6,
+     "interval": 1.1,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "heli",
+     "count": 1,
+     "interval": 2.6,
+     "delay": 4.3,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 23,
+     "interval": 0.8,
+     "delay": 8.4,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 101,
+   "groups": [
+    {
+     "enemy": "caminhao",
+     "count": 3,
+     "interval": 3,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "elite",
+     "count": 9,
+     "interval": 1,
+     "delay": 6,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 6,
+     "interval": 1.5,
+     "delay": 11.5,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 107,
+   "groups": [
+    {
+     "enemy": "caminhao",
+     "count": 3,
+     "interval": 3,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "escudo",
+     "count": 6,
+     "interval": 1.2,
+     "delay": 6,
+     "path": 1
+    },
+    {
+     "enemy": "heli",
+     "count": 2,
+     "interval": 2.6,
+     "delay": 11.7,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 113,
+   "groups": [
+    {
+     "enemy": "elite",
+     "count": 10,
+     "interval": 1,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "heli",
+     "count": 2,
+     "interval": 2.6,
+     "delay": 6,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 29,
+     "interval": 0.8,
+     "delay": 11.4,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 119,
+   "groups": [
+    {
+     "enemy": "drone",
+     "count": 68,
+     "interval": 0.35,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "gerador",
+     "count": 5,
+     "interval": 3,
+     "delay": 8,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 125,
+   "groups": [
+    {
+     "enemy": "jipe",
+     "count": 15,
+     "interval": 1.5,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 18,
+     "interval": 1.4,
+     "delay": 8,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 131,
+   "groups": [
+    {
+     "enemy": "camuflado",
+     "count": 8,
+     "interval": 1.1,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "elite",
+     "count": 12,
+     "interval": 1,
+     "delay": 5.4,
+     "path": 1
+    },
+    {
+     "enemy": "drone",
+     "count": 31,
+     "interval": 0.35,
+     "delay": 12.4,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 137,
+   "groups": [
+    {
+     "enemy": "moto",
+     "count": 17,
+     "interval": 0.7,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "heli",
+     "count": 3,
+     "interval": 2.6,
+     "delay": 7.8,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 36,
+     "interval": 0.8,
+     "delay": 14.5,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 143,
+   "groups": [
+    {
+     "enemy": "tanque_leve",
+     "count": 8,
+     "interval": 2.4,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "gerador",
+     "count": 3,
+     "interval": 3,
+     "delay": 7.5,
+     "path": 1
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 4,
+     "interval": 1.4,
+     "delay": 9,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 149,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 38,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "heli",
+     "count": 3,
+     "interval": 2.6,
+     "delay": 8,
+     "path": 0
+    },
+    {
+     "enemy": "camuflado",
+     "count": 10,
+     "interval": 1.1,
+     "delay": 14.7,
+     "path": 1
+    }
+   ]
+  }
+ ],
+ "briefing": "Ataque por terra e por duas rotas aéreas. A estação precisa de cobertura antiaérea dupla.",
+ "waveHpGrowth": 0.025
+}

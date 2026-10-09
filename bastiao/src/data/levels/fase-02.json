@@ -1,0 +1,470 @@
+{
+ "id": 2,
+ "name": "Dunas Vermelhas",
+ "biome": "deserto",
+ "map": {
+  "x": 0.112,
+  "y": 0.73
+ },
+ "startMoney": 320,
+ "lives": 20,
+ "hpMult": 1,
+ "waveGap": 15,
+ "towers": [
+  "mg",
+  "at"
+ ],
+ "abilities": [
+  "aereo",
+  "minas",
+  "suprimentos"
+ ],
+ "paths": [
+  [
+   [
+    -1,
+    11
+   ],
+   [
+    4,
+    11
+   ],
+   [
+    4,
+    4
+   ],
+   [
+    10,
+    4
+   ],
+   [
+    10,
+    10
+   ],
+   [
+    16,
+    10
+   ],
+   [
+    16,
+    2
+   ],
+   [
+    21,
+    2
+   ],
+   [
+    21,
+    7
+   ],
+   [
+    23,
+    7
+   ]
+  ]
+ ],
+ "airPaths": [],
+ "obstacles": [
+  {
+   "type": "carcaca",
+   "x": 18,
+   "y": 4
+  },
+  {
+   "type": "pedra",
+   "x": 19,
+   "y": 4
+  },
+  {
+   "type": "carcaca",
+   "x": 6,
+   "y": 6
+  },
+  {
+   "type": "pedra",
+   "x": 8,
+   "y": 6
+  },
+  {
+   "type": "pedra",
+   "x": 12,
+   "y": 8
+  },
+  {
+   "type": "arvore",
+   "x": 14,
+   "y": 8
+  },
+  {
+   "type": "destrocos",
+   "x": 2,
+   "y": 9
+  },
+  {
+   "type": "pedra",
+   "x": 6,
+   "y": 5
+  },
+  {
+   "type": "arvore",
+   "x": 15,
+   "y": 8
+  },
+  {
+   "type": "barril",
+   "x": 17,
+   "y": 3
+  },
+  {
+   "type": "pedra",
+   "x": 18,
+   "y": 1
+  },
+  {
+   "type": "destrocos",
+   "x": 19,
+   "y": 1
+  },
+  {
+   "type": "destrocos",
+   "x": 3,
+   "y": 6
+  },
+  {
+   "type": "barril",
+   "x": 3,
+   "y": 5
+  },
+  {
+   "type": "arvore",
+   "x": 7,
+   "y": 5
+  },
+  {
+   "type": "destrocos",
+   "x": 17,
+   "y": 5
+  },
+  {
+   "type": "arvore",
+   "x": 15,
+   "y": 6
+  },
+  {
+   "type": "arvore",
+   "x": 3,
+   "y": 12
+  },
+  {
+   "type": "destrocos",
+   "x": 18,
+   "y": 0
+  },
+  {
+   "type": "pedra",
+   "x": 6,
+   "y": 2
+  },
+  {
+   "type": "pedra",
+   "x": 14,
+   "y": 4
+  },
+  {
+   "type": "pedra",
+   "x": 2,
+   "y": 7
+  },
+  {
+   "type": "destrocos",
+   "x": 8,
+   "y": 8
+  },
+  {
+   "type": "pedra",
+   "x": 3,
+   "y": 3
+  },
+  {
+   "type": "arvore",
+   "x": 20,
+   "y": 8
+  },
+  {
+   "type": "pedra",
+   "x": 10,
+   "y": 12
+  },
+  {
+   "type": "arvore",
+   "x": 16,
+   "y": 12
+  },
+  {
+   "type": "pedra",
+   "x": 17,
+   "y": 12
+  },
+  {
+   "type": "destrocos",
+   "x": 5,
+   "y": 13
+  },
+  {
+   "type": "arvore",
+   "x": 2,
+   "y": 2
+  },
+  {
+   "type": "barril",
+   "x": 2,
+   "y": 0
+  },
+  {
+   "type": "pedra",
+   "x": 5,
+   "y": 0
+  },
+  {
+   "type": "barril",
+   "x": 1,
+   "y": 1
+  },
+  {
+   "type": "destrocos",
+   "x": 7,
+   "y": 1
+  },
+  {
+   "type": "destrocos",
+   "x": 11,
+   "y": 1
+  },
+  {
+   "type": "arvore",
+   "x": 13,
+   "y": 1
+  },
+  {
+   "type": "arvore",
+   "x": 1,
+   "y": 2
+  },
+  {
+   "type": "pedra",
+   "x": 13,
+   "y": 6
+  },
+  {
+   "type": "pedra",
+   "x": 1,
+   "y": 8
+  },
+  {
+   "type": "barril",
+   "x": 7,
+   "y": 11
+  },
+  {
+   "type": "destrocos",
+   "x": 20,
+   "y": 11
+  },
+  {
+   "type": "destrocos",
+   "x": 20,
+   "y": 13
+  }
+ ],
+ "waves": [
+  {
+   "bonus": 29,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 4,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "moto",
+     "count": 2,
+     "interval": 0.7,
+     "delay": 3.1,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 35,
+   "groups": [
+    {
+     "enemy": "moto",
+     "count": 3,
+     "interval": 0.7,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 1,
+     "interval": 1.5,
+     "delay": 2.6,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 41,
+   "groups": [
+    {
+     "enemy": "jipe",
+     "count": 2,
+     "interval": 1.5,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "moto",
+     "count": 4,
+     "interval": 0.7,
+     "delay": 3,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 47,
+   "groups": [
+    {
+     "enemy": "jipe",
+     "count": 1,
+     "interval": 1.5,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 5,
+     "interval": 0.8,
+     "delay": 2.3,
+     "path": 0
+    },
+    {
+     "enemy": "moto",
+     "count": 3,
+     "interval": 0.7,
+     "delay": 5.8,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 53,
+   "groups": [
+    {
+     "enemy": "moto",
+     "count": 3,
+     "interval": 0.7,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 2,
+     "interval": 1.5,
+     "delay": 2.6,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 5,
+     "interval": 0.8,
+     "delay": 5.6,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 59,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 6,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 2,
+     "interval": 1.5,
+     "delay": 3.9,
+     "path": 0
+    },
+    {
+     "enemy": "moto",
+     "count": 4,
+     "interval": 0.7,
+     "delay": 6.9,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 65,
+   "groups": [
+    {
+     "enemy": "moto",
+     "count": 4,
+     "interval": 0.7,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 7,
+     "interval": 0.8,
+     "delay": 2.9,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 2,
+     "interval": 1.5,
+     "delay": 7.2,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 71,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 8,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 2,
+     "interval": 1.5,
+     "delay": 4.7,
+     "path": 0
+    },
+    {
+     "enemy": "moto",
+     "count": 5,
+     "interval": 0.7,
+     "delay": 7.7,
+     "path": 0
+    }
+   ]
+  }
+ ],
+ "briefing": "Veículos leves à vista. Balas comuns rendem pouco contra blindagem: o Canhão Antitanque chegou.",
+ "waveHpGrowth": 0.025
+}

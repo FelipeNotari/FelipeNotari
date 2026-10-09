@@ -1,0 +1,279 @@
+[
+ {
+  "id": "mg",
+  "name": "Metralhadora",
+  "short": "Metral.",
+  "role": "Barata e de cadência alta. Arrasa infantaria; fraca contra veículos e aéreos, inútil contra tanques.",
+  "dmgType": "BAL",
+  "targets": "both",
+  "attack": "hitscan",
+  "unlock": 1,
+  "levels": [
+   {
+    "cost": 100,
+    "dmg": 8,
+    "rate": 5.0,
+    "range": 2.8
+   },
+   {
+    "cost": 75,
+    "dmg": 12,
+    "rate": 5.5,
+    "range": 2.9
+   },
+   {
+    "cost": 120,
+    "dmg": 16,
+    "rate": 6.5,
+    "range": 3.1
+   }
+  ]
+ },
+ {
+  "id": "at",
+  "name": "Canhão Antitanque",
+  "short": "Antitanque",
+  "role": "Perfurante pesado, lento, alvo único. Destrói blindados; desperdiça tiros em infantaria. Não atinge aéreos.",
+  "dmgType": "PER",
+  "targets": "ground",
+  "attack": "shell",
+  "unlock": 2,
+  "levels": [
+   {
+    "cost": 200,
+    "dmg": 160,
+    "rate": 0.5,
+    "range": 3.2,
+    "projSpeed": 14
+   },
+   {
+    "cost": 150,
+    "dmg": 250,
+    "rate": 0.52,
+    "range": 3.3,
+    "projSpeed": 14
+   },
+   {
+    "cost": 230,
+    "dmg": 380,
+    "rate": 0.55,
+    "range": 3.5,
+    "projSpeed": 15
+   }
+  ]
+ },
+ {
+  "id": "aa",
+  "name": "Bateria Antiaérea",
+  "short": "Antiaérea",
+  "role": "Mísseis teleguiados que só atingem alvos aéreos. Pequena fragmentação no impacto.",
+  "dmgType": "PER",
+  "targets": "air",
+  "attack": "missile",
+  "unlock": 3,
+  "levels": [
+   {
+    "cost": 160,
+    "dmg": 55,
+    "rate": 0.833,
+    "range": 4.5,
+    "missiles": 2,
+    "aoe": 0.5,
+    "projSpeed": 9
+   },
+   {
+    "cost": 120,
+    "dmg": 85,
+    "rate": 0.909,
+    "range": 4.8,
+    "missiles": 2,
+    "aoe": 0.55,
+    "projSpeed": 10
+   },
+   {
+    "cost": 190,
+    "dmg": 125,
+    "rate": 1.0,
+    "range": 5.2,
+    "missiles": 2,
+    "aoe": 0.6,
+    "projSpeed": 11
+   }
+  ]
+ },
+ {
+  "id": "mo",
+  "name": "Morteiro",
+  "short": "Morteiro",
+  "role": "Explosivo em área de longo alcance. Tem ponto cego perto da base e só atinge alvos terrestres.",
+  "dmgType": "EXP",
+  "targets": "ground",
+  "attack": "mortar",
+  "unlock": 4,
+  "levels": [
+   {
+    "cost": 175,
+    "dmg": 50,
+    "rate": 0.5,
+    "range": 5.0,
+    "minRange": 1.6,
+    "aoe": 1.1,
+    "flight": 1.1
+   },
+   {
+    "cost": 130,
+    "dmg": 80,
+    "rate": 0.55,
+    "range": 5.2,
+    "minRange": 1.6,
+    "aoe": 1.2,
+    "flight": 1.1
+   },
+   {
+    "cost": 200,
+    "dmg": 120,
+    "rate": 0.6,
+    "range": 5.5,
+    "minRange": 1.6,
+    "aoe": 1.35,
+    "flight": 1.1
+   }
+  ]
+ },
+ {
+  "id": "sn",
+  "name": "Sniper",
+  "short": "Sniper",
+  "role": "Alcance enorme e tiro lento perfurante contra alvos terrestres. No nível 3 revela camuflados.",
+  "dmgType": "PER",
+  "targets": "ground",
+  "attack": "hitscan",
+  "unlock": 5,
+  "levels": [
+   {
+    "cost": 150,
+    "dmg": 45,
+    "rate": 0.5,
+    "range": 6.0
+   },
+   {
+    "cost": 110,
+    "dmg": 72,
+    "rate": 0.55,
+    "range": 6.3
+   },
+   {
+    "cost": 170,
+    "dmg": 110,
+    "rate": 0.6,
+    "range": 6.8,
+    "revealCamo": true
+   }
+  ]
+ },
+ {
+  "id": "fl",
+  "name": "Lança-chamas",
+  "short": "Chamas",
+  "role": "Curto alcance, cone de fogo que atinge vários alvos e deixa queimadura. Nulo contra blindagem pesada.",
+  "dmgType": "FOG",
+  "targets": "ground",
+  "attack": "flame",
+  "unlock": 6,
+  "levels": [
+   {
+    "cost": 130,
+    "dmg": 18,
+    "range": 1.8,
+    "cone": 50,
+    "burnDps": 8,
+    "burnTime": 3
+   },
+   {
+    "cost": 100,
+    "dmg": 28,
+    "range": 1.9,
+    "cone": 55,
+    "burnDps": 12,
+    "burnTime": 3
+   },
+   {
+    "cost": 160,
+    "dmg": 42,
+    "range": 2.1,
+    "cone": 60,
+    "burnDps": 18,
+    "burnTime": 3
+   }
+  ]
+ },
+ {
+  "id": "su",
+  "name": "Radar de Suporte",
+  "short": "Radar",
+  "role": "Não causa dano. Revela camuflados, desacelera veículos e aumenta o alcance das torres vizinhas.",
+  "dmgType": "ENE",
+  "targets": "none",
+  "attack": "support",
+  "unlock": 7,
+  "levels": [
+   {
+    "cost": 150,
+    "range": 3.5,
+    "slow": 0.15,
+    "aura": 0.1,
+    "auraRadius": 2.0,
+    "auraDmg": 0
+   },
+   {
+    "cost": 120,
+    "range": 4.0,
+    "slow": 0.22,
+    "aura": 0.15,
+    "auraRadius": 2.0,
+    "auraDmg": 0
+   },
+   {
+    "cost": 180,
+    "range": 4.5,
+    "slow": 0.3,
+    "aura": 0.2,
+    "auraRadius": 2.0,
+    "auraDmg": 0.1
+   }
+  ]
+ },
+ {
+  "id": "la",
+  "name": "Laser",
+  "short": "Laser",
+  "role": "Feixe de energia contínuo. O dano cresce enquanto mantém o mesmo alvo. Derrete escudos de energia.",
+  "dmgType": "ENE",
+  "targets": "both",
+  "attack": "beam",
+  "unlock": 8,
+  "levels": [
+   {
+    "cost": 220,
+    "dmg": 30,
+    "range": 3.2,
+    "rampMax": 2.5,
+    "rampTime": 2.5
+   },
+   {
+    "cost": 170,
+    "dmg": 46,
+    "range": 3.4,
+    "rampMax": 2.5,
+    "rampTime": 2.5
+   },
+   {
+    "cost": 250,
+    "dmg": 70,
+    "range": 3.6,
+    "rampMax": 3.0,
+    "rampTime": 2.5
+   }
+  ]
+ }
+]

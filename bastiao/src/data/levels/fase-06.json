@@ -1,0 +1,590 @@
+{
+ "id": 6,
+ "name": "Avenida Partida",
+ "biome": "cidade",
+ "map": {
+  "x": 0.305,
+  "y": 0.72
+ },
+ "startMoney": 500,
+ "lives": 20,
+ "hpMult": 1,
+ "waveGap": 15,
+ "towers": [
+  "mg",
+  "at",
+  "aa",
+  "mo",
+  "sn",
+  "fl"
+ ],
+ "abilities": [
+  "aereo",
+  "minas",
+  "suprimentos",
+  "arame",
+  "napalm"
+ ],
+ "paths": [
+  [
+   [
+    -1,
+    2
+   ],
+   [
+    7,
+    2
+   ],
+   [
+    7,
+    7
+   ],
+   [
+    14,
+    7
+   ],
+   [
+    14,
+    11
+   ],
+   [
+    23,
+    11
+   ]
+  ],
+  [
+   [
+    -1,
+    12
+   ],
+   [
+    4,
+    12
+   ],
+   [
+    4,
+    9
+   ],
+   [
+    10,
+    9
+   ],
+   [
+    10,
+    7
+   ],
+   [
+    14,
+    7
+   ],
+   [
+    14,
+    11
+   ],
+   [
+    23,
+    11
+   ]
+  ]
+ ],
+ "airPaths": [
+  [
+   [
+    -1,
+    0
+   ],
+   [
+    23,
+    11
+   ]
+  ]
+ ],
+ "obstacles": [
+  {
+   "type": "conteiner",
+   "x": 12,
+   "y": 9
+  },
+  {
+   "type": "carcaca",
+   "x": 12,
+   "y": 8
+  },
+  {
+   "type": "conteiner",
+   "x": 16,
+   "y": 9
+  },
+  {
+   "type": "conteiner",
+   "x": 15,
+   "y": 9
+  },
+  {
+   "type": "carcaca",
+   "x": 13,
+   "y": 9
+  },
+  {
+   "type": "carcaca",
+   "x": 16,
+   "y": 10
+  },
+  {
+   "type": "carcaca",
+   "x": 13,
+   "y": 8
+  },
+  {
+   "type": "barril",
+   "x": 15,
+   "y": 10
+  },
+  {
+   "type": "barril",
+   "x": 12,
+   "y": 6
+  },
+  {
+   "type": "destrocos",
+   "x": 9,
+   "y": 8
+  },
+  {
+   "type": "barril",
+   "x": 9,
+   "y": 5
+  },
+  {
+   "type": "destrocos",
+   "x": 13,
+   "y": 10
+  },
+  {
+   "type": "destrocos",
+   "x": 8,
+   "y": 4
+  },
+  {
+   "type": "carcaca",
+   "x": 22,
+   "y": 13
+  },
+  {
+   "type": "arvore",
+   "x": 3,
+   "y": 0
+  },
+  {
+   "type": "destrocos",
+   "x": 23,
+   "y": 12
+  },
+  {
+   "type": "barril",
+   "x": 4,
+   "y": 7
+  },
+  {
+   "type": "arvore",
+   "x": 0,
+   "y": 11
+  },
+  {
+   "type": "arvore",
+   "x": 3,
+   "y": 8
+  },
+  {
+   "type": "destrocos",
+   "x": 5,
+   "y": 13
+  },
+  {
+   "type": "destrocos",
+   "x": 10,
+   "y": 11
+  },
+  {
+   "type": "destrocos",
+   "x": 17,
+   "y": 4
+  },
+  {
+   "type": "barril",
+   "x": 9,
+   "y": 0
+  },
+  {
+   "type": "destrocos",
+   "x": 11,
+   "y": 1
+  },
+  {
+   "type": "destrocos",
+   "x": 0,
+   "y": 5
+  },
+  {
+   "type": "destrocos",
+   "x": 16,
+   "y": 3
+  },
+  {
+   "type": "destrocos",
+   "x": 13,
+   "y": 0
+  },
+  {
+   "type": "arvore",
+   "x": 14,
+   "y": 0
+  },
+  {
+   "type": "destrocos",
+   "x": 22,
+   "y": 1
+  },
+  {
+   "type": "carcaca",
+   "x": 20,
+   "y": 2
+  },
+  {
+   "type": "barril",
+   "x": 20,
+   "y": 3
+  },
+  {
+   "type": "carcaca",
+   "x": 22,
+   "y": 3
+  },
+  {
+   "type": "destrocos",
+   "x": 23,
+   "y": 3
+  },
+  {
+   "type": "destrocos",
+   "x": 19,
+   "y": 4
+  },
+  {
+   "type": "barril",
+   "x": 21,
+   "y": 4
+  },
+  {
+   "type": "arvore",
+   "x": 23,
+   "y": 4
+  },
+  {
+   "type": "carcaca",
+   "x": 1,
+   "y": 6
+  },
+  {
+   "type": "destrocos",
+   "x": 7,
+   "y": 12
+  },
+  {
+   "type": "destrocos",
+   "x": 8,
+   "y": 12
+  },
+  {
+   "type": "destrocos",
+   "x": 7,
+   "y": 13
+  },
+  {
+   "type": "destrocos",
+   "x": 8,
+   "y": 13
+  }
+ ],
+ "waves": [
+  {
+   "bonus": 37,
+   "groups": [
+    {
+     "enemy": "heli",
+     "count": 1,
+     "interval": 2.6,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 1,
+     "interval": 1.5,
+     "delay": 2.8,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 43,
+   "groups": [
+    {
+     "enemy": "reparo",
+     "count": 1,
+     "interval": 3,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "moto",
+     "count": 7,
+     "interval": 0.7,
+     "delay": 1.5,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 49,
+   "groups": [
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 2.4,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "reparo",
+     "count": 1,
+     "interval": 3,
+     "delay": 2.7,
+     "path": 0
+    },
+    {
+     "enemy": "escudo",
+     "count": 2,
+     "interval": 1.2,
+     "delay": 4.2,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 55,
+   "groups": [
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 2.4,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 27,
+     "interval": 0.8,
+     "delay": 2.7,
+     "path": 1
+    },
+    {
+     "enemy": "heli",
+     "count": 1,
+     "interval": 2.6,
+     "delay": 7,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 61,
+   "groups": [
+    {
+     "enemy": "drone",
+     "count": 1,
+     "interval": 0.35,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 22,
+     "interval": 0.8,
+     "delay": 4.8,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 67,
+   "groups": [
+    {
+     "enemy": "drone",
+     "count": 34,
+     "interval": 0.35,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "reparo",
+     "count": 1,
+     "interval": 3,
+     "delay": 8,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 73,
+   "groups": [
+    {
+     "enemy": "jipe",
+     "count": 2,
+     "interval": 1.5,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "reparo",
+     "count": 1,
+     "interval": 3,
+     "delay": 3.8,
+     "path": 1
+    },
+    {
+     "enemy": "moto",
+     "count": 2,
+     "interval": 0.7,
+     "delay": 5.3,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 18,
+     "interval": 0.35,
+     "delay": 8.5,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 79,
+   "groups": [
+    {
+     "enemy": "reparo",
+     "count": 1,
+     "interval": 3,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 4,
+     "interval": 2.4,
+     "delay": 1.5,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 85,
+   "groups": [
+    {
+     "enemy": "caminhao",
+     "count": 1,
+     "interval": 3,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "reparo",
+     "count": 1,
+     "interval": 3,
+     "delay": 4.5,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 26,
+     "interval": 0.35,
+     "delay": 6,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 91,
+   "groups": [
+    {
+     "enemy": "caminhao",
+     "count": 1,
+     "interval": 3,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "soldado",
+     "count": 38,
+     "interval": 0.8,
+     "delay": 6,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 97,
+   "groups": [
+    {
+     "enemy": "jipe",
+     "count": 2,
+     "interval": 1.5,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "heli",
+     "count": 2,
+     "interval": 2.6,
+     "delay": 4.5,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 21,
+     "interval": 0.35,
+     "delay": 8.6,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 103,
+   "groups": [
+    {
+     "enemy": "moto",
+     "count": 7,
+     "interval": 0.7,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 39,
+     "interval": 0.35,
+     "delay": 4.7,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 4,
+     "interval": 1.5,
+     "delay": 10.5,
+     "path": 1
+    }
+   ]
+  }
+ ],
+ "briefing": "Duas entradas. Veículos de Reparo consertam os aliados: derrube-os primeiro. Lança-chamas assa infantaria em grupo.",
+ "waveHpGrowth": 0.025
+}

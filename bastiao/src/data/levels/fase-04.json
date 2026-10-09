@@ -1,0 +1,478 @@
+{
+ "id": 4,
+ "name": "Céu de Areia",
+ "biome": "deserto",
+ "map": {
+  "x": 0.196,
+  "y": 0.51
+ },
+ "startMoney": 420,
+ "lives": 20,
+ "hpMult": 1,
+ "waveGap": 15,
+ "towers": [
+  "mg",
+  "at",
+  "aa",
+  "mo"
+ ],
+ "abilities": [
+  "aereo",
+  "minas",
+  "suprimentos",
+  "arame"
+ ],
+ "paths": [
+  [
+   [
+    -1,
+    3
+   ],
+   [
+    6,
+    3
+   ],
+   [
+    6,
+    10
+   ],
+   [
+    12,
+    10
+   ],
+   [
+    12,
+    5
+   ],
+   [
+    18,
+    5
+   ],
+   [
+    18,
+    11
+   ],
+   [
+    23,
+    11
+   ]
+  ]
+ ],
+ "airPaths": [
+  [
+   [
+    -1,
+    0
+   ],
+   [
+    9,
+    1
+   ],
+   [
+    23,
+    11
+   ]
+  ]
+ ],
+ "obstacles": [
+  {
+   "type": "carcaca",
+   "x": 16,
+   "y": 7
+  },
+  {
+   "type": "pedra",
+   "x": 20,
+   "y": 9
+  },
+  {
+   "type": "pedra",
+   "x": 14,
+   "y": 7
+  },
+  {
+   "type": "destrocos",
+   "x": 16,
+   "y": 6
+  },
+  {
+   "type": "pedra",
+   "x": 17,
+   "y": 7
+  },
+  {
+   "type": "pedra",
+   "x": 19,
+   "y": 9
+  },
+  {
+   "type": "arvore",
+   "x": 14,
+   "y": 6
+  },
+  {
+   "type": "arvore",
+   "x": 17,
+   "y": 6
+  },
+  {
+   "type": "arvore",
+   "x": 14,
+   "y": 4
+  },
+  {
+   "type": "pedra",
+   "x": 15,
+   "y": 6
+  },
+  {
+   "type": "destrocos",
+   "x": 7,
+   "y": 3
+  },
+  {
+   "type": "destrocos",
+   "x": 20,
+   "y": 12
+  },
+  {
+   "type": "barril",
+   "x": 11,
+   "y": 5
+  },
+  {
+   "type": "destrocos",
+   "x": 14,
+   "y": 3
+  },
+  {
+   "type": "destrocos",
+   "x": 20,
+   "y": 7
+  },
+  {
+   "type": "barril",
+   "x": 17,
+   "y": 12
+  },
+  {
+   "type": "pedra",
+   "x": 4,
+   "y": 9
+  },
+  {
+   "type": "destrocos",
+   "x": 11,
+   "y": 1
+  },
+  {
+   "type": "arvore",
+   "x": 9,
+   "y": 4
+  },
+  {
+   "type": "arvore",
+   "x": 3,
+   "y": 0
+  },
+  {
+   "type": "destrocos",
+   "x": 22,
+   "y": 8
+  },
+  {
+   "type": "pedra",
+   "x": 19,
+   "y": 1
+  },
+  {
+   "type": "pedra",
+   "x": 21,
+   "y": 4
+  },
+  {
+   "type": "barril",
+   "x": 3,
+   "y": 6
+  },
+  {
+   "type": "destrocos",
+   "x": 3,
+   "y": 8
+  },
+  {
+   "type": "destrocos",
+   "x": 2,
+   "y": 9
+  },
+  {
+   "type": "barril",
+   "x": 1,
+   "y": 10
+  },
+  {
+   "type": "destrocos",
+   "x": 3,
+   "y": 10
+  },
+  {
+   "type": "arvore",
+   "x": 1,
+   "y": 11
+  },
+  {
+   "type": "barril",
+   "x": 2,
+   "y": 12
+  },
+  {
+   "type": "barril",
+   "x": 15,
+   "y": 12
+  },
+  {
+   "type": "destrocos",
+   "x": 0,
+   "y": 13
+  },
+  {
+   "type": "arvore",
+   "x": 10,
+   "y": 13
+  }
+ ],
+ "waves": [
+  {
+   "bonus": 33,
+   "groups": [
+    {
+     "enemy": "escudo",
+     "count": 2,
+     "interval": 1.2,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "moto",
+     "count": 2,
+     "interval": 0.7,
+     "delay": 2.7,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 39,
+   "groups": [
+    {
+     "enemy": "elite",
+     "count": 3,
+     "interval": 1,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 6,
+     "interval": 0.35,
+     "delay": 3,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 45,
+   "groups": [
+    {
+     "enemy": "escudo",
+     "count": 2,
+     "interval": 1.2,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 2,
+     "interval": 1.5,
+     "delay": 3.3,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 51,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 11,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 2.4,
+     "delay": 3.9,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 9,
+     "interval": 0.35,
+     "delay": 6.6,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 57,
+   "groups": [
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 2.4,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 10,
+     "interval": 0.35,
+     "delay": 2.7,
+     "path": 0
+    },
+    {
+     "enemy": "elite",
+     "count": 5,
+     "interval": 1,
+     "delay": 6.1,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 63,
+   "groups": [
+    {
+     "enemy": "escudo",
+     "count": 2,
+     "interval": 1.2,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 31,
+     "interval": 0.35,
+     "delay": 3.9,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 69,
+   "groups": [
+    {
+     "enemy": "escudo",
+     "count": 3,
+     "interval": 1.2,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 2,
+     "interval": 2.4,
+     "delay": 3.9,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 75,
+   "groups": [
+    {
+     "enemy": "elite",
+     "count": 5,
+     "interval": 1,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 12,
+     "interval": 0.8,
+     "delay": 3.5,
+     "path": 0
+    },
+    {
+     "enemy": "escudo",
+     "count": 1,
+     "interval": 1.2,
+     "delay": 8.6,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 81,
+   "groups": [
+    {
+     "enemy": "jipe",
+     "count": 6,
+     "interval": 1.5,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 2,
+     "interval": 2.4,
+     "delay": 5.3,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 87,
+   "groups": [
+    {
+     "enemy": "drone",
+     "count": 41,
+     "interval": 0.35,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 2.4,
+     "delay": 6.2,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 93,
+   "groups": [
+    {
+     "enemy": "elite",
+     "count": 10,
+     "interval": 1,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "heli",
+     "count": 2,
+     "interval": 2.6,
+     "delay": 5,
+     "path": 0
+    }
+   ]
+  }
+ ],
+ "briefing": "Infantaria de elite e tropas com escudo balístico marcham em blocos. O Morteiro castiga grupos (mas não acerta o ar).",
+ "waveHpGrowth": 0.025
+}

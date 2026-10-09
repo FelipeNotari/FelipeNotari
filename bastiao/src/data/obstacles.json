@@ -1,0 +1,48 @@
+[
+ {
+  "id": "arvore",
+  "name": "Árvore",
+  "cls": "INF",
+  "hp": 160,
+  "reward": 8
+ },
+ {
+  "id": "pedra",
+  "name": "Rocha",
+  "cls": "PES",
+  "hp": 420,
+  "reward": 16
+ },
+ {
+  "id": "destrocos",
+  "name": "Destroços",
+  "cls": "LEV",
+  "hp": 300,
+  "reward": 12
+ },
+ {
+  "id": "barril",
+  "name": "Barril de Combustível",
+  "cls": "LEV",
+  "hp": 90,
+  "reward": 6,
+  "explode": {
+   "dmg": 90,
+   "radius": 1.5
+  }
+ },
+ {
+  "id": "carcaca",
+  "name": "Carcaça de Tanque",
+  "cls": "PES",
+  "hp": 900,
+  "reward": 30
+ },
+ {
+  "id": "conteiner",
+  "name": "Contêiner",
+  "cls": "LEV",
+  "hp": 600,
+  "reward": 22
+ }
+]

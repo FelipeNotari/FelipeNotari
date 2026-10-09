@@ -1,0 +1,647 @@
+{
+ "id": 10,
+ "name": "Coração da Cidade",
+ "biome": "cidade",
+ "map": {
+  "x": 0.473,
+  "y": 0.28
+ },
+ "startMoney": 660,
+ "lives": 20,
+ "hpMult": 1,
+ "waveGap": 15,
+ "towers": [
+  "mg",
+  "at",
+  "aa",
+  "mo",
+  "sn",
+  "fl",
+  "su",
+  "la"
+ ],
+ "abilities": [
+  "aereo",
+  "minas",
+  "suprimentos",
+  "arame",
+  "napalm",
+  "emp"
+ ],
+ "paths": [
+  [
+   [
+    -1,
+    6
+   ],
+   [
+    5,
+    6
+   ],
+   [
+    5,
+    2
+   ],
+   [
+    12,
+    2
+   ],
+   [
+    12,
+    11
+   ],
+   [
+    18,
+    11
+   ],
+   [
+    18,
+    5
+   ],
+   [
+    23,
+    5
+   ]
+  ],
+  [
+   [
+    -1,
+    12
+   ],
+   [
+    8,
+    12
+   ],
+   [
+    8,
+    8
+   ],
+   [
+    12,
+    8
+   ],
+   [
+    12,
+    11
+   ],
+   [
+    18,
+    11
+   ],
+   [
+    18,
+    5
+   ],
+   [
+    23,
+    5
+   ]
+  ]
+ ],
+ "airPaths": [
+  [
+   [
+    -1,
+    0
+   ],
+   [
+    23,
+    5
+   ]
+  ]
+ ],
+ "obstacles": [
+  {
+   "type": "carcaca",
+   "x": 20,
+   "y": 7
+  },
+  {
+   "type": "conteiner",
+   "x": 20,
+   "y": 6
+  },
+  {
+   "type": "conteiner",
+   "x": 19,
+   "y": 7
+  },
+  {
+   "type": "conteiner",
+   "x": 19,
+   "y": 6
+  },
+  {
+   "type": "carcaca",
+   "x": 16,
+   "y": 9
+  },
+  {
+   "type": "destrocos",
+   "x": 14,
+   "y": 9
+  },
+  {
+   "type": "destrocos",
+   "x": 13,
+   "y": 9
+  },
+  {
+   "type": "destrocos",
+   "x": 17,
+   "y": 9
+  },
+  {
+   "type": "barril",
+   "x": 10,
+   "y": 10
+  },
+  {
+   "type": "destrocos",
+   "x": 14,
+   "y": 10
+  },
+  {
+   "type": "destrocos",
+   "x": 16,
+   "y": 10
+  },
+  {
+   "type": "arvore",
+   "x": 13,
+   "y": 10
+  },
+  {
+   "type": "carcaca",
+   "x": 17,
+   "y": 10
+  },
+  {
+   "type": "destrocos",
+   "x": 21,
+   "y": 4
+  },
+  {
+   "type": "destrocos",
+   "x": 7,
+   "y": 3
+  },
+  {
+   "type": "carcaca",
+   "x": 11,
+   "y": 3
+  },
+  {
+   "type": "carcaca",
+   "x": 6,
+   "y": 3
+  },
+  {
+   "type": "carcaca",
+   "x": 18,
+   "y": 3
+  },
+  {
+   "type": "arvore",
+   "x": 16,
+   "y": 8
+  },
+  {
+   "type": "destrocos",
+   "x": 4,
+   "y": 5
+  },
+  {
+   "type": "arvore",
+   "x": 14,
+   "y": 7
+  },
+  {
+   "type": "barril",
+   "x": 4,
+   "y": 2
+  },
+  {
+   "type": "barril",
+   "x": 8,
+   "y": 0
+  },
+  {
+   "type": "destrocos",
+   "x": 10,
+   "y": 0
+  },
+  {
+   "type": "destrocos",
+   "x": 23,
+   "y": 6
+  },
+  {
+   "type": "barril",
+   "x": 0,
+   "y": 7
+  },
+  {
+   "type": "destrocos",
+   "x": 15,
+   "y": 1
+  },
+  {
+   "type": "destrocos",
+   "x": 19,
+   "y": 2
+  },
+  {
+   "type": "barril",
+   "x": 9,
+   "y": 5
+  },
+  {
+   "type": "carcaca",
+   "x": 1,
+   "y": 2
+  },
+  {
+   "type": "barril",
+   "x": 23,
+   "y": 2
+  },
+  {
+   "type": "barril",
+   "x": 20,
+   "y": 0
+  },
+  {
+   "type": "arvore",
+   "x": 21,
+   "y": 0
+  },
+  {
+   "type": "barril",
+   "x": 23,
+   "y": 0
+  },
+  {
+   "type": "barril",
+   "x": 5,
+   "y": 9
+  },
+  {
+   "type": "barril",
+   "x": 22,
+   "y": 11
+  }
+ ],
+ "waves": [
+  {
+   "bonus": 45,
+   "groups": [
+    {
+     "enemy": "jipe",
+     "count": 1,
+     "interval": 1.5,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "camuflado",
+     "count": 3,
+     "interval": 1.1,
+     "delay": 3,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 51,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 5,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "gerador",
+     "count": 2,
+     "interval": 3,
+     "delay": 7.9,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 57,
+   "groups": [
+    {
+     "enemy": "escudo",
+     "count": 4,
+     "interval": 1.2,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 2.4,
+     "delay": 3.9,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 63,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 20,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "escudo",
+     "count": 2,
+     "interval": 1.2,
+     "delay": 6.7,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 69,
+   "groups": [
+    {
+     "enemy": "heli",
+     "count": 1,
+     "interval": 2.6,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 23,
+     "interval": 0.35,
+     "delay": 2.8,
+     "path": 0
+    },
+    {
+     "enemy": "moto",
+     "count": 3,
+     "interval": 0.7,
+     "delay": 7.3,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 75,
+   "groups": [
+    {
+     "enemy": "moto",
+     "count": 12,
+     "interval": 0.7,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 2,
+     "interval": 2.4,
+     "delay": 5.4,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 81,
+   "groups": [
+    {
+     "enemy": "heli",
+     "count": 2,
+     "interval": 2.6,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "camuflado",
+     "count": 3,
+     "interval": 1.1,
+     "delay": 4.1,
+     "path": 1
+    },
+    {
+     "enemy": "elite",
+     "count": 5,
+     "interval": 1,
+     "delay": 7.3,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 87,
+   "groups": [
+    {
+     "enemy": "elite",
+     "count": 7,
+     "interval": 1,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "moto",
+     "count": 4,
+     "interval": 0.7,
+     "delay": 4.5,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 17,
+     "interval": 0.8,
+     "delay": 9.2,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 93,
+   "groups": [
+    {
+     "enemy": "escudo",
+     "count": 4,
+     "interval": 1.2,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_pesado",
+     "count": 1,
+     "interval": 3.8,
+     "delay": 4.5,
+     "path": 1
+    },
+    {
+     "enemy": "jipe",
+     "count": 4,
+     "interval": 1.5,
+     "delay": 7.9,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 99,
+   "groups": [
+    {
+     "enemy": "drone",
+     "count": 55,
+     "interval": 0.35,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "caminhao",
+     "count": 2,
+     "interval": 3,
+     "delay": 8,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 105,
+   "groups": [
+    {
+     "enemy": "drone",
+     "count": 53,
+     "interval": 0.35,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 2,
+     "interval": 2.4,
+     "delay": 8,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 111,
+   "groups": [
+    {
+     "enemy": "moto",
+     "count": 9,
+     "interval": 0.7,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "drone",
+     "count": 49,
+     "interval": 0.35,
+     "delay": 5.7,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 4,
+     "interval": 1.5,
+     "delay": 12.6,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 117,
+   "groups": [
+    {
+     "enemy": "elite",
+     "count": 10,
+     "interval": 1,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "soldado",
+     "count": 22,
+     "interval": 0.8,
+     "delay": 5.5,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 2,
+     "interval": 2.4,
+     "delay": 13.5,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 123,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 41,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "reparo",
+     "count": 1,
+     "interval": 3,
+     "delay": 8,
+     "path": 1
+    },
+    {
+     "enemy": "escudo",
+     "count": 5,
+     "interval": 1.2,
+     "delay": 9.5,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 129,
+   "groups": [
+    {
+     "enemy": "drone",
+     "count": 22,
+     "interval": 0.35,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "heli",
+     "count": 2,
+     "interval": 2.6,
+     "delay": 5.2,
+     "path": 0
+    },
+    {
+     "enemy": "elite",
+     "count": 6,
+     "interval": 1,
+     "delay": 9.3,
+     "path": 1
+    },
+    {
+     "enemy": "boss_colosso",
+     "count": 1,
+     "interval": 1,
+     "delay": 15.3,
+     "path": 0
+    }
+   ]
+  }
+ ],
+ "briefing": "CHEFE: o Colosso Urbano. Com metade da vida ele larga a blindagem pesada, acelera e desembarca soldados de elite.",
+ "waveHpGrowth": 0.025
+}

@@ -1,0 +1,93 @@
+[
+ {
+  "id": "aereo",
+  "name": "Ataque Aéreo",
+  "unlock": 1,
+  "cooldown": 60,
+  "target": "any",
+  "desc": "Bombardeio no ponto escolhido após 1,2 s: 200 de dano Explosivo em área (não atinge aéreos).",
+  "params": {
+   "dmg": 200,
+   "radius": 1.8,
+   "delay": 1.2
+  }
+ },
+ {
+  "id": "minas",
+  "name": "Minas Terrestres",
+  "unlock": 1,
+  "cooldown": 40,
+  "target": "path",
+  "desc": "Planta 4 minas na estrada (110 de dano Explosivo cada). Explodem no primeiro inimigo terrestre que passar.",
+  "params": {
+   "dmg": 110,
+   "radius": 0.9,
+   "count": 4,
+   "life": 90
+  }
+ },
+ {
+  "id": "suprimentos",
+  "name": "Caixa de Suprimentos",
+  "unlock": 1,
+  "cooldown": 120,
+  "target": "none",
+  "desc": "Lança suprimentos: +100 de dinheiro e +2 vidas (até o máximo inicial).",
+  "params": {
+   "money": 100,
+   "lives": 2
+  }
+ },
+ {
+  "id": "arame",
+  "name": "Arame Farpado",
+  "unlock": 3,
+  "cooldown": 30,
+  "target": "path",
+  "desc": "Estende arame na área: inimigos terrestres ficam 50% mais lentos por 15 s.",
+  "params": {
+   "slow": 0.5,
+   "radius": 1.6,
+   "duration": 15
+  }
+ },
+ {
+  "id": "napalm",
+  "name": "Napalm",
+  "unlock": 6,
+  "cooldown": 50,
+  "target": "any",
+  "desc": "Incendeia a área por 6 s: 50 de dano de Fogo por segundo em inimigos terrestres.",
+  "params": {
+   "dps": 50,
+   "radius": 1.5,
+   "duration": 6
+  }
+ },
+ {
+  "id": "emp",
+  "name": "Pulso EMP",
+  "unlock": 9,
+  "cooldown": 50,
+  "target": "any",
+  "desc": "Pulso de Energia: atordoa veículos e aéreos por 3 s e apaga escudos de energia na área.",
+  "params": {
+   "dmg": 60,
+   "radius": 2.5,
+   "stun": 3
+  }
+ },
+ {
+  "id": "reforcos",
+  "name": "Reforços",
+  "unlock": 12,
+  "cooldown": 60,
+  "target": "any",
+  "desc": "Esquadrão temporário (20 s) com fuzis Balísticos (50 de dano/s) que atira em terra e ar.",
+  "params": {
+   "dps": 50,
+   "range": 2.5,
+   "duration": 20
+  }
+ }
+]

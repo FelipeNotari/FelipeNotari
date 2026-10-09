@@ -1,0 +1,752 @@
+{
+ "id": 19,
+ "name": "Usina Norte",
+ "biome": "industrial",
+ "map": {
+  "x": 0.901,
+  "y": 0.51
+ },
+ "startMoney": 1020,
+ "lives": 20,
+ "hpMult": 1,
+ "waveGap": 15,
+ "towers": [
+  "mg",
+  "at",
+  "aa",
+  "mo",
+  "sn",
+  "fl",
+  "su",
+  "la"
+ ],
+ "abilities": [
+  "aereo",
+  "minas",
+  "suprimentos",
+  "arame",
+  "napalm",
+  "emp",
+  "reforcos"
+ ],
+ "paths": [
+  [
+   [
+    -1,
+    2
+   ],
+   [
+    8,
+    2
+   ],
+   [
+    8,
+    7
+   ],
+   [
+    3,
+    7
+   ],
+   [
+    3,
+    12
+   ],
+   [
+    14,
+    12
+   ],
+   [
+    14,
+    7
+   ],
+   [
+    23,
+    7
+   ]
+  ],
+  [
+   [
+    11,
+    -1
+   ],
+   [
+    11,
+    4
+   ],
+   [
+    18,
+    4
+   ],
+   [
+    18,
+    7
+   ],
+   [
+    23,
+    7
+   ]
+  ]
+ ],
+ "airPaths": [
+  [
+   [
+    -1,
+    13
+   ],
+   [
+    23,
+    7
+   ]
+  ],
+  [
+   [
+    -1,
+    0
+   ],
+   [
+    14,
+    1
+   ],
+   [
+    23,
+    7
+   ]
+  ]
+ ],
+ "obstacles": [
+  {
+   "type": "conteiner",
+   "x": 19,
+   "y": 6
+  },
+  {
+   "type": "conteiner",
+   "x": 16,
+   "y": 6
+  },
+  {
+   "type": "conteiner",
+   "x": 17,
+   "y": 6
+  },
+  {
+   "type": "conteiner",
+   "x": 20,
+   "y": 6
+  },
+  {
+   "type": "carcaca",
+   "x": 19,
+   "y": 5
+  },
+  {
+   "type": "conteiner",
+   "x": 20,
+   "y": 5
+  },
+  {
+   "type": "destrocos",
+   "x": 17,
+   "y": 5
+  },
+  {
+   "type": "destrocos",
+   "x": 16,
+   "y": 5
+  },
+  {
+   "type": "destrocos",
+   "x": 20,
+   "y": 8
+  },
+  {
+   "type": "conteiner",
+   "x": 19,
+   "y": 8
+  },
+  {
+   "type": "conteiner",
+   "x": 18,
+   "y": 8
+  },
+  {
+   "type": "destrocos",
+   "x": 15,
+   "y": 6
+  },
+  {
+   "type": "destrocos",
+   "x": 21,
+   "y": 6
+  },
+  {
+   "type": "barril",
+   "x": 21,
+   "y": 8
+  },
+  {
+   "type": "barril",
+   "x": 15,
+   "y": 5
+  },
+  {
+   "type": "barril",
+   "x": 17,
+   "y": 8
+  },
+  {
+   "type": "conteiner",
+   "x": 9,
+   "y": 2
+  },
+  {
+   "type": "barril",
+   "x": 13,
+   "y": 2
+  },
+  {
+   "type": "destrocos",
+   "x": 12,
+   "y": 11
+  },
+  {
+   "type": "destrocos",
+   "x": 13,
+   "y": 6
+  },
+  {
+   "type": "destrocos",
+   "x": 5,
+   "y": 8
+  },
+  {
+   "type": "conteiner",
+   "x": 6,
+   "y": 1
+  },
+  {
+   "type": "barril",
+   "x": 17,
+   "y": 3
+  },
+  {
+   "type": "barril",
+   "x": 6,
+   "y": 11
+  },
+  {
+   "type": "conteiner",
+   "x": 10,
+   "y": 5
+  },
+  {
+   "type": "destrocos",
+   "x": 7,
+   "y": 13
+  },
+  {
+   "type": "destrocos",
+   "x": 2,
+   "y": 3
+  },
+  {
+   "type": "destrocos",
+   "x": 6,
+   "y": 0
+  },
+  {
+   "type": "barril",
+   "x": 6,
+   "y": 9
+  },
+  {
+   "type": "destrocos",
+   "x": 2,
+   "y": 4
+  },
+  {
+   "type": "destrocos",
+   "x": 10,
+   "y": 7
+  },
+  {
+   "type": "conteiner",
+   "x": 20,
+   "y": 2
+  },
+  {
+   "type": "destrocos",
+   "x": 18,
+   "y": 11
+  },
+  {
+   "type": "barril",
+   "x": 2,
+   "y": 5
+  },
+  {
+   "type": "barril",
+   "x": 21,
+   "y": 12
+  },
+  {
+   "type": "barril",
+   "x": 1,
+   "y": 5
+  }
+ ],
+ "waves": [
+  {
+   "bonus": 63,
+   "groups": [
+    {
+     "enemy": "elite",
+     "count": 7,
+     "interval": 1,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "caminhao",
+     "count": 1,
+     "interval": 3,
+     "delay": 4,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 69,
+   "groups": [
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 2.4,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_pesado",
+     "count": 1,
+     "interval": 3.8,
+     "delay": 2.7,
+     "path": 1
+    },
+    {
+     "enemy": "caminhao",
+     "count": 1,
+     "interval": 3,
+     "delay": 6.1,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 75,
+   "groups": [
+    {
+     "enemy": "jipe",
+     "count": 2,
+     "interval": 1.5,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "caminhao",
+     "count": 1,
+     "interval": 3,
+     "delay": 4.5,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 38,
+     "interval": 0.35,
+     "delay": 9,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 81,
+   "groups": [
+    {
+     "enemy": "camuflado",
+     "count": 5,
+     "interval": 1.1,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 11,
+     "interval": 1.4,
+     "delay": 3.7,
+     "path": 1
+    },
+    {
+     "enemy": "escudo",
+     "count": 2,
+     "interval": 1.2,
+     "delay": 10.1,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 87,
+   "groups": [
+    {
+     "enemy": "camuflado",
+     "count": 4,
+     "interval": 1.1,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "heli",
+     "count": 4,
+     "interval": 2.6,
+     "delay": 3.7,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 2,
+     "interval": 1.5,
+     "delay": 7.8,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 93,
+   "groups": [
+    {
+     "enemy": "moto",
+     "count": 7,
+     "interval": 0.7,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "elite",
+     "count": 16,
+     "interval": 1,
+     "delay": 7.1,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 99,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 13,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "drone",
+     "count": 33,
+     "interval": 0.35,
+     "delay": 8,
+     "path": 1
+    },
+    {
+     "enemy": "gerador",
+     "count": 4,
+     "interval": 3,
+     "delay": 16,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 105,
+   "groups": [
+    {
+     "enemy": "gerador",
+     "count": 5,
+     "interval": 3,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "tanque_pesado",
+     "count": 2,
+     "interval": 3.8,
+     "delay": 1.5,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 111,
+   "groups": [
+    {
+     "enemy": "tanque_leve",
+     "count": 3,
+     "interval": 2.4,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "tanque_pesado",
+     "count": 1,
+     "interval": 3.8,
+     "delay": 5.1,
+     "path": 0
+    },
+    {
+     "enemy": "caminhao",
+     "count": 3,
+     "interval": 3,
+     "delay": 8.5,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 117,
+   "groups": [
+    {
+     "enemy": "jipe",
+     "count": 5,
+     "interval": 1.5,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 57,
+     "interval": 0.8,
+     "delay": 8,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 123,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 60,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 6,
+     "interval": 1.5,
+     "delay": 8,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 129,
+   "groups": [
+    {
+     "enemy": "jipe",
+     "count": 3,
+     "interval": 1.5,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "elite",
+     "count": 12,
+     "interval": 1,
+     "delay": 8,
+     "path": 1
+    },
+    {
+     "enemy": "heli",
+     "count": 7,
+     "interval": 2.6,
+     "delay": 15.5,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 135,
+   "groups": [
+    {
+     "enemy": "reparo",
+     "count": 2,
+     "interval": 3,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_pesado",
+     "count": 2,
+     "interval": 3.8,
+     "delay": 1.5,
+     "path": 1
+    },
+    {
+     "enemy": "jipe",
+     "count": 10,
+     "interval": 1.5,
+     "delay": 6.8,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 141,
+   "groups": [
+    {
+     "enemy": "camuflado",
+     "count": 19,
+     "interval": 1.1,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "gerador",
+     "count": 5,
+     "interval": 3,
+     "delay": 8,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 147,
+   "groups": [
+    {
+     "enemy": "tanque_pesado",
+     "count": 2,
+     "interval": 3.8,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "jipe",
+     "count": 10,
+     "interval": 1.5,
+     "delay": 5.3,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 4,
+     "interval": 2.4,
+     "delay": 13.3,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 153,
+   "groups": [
+    {
+     "enemy": "escudo",
+     "count": 9,
+     "interval": 1.2,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 84,
+     "interval": 0.8,
+     "delay": 8,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 159,
+   "groups": [
+    {
+     "enemy": "gerador",
+     "count": 5,
+     "interval": 3,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 45,
+     "interval": 1.4,
+     "delay": 1.5,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 165,
+   "groups": [
+    {
+     "enemy": "moto",
+     "count": 9,
+     "interval": 0.7,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "elite",
+     "count": 19,
+     "interval": 1,
+     "delay": 8,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 31,
+     "interval": 1.4,
+     "delay": 16,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 171,
+   "groups": [
+    {
+     "enemy": "kamikaze",
+     "count": 59,
+     "interval": 1.4,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "reparo",
+     "count": 2,
+     "interval": 3,
+     "delay": 8,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 177,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 101,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 4,
+     "interval": 2.4,
+     "delay": 8,
+     "path": 1
+    }
+   ]
+  }
+ ],
+ "briefing": "Última linha antes do ninho do Ciclope. Tudo o que a Legião tem virá por terra e ar.",
+ "waveHpGrowth": 0.025
+}

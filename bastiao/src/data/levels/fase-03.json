@@ -1,0 +1,431 @@
+{
+ "id": 3,
+ "name": "Oásis Seco",
+ "biome": "deserto",
+ "map": {
+  "x": 0.154,
+  "y": 0.5
+ },
+ "startMoney": 380,
+ "lives": 20,
+ "hpMult": 1,
+ "waveGap": 15,
+ "towers": [
+  "mg",
+  "at",
+  "aa"
+ ],
+ "abilities": [
+  "aereo",
+  "minas",
+  "suprimentos",
+  "arame"
+ ],
+ "paths": [
+  [
+   [
+    -1,
+    6
+   ],
+   [
+    3,
+    6
+   ],
+   [
+    3,
+    2
+   ],
+   [
+    8,
+    2
+   ],
+   [
+    8,
+    11
+   ],
+   [
+    13,
+    11
+   ],
+   [
+    13,
+    4
+   ],
+   [
+    18,
+    4
+   ],
+   [
+    18,
+    9
+   ],
+   [
+    23,
+    9
+   ]
+  ]
+ ],
+ "airPaths": [
+  [
+   [
+    -1,
+    13
+   ],
+   [
+    10,
+    9
+   ],
+   [
+    23,
+    9
+   ]
+  ]
+ ],
+ "obstacles": [
+  {
+   "type": "carcaca",
+   "x": 10,
+   "y": 9
+  },
+  {
+   "type": "pedra",
+   "x": 11,
+   "y": 9
+  },
+  {
+   "type": "carcaca",
+   "x": 9,
+   "y": 9
+  },
+  {
+   "type": "destrocos",
+   "x": 12,
+   "y": 9
+  },
+  {
+   "type": "pedra",
+   "x": 10,
+   "y": 10
+  },
+  {
+   "type": "pedra",
+   "x": 11,
+   "y": 10
+  },
+  {
+   "type": "destrocos",
+   "x": 20,
+   "y": 7
+  },
+  {
+   "type": "barril",
+   "x": 19,
+   "y": 7
+  },
+  {
+   "type": "destrocos",
+   "x": 15,
+   "y": 6
+  },
+  {
+   "type": "destrocos",
+   "x": 13,
+   "y": 12
+  },
+  {
+   "type": "destrocos",
+   "x": 20,
+   "y": 6
+  },
+  {
+   "type": "pedra",
+   "x": 7,
+   "y": 12
+  },
+  {
+   "type": "destrocos",
+   "x": 16,
+   "y": 10
+  },
+  {
+   "type": "destrocos",
+   "x": 18,
+   "y": 3
+  },
+  {
+   "type": "destrocos",
+   "x": 6,
+   "y": 5
+  },
+  {
+   "type": "destrocos",
+   "x": 14,
+   "y": 13
+  },
+  {
+   "type": "arvore",
+   "x": 12,
+   "y": 3
+  },
+  {
+   "type": "pedra",
+   "x": 5,
+   "y": 10
+  },
+  {
+   "type": "pedra",
+   "x": 10,
+   "y": 2
+  },
+  {
+   "type": "arvore",
+   "x": 16,
+   "y": 12
+  },
+  {
+   "type": "destrocos",
+   "x": 1,
+   "y": 13
+  },
+  {
+   "type": "arvore",
+   "x": 22,
+   "y": 5
+  },
+  {
+   "type": "destrocos",
+   "x": 23,
+   "y": 13
+  },
+  {
+   "type": "destrocos",
+   "x": 20,
+   "y": 2
+  },
+  {
+   "type": "pedra",
+   "x": 0,
+   "y": 1
+  },
+  {
+   "type": "destrocos",
+   "x": 21,
+   "y": 3
+  }
+ ],
+ "waves": [
+  {
+   "bonus": 31,
+   "groups": [
+    {
+     "enemy": "moto",
+     "count": 3,
+     "interval": 0.7,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 2.4,
+     "delay": 2.6,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 37,
+   "groups": [
+    {
+     "enemy": "drone",
+     "count": 6,
+     "interval": 0.35,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 8,
+     "interval": 0.8,
+     "delay": 3.1,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 43,
+   "groups": [
+    {
+     "enemy": "heli",
+     "count": 1,
+     "interval": 2.6,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 8,
+     "interval": 0.8,
+     "delay": 2.8,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 49,
+   "groups": [
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 2.4,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 9,
+     "interval": 0.8,
+     "delay": 2.7,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 55,
+   "groups": [
+    {
+     "enemy": "drone",
+     "count": 7,
+     "interval": 0.35,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "heli",
+     "count": 1,
+     "interval": 2.6,
+     "delay": 3.3,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 9,
+     "interval": 0.8,
+     "delay": 6.1,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 61,
+   "groups": [
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 2.4,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 3,
+     "interval": 1.5,
+     "delay": 2.7,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 67,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 10,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "moto",
+     "count": 5,
+     "interval": 0.7,
+     "delay": 4.7,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 2,
+     "interval": 1.5,
+     "delay": 8,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 73,
+   "groups": [
+    {
+     "enemy": "drone",
+     "count": 11,
+     "interval": 0.35,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 2.4,
+     "delay": 4,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 12,
+     "interval": 0.8,
+     "delay": 6.7,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 79,
+   "groups": [
+    {
+     "enemy": "drone",
+     "count": 18,
+     "interval": 0.35,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 4,
+     "interval": 1.5,
+     "delay": 5.5,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 85,
+   "groups": [
+    {
+     "enemy": "heli",
+     "count": 2,
+     "interval": 2.6,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 18,
+     "interval": 0.8,
+     "delay": 4.1,
+     "path": 0
+    }
+   ]
+  }
+ ],
+ "briefing": "Ameaça aérea e o primeiro tanque! Balas comuns rendem pouco no ar: a Bateria Antiaérea chegou. Combine Metralhadora, Antitanque e Antiaérea.",
+ "waveHpGrowth": 0.025
+}

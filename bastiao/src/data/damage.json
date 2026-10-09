@@ -1,0 +1,89 @@
+{
+  "damageTypes": {
+    "BAL": {
+      "name": "Balístico",
+      "color": "#ffd23f",
+      "desc": "Projéteis comuns. Ótimo contra infantaria, fraco contra veículos e aéreos, quase inútil contra blindagem pesada."
+    },
+    "PER": {
+      "name": "Perfurante",
+      "color": "#9fd4ff",
+      "desc": "Penetra blindagem. Forte contra blindados e aéreos; desperdício contra infantaria."
+    },
+    "EXP": {
+      "name": "Explosivo",
+      "color": "#ff8a1f",
+      "desc": "Dano em área. Não atinge unidades aéreas."
+    },
+    "ENE": {
+      "name": "Energia",
+      "color": "#3fd0ff",
+      "desc": "Feixes de energia. Derrete escudos de energia; fraco contra todo o resto."
+    },
+    "FOG": {
+      "name": "Fogo",
+      "color": "#ff4d2e",
+      "desc": "Queima contínua. Forte contra infantaria, nulo contra blindagem pesada."
+    }
+  },
+  "armorClasses": {
+    "INF": {
+      "name": "Infantaria",
+      "color": "#c9b37a"
+    },
+    "LEV": {
+      "name": "Blindagem leve",
+      "color": "#8fae5d"
+    },
+    "PES": {
+      "name": "Blindagem pesada",
+      "color": "#7d8790"
+    },
+    "AER": {
+      "name": "Aéreo",
+      "color": "#7fb6e0"
+    },
+    "ESC": {
+      "name": "Escudo de energia",
+      "color": "#3fd0ff"
+    }
+  },
+  "matrix": {
+    "BAL": {
+      "INF": 1.5,
+      "LEV": 0.5,
+      "PES": 0.25,
+      "AER": 0.5,
+      "ESC": 0.5
+    },
+    "PER": {
+      "INF": 0.25,
+      "LEV": 1.5,
+      "PES": 2.0,
+      "AER": 1.0,
+      "ESC": 0.5
+    },
+    "EXP": {
+      "INF": 1.25,
+      "LEV": 1.25,
+      "PES": 0.75,
+      "AER": 0,
+      "ESC": 0.5
+    },
+    "ENE": {
+      "INF": 0.5,
+      "LEV": 0.5,
+      "PES": 0.5,
+      "AER": 0.75,
+      "ESC": 2.0
+    },
+    "FOG": {
+      "INF": 2.0,
+      "LEV": 0.5,
+      "PES": 0,
+      "AER": 0.5,
+      "ESC": 0.25
+    }
+  },
+  "notes": "Valores entre 0,25x e 2x. As duas células 0 são as imunidades pedidas: Explosivo não atinge aéreo e Fogo é nulo contra blindagem pesada."
+}

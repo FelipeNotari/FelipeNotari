@@ -1,0 +1,494 @@
+{
+ "id": 5,
+ "name": "Toca do Escorpião",
+ "biome": "deserto",
+ "map": {
+  "x": 0.238,
+  "y": 0.28
+ },
+ "startMoney": 460,
+ "lives": 20,
+ "hpMult": 1,
+ "waveGap": 15,
+ "towers": [
+  "mg",
+  "at",
+  "aa",
+  "mo",
+  "sn"
+ ],
+ "abilities": [
+  "aereo",
+  "minas",
+  "suprimentos",
+  "arame"
+ ],
+ "paths": [
+  [
+   [
+    -1,
+    10
+   ],
+   [
+    5,
+    10
+   ],
+   [
+    5,
+    3
+   ],
+   [
+    11,
+    3
+   ],
+   [
+    11,
+    9
+   ],
+   [
+    16,
+    9
+   ],
+   [
+    16,
+    2
+   ],
+   [
+    20,
+    2
+   ],
+   [
+    20,
+    7
+   ],
+   [
+    23,
+    7
+   ]
+  ]
+ ],
+ "airPaths": [
+  [
+   [
+    0,
+    -1
+   ],
+   [
+    12,
+    4
+   ],
+   [
+    23,
+    7
+   ]
+  ]
+ ],
+ "obstacles": [
+  {
+   "type": "pedra",
+   "x": 18,
+   "y": 4
+  },
+  {
+   "type": "pedra",
+   "x": 18,
+   "y": 3
+  },
+  {
+   "type": "carcaca",
+   "x": 18,
+   "y": 5
+  },
+  {
+   "type": "destrocos",
+   "x": 18,
+   "y": 6
+  },
+  {
+   "type": "destrocos",
+   "x": 9,
+   "y": 5
+  },
+  {
+   "type": "destrocos",
+   "x": 14,
+   "y": 7
+  },
+  {
+   "type": "arvore",
+   "x": 17,
+   "y": 4
+  },
+  {
+   "type": "arvore",
+   "x": 13,
+   "y": 7
+  },
+  {
+   "type": "barril",
+   "x": 9,
+   "y": 4
+  },
+  {
+   "type": "arvore",
+   "x": 14,
+   "y": 8
+  },
+  {
+   "type": "pedra",
+   "x": 11,
+   "y": 2
+  },
+  {
+   "type": "destrocos",
+   "x": 3,
+   "y": 4
+  },
+  {
+   "type": "arvore",
+   "x": 20,
+   "y": 9
+  },
+  {
+   "type": "arvore",
+   "x": 2,
+   "y": 12
+  },
+  {
+   "type": "arvore",
+   "x": 19,
+   "y": 10
+  },
+  {
+   "type": "pedra",
+   "x": 14,
+   "y": 0
+  },
+  {
+   "type": "arvore",
+   "x": 8,
+   "y": 7
+  },
+  {
+   "type": "pedra",
+   "x": 23,
+   "y": 1
+  },
+  {
+   "type": "pedra",
+   "x": 0,
+   "y": 5
+  },
+  {
+   "type": "destrocos",
+   "x": 1,
+   "y": 5
+  },
+  {
+   "type": "barril",
+   "x": 2,
+   "y": 5
+  },
+  {
+   "type": "barril",
+   "x": 10,
+   "y": 12
+  },
+  {
+   "type": "pedra",
+   "x": 22,
+   "y": 12
+  },
+  {
+   "type": "arvore",
+   "x": 10,
+   "y": 13
+  },
+  {
+   "type": "barril",
+   "x": 14,
+   "y": 13
+  }
+ ],
+ "waves": [
+  {
+   "bonus": 35,
+   "groups": [
+    {
+     "enemy": "elite",
+     "count": 2,
+     "interval": 1,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 4,
+     "interval": 0.8,
+     "delay": 2.5,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 41,
+   "groups": [
+    {
+     "enemy": "caminhao",
+     "count": 1,
+     "interval": 3,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "elite",
+     "count": 3,
+     "interval": 1,
+     "delay": 3,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 47,
+   "groups": [
+    {
+     "enemy": "moto",
+     "count": 2,
+     "interval": 0.7,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 2.4,
+     "delay": 2.6,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 24,
+     "interval": 0.35,
+     "delay": 5.3,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 53,
+   "groups": [
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 2.4,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "escudo",
+     "count": 1,
+     "interval": 1.2,
+     "delay": 2.7,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 9,
+     "interval": 0.8,
+     "delay": 5.4,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 59,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 9,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "heli",
+     "count": 1,
+     "interval": 2.6,
+     "delay": 5.9,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 65,
+   "groups": [
+    {
+     "enemy": "moto",
+     "count": 6,
+     "interval": 0.7,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 2,
+     "interval": 2.4,
+     "delay": 4.3,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 71,
+   "groups": [
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 2.4,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 19,
+     "interval": 0.8,
+     "delay": 3.9,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 77,
+   "groups": [
+    {
+     "enemy": "elite",
+     "count": 5,
+     "interval": 1,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "caminhao",
+     "count": 1,
+     "interval": 3,
+     "delay": 3.5,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 16,
+     "interval": 0.8,
+     "delay": 8,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 83,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 19,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "moto",
+     "count": 3,
+     "interval": 0.7,
+     "delay": 5.9,
+     "path": 0
+    },
+    {
+     "enemy": "escudo",
+     "count": 2,
+     "interval": 1.2,
+     "delay": 9.9,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 89,
+   "groups": [
+    {
+     "enemy": "escudo",
+     "count": 7,
+     "interval": 1.2,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 2,
+     "interval": 2.4,
+     "delay": 5.1,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 95,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 7,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 2.4,
+     "delay": 6.7,
+     "path": 0
+    },
+    {
+     "enemy": "heli",
+     "count": 3,
+     "interval": 2.6,
+     "delay": 10.6,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 101,
+   "groups": [
+    {
+     "enemy": "jipe",
+     "count": 1,
+     "interval": 1.5,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "moto",
+     "count": 2,
+     "interval": 0.7,
+     "delay": 3,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 52,
+     "interval": 0.35,
+     "delay": 6.3,
+     "path": 0
+    },
+    {
+     "enemy": "boss_escorpiao",
+     "count": 1,
+     "interval": 1,
+     "delay": 11.9,
+     "path": 0
+    }
+   ]
+  }
+ ],
+ "briefing": "CHEFE: o Escorpião do Deserto. Sua fumaça impede a mira por alguns segundos — área e Sniper de longe são aliados.",
+ "waveHpGrowth": 0.025
+}

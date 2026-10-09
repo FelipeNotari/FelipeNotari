@@ -1,0 +1,2225 @@
+{
+ "towers": {
+  "mg": {
+   "branchA": "Supressão",
+   "branchB": "Antiaérea improvisada",
+   "nodes": [
+    {
+     "id": "n1",
+     "name": "Canos reforçados",
+     "desc": "+5% de dano",
+     "cost": 1,
+     "row": 0,
+     "col": 1,
+     "req": [],
+     "excl": [],
+     "fx": {
+      "dmg": 0.05
+     }
+    },
+    {
+     "id": "n2",
+     "name": "Mira estabilizada",
+     "desc": "+5% de alcance",
+     "cost": 1,
+     "row": 1,
+     "col": 0,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "range": 0.05
+     }
+    },
+    {
+     "id": "n3",
+     "name": "Linha de montagem",
+     "desc": "-6% no custo de construção",
+     "cost": 1,
+     "row": 1,
+     "col": 2,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "cost": -0.06
+     }
+    },
+    {
+     "id": "n4",
+     "name": "Ferrolho leve",
+     "desc": "+6% de cadência",
+     "cost": 2,
+     "row": 2,
+     "col": 0,
+     "req": [
+      "n2"
+     ],
+     "excl": [],
+     "fx": {
+      "rate": 0.06
+     }
+    },
+    {
+     "id": "n5",
+     "name": "Manutenção de campo",
+     "desc": "-8% no custo de melhorias",
+     "cost": 2,
+     "row": 2,
+     "col": 2,
+     "req": [
+      "n3"
+     ],
+     "excl": [],
+     "fx": {
+      "upg": -0.08
+     }
+    },
+    {
+     "id": "n6",
+     "name": "Munição de alta velocidade",
+     "desc": "+6% de dano",
+     "cost": 2,
+     "row": 3,
+     "col": 1,
+     "req": [
+      "n4",
+      "n5"
+     ],
+     "excl": [],
+     "fx": {
+      "dmg": 0.06
+     }
+    },
+    {
+     "id": "a1",
+     "name": "Rajada contínua",
+     "desc": "+8% de cadência",
+     "cost": 2,
+     "row": 4,
+     "col": 0,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "b1"
+     ],
+     "fx": {
+      "rate": 0.08
+     }
+    },
+    {
+     "id": "a2",
+     "name": "Munição fragmentável",
+     "desc": "+10% de dano contra Infantaria",
+     "cost": 3,
+     "row": 5,
+     "col": 0,
+     "req": [
+      "a1"
+     ],
+     "excl": [],
+     "fx": {
+      "vs.INF": 0.1
+     }
+    },
+    {
+     "id": "a3",
+     "name": "Fogo de supressão",
+     "desc": "+8% de dano",
+     "cost": 3,
+     "row": 6,
+     "col": 0,
+     "req": [
+      "a2"
+     ],
+     "excl": [],
+     "fx": {
+      "dmg": 0.08
+     }
+    },
+    {
+     "id": "b1",
+     "name": "Mira antiaérea",
+     "desc": "+10% de dano contra Aéreos",
+     "cost": 2,
+     "row": 4,
+     "col": 2,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "a1"
+     ],
+     "fx": {
+      "vs.AER": 0.1
+     }
+    },
+    {
+     "id": "b2",
+     "name": "Munição traçante",
+     "desc": "+8% de alcance",
+     "cost": 3,
+     "row": 5,
+     "col": 2,
+     "req": [
+      "b1"
+     ],
+     "excl": [],
+     "fx": {
+      "range": 0.08
+     }
+    },
+    {
+     "id": "b3",
+     "name": "Núcleo de aço",
+     "desc": "+10% de dano contra Blindagem leve",
+     "cost": 3,
+     "row": 6,
+     "col": 2,
+     "req": [
+      "b2"
+     ],
+     "excl": [],
+     "fx": {
+      "vs.LEV": 0.1
+     }
+    }
+   ]
+  },
+  "at": {
+   "branchA": "Matador de tanques",
+   "branchB": "Caçador ágil",
+   "nodes": [
+    {
+     "id": "n1",
+     "name": "Pólvora refinada",
+     "desc": "+5% de dano",
+     "cost": 1,
+     "row": 0,
+     "col": 1,
+     "req": [],
+     "excl": [],
+     "fx": {
+      "dmg": 0.05
+     }
+    },
+    {
+     "id": "n2",
+     "name": "Carregador automático",
+     "desc": "+5% de cadência",
+     "cost": 1,
+     "row": 1,
+     "col": 0,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "rate": 0.05
+     }
+    },
+    {
+     "id": "n3",
+     "name": "Logística",
+     "desc": "-6% no custo de construção",
+     "cost": 1,
+     "row": 1,
+     "col": 2,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "cost": -0.06
+     }
+    },
+    {
+     "id": "n4",
+     "name": "Ogiva HEAT",
+     "desc": "+8% de dano contra Blindagem pesada",
+     "cost": 2,
+     "row": 2,
+     "col": 0,
+     "req": [
+      "n2"
+     ],
+     "excl": [],
+     "fx": {
+      "vs.PES": 0.08
+     }
+    },
+    {
+     "id": "n5",
+     "name": "Telêmetro",
+     "desc": "+5% de alcance",
+     "cost": 2,
+     "row": 2,
+     "col": 2,
+     "req": [
+      "n3"
+     ],
+     "excl": [],
+     "fx": {
+      "range": 0.05
+     }
+    },
+    {
+     "id": "n6",
+     "name": "Oficina móvel",
+     "desc": "-8% no custo de melhorias",
+     "cost": 2,
+     "row": 3,
+     "col": 1,
+     "req": [
+      "n4",
+      "n5"
+     ],
+     "excl": [],
+     "fx": {
+      "upg": -0.08
+     }
+    },
+    {
+     "id": "a1",
+     "name": "Ogiva tandem",
+     "desc": "+10% de dano contra Blindagem pesada",
+     "cost": 2,
+     "row": 4,
+     "col": 0,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "b1"
+     ],
+     "fx": {
+      "vs.PES": 0.1
+     }
+    },
+    {
+     "id": "a2",
+     "name": "Recarga hidráulica",
+     "desc": "+8% de cadência",
+     "cost": 3,
+     "row": 5,
+     "col": 0,
+     "req": [
+      "a1"
+     ],
+     "excl": [],
+     "fx": {
+      "rate": 0.08
+     }
+    },
+    {
+     "id": "a3",
+     "name": "Calibre ampliado",
+     "desc": "+8% de dano",
+     "cost": 3,
+     "row": 6,
+     "col": 0,
+     "req": [
+      "a2"
+     ],
+     "excl": [],
+     "fx": {
+      "dmg": 0.08
+     }
+    },
+    {
+     "id": "b1",
+     "name": "Rastreamento rápido",
+     "desc": "+10% de dano contra Blindagem leve",
+     "cost": 2,
+     "row": 4,
+     "col": 2,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "a1"
+     ],
+     "fx": {
+      "vs.LEV": 0.1
+     }
+    },
+    {
+     "id": "b2",
+     "name": "Munição sabot",
+     "desc": "+7% de dano",
+     "cost": 3,
+     "row": 5,
+     "col": 2,
+     "req": [
+      "b1"
+     ],
+     "excl": [],
+     "fx": {
+      "dmg": 0.07
+     }
+    },
+    {
+     "id": "b3",
+     "name": "Torre giratória",
+     "desc": "+8% de alcance",
+     "cost": 3,
+     "row": 6,
+     "col": 2,
+     "req": [
+      "b2"
+     ],
+     "excl": [],
+     "fx": {
+      "range": 0.08
+     }
+    }
+   ]
+  },
+  "mo": {
+   "branchA": "Barragem",
+   "branchB": "Artilharia pesada",
+   "nodes": [
+    {
+     "id": "n1",
+     "name": "Granadas carregadas",
+     "desc": "+5% de dano",
+     "cost": 1,
+     "row": 0,
+     "col": 1,
+     "req": [],
+     "excl": [],
+     "fx": {
+      "dmg": 0.05
+     }
+    },
+    {
+     "id": "n2",
+     "name": "Tubo reforçado",
+     "desc": "+5% de alcance",
+     "cost": 1,
+     "row": 1,
+     "col": 0,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "range": 0.05
+     }
+    },
+    {
+     "id": "n3",
+     "name": "Base leve",
+     "desc": "-6% no custo de construção",
+     "cost": 1,
+     "row": 1,
+     "col": 2,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "cost": -0.06
+     }
+    },
+    {
+     "id": "n4",
+     "name": "Estilhaços",
+     "desc": "+6% de raio da explosão",
+     "cost": 2,
+     "row": 2,
+     "col": 0,
+     "req": [
+      "n2"
+     ],
+     "excl": [],
+     "fx": {
+      "aoe": 0.06
+     }
+    },
+    {
+     "id": "n5",
+     "name": "Cálculo balístico",
+     "desc": "-10% no ponto cego",
+     "cost": 2,
+     "row": 2,
+     "col": 2,
+     "req": [
+      "n3"
+     ],
+     "excl": [],
+     "fx": {
+      "minRange": -0.1
+     }
+    },
+    {
+     "id": "n6",
+     "name": "Equipe treinada",
+     "desc": "+6% de cadência",
+     "cost": 2,
+     "row": 3,
+     "col": 1,
+     "req": [
+      "n4",
+      "n5"
+     ],
+     "excl": [],
+     "fx": {
+      "rate": 0.06
+     }
+    },
+    {
+     "id": "a1",
+     "name": "Fogo rápido",
+     "desc": "+8% de cadência",
+     "cost": 2,
+     "row": 4,
+     "col": 0,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "b1"
+     ],
+     "fx": {
+      "rate": 0.08
+     }
+    },
+    {
+     "id": "a2",
+     "name": "Granada de fragmentação",
+     "desc": "+10% de dano contra Infantaria",
+     "cost": 3,
+     "row": 5,
+     "col": 0,
+     "req": [
+      "a1"
+     ],
+     "excl": [],
+     "fx": {
+      "vs.INF": 0.1
+     }
+    },
+    {
+     "id": "a3",
+     "name": "Saturação",
+     "desc": "+8% de raio da explosão",
+     "cost": 3,
+     "row": 6,
+     "col": 0,
+     "req": [
+      "a2"
+     ],
+     "excl": [],
+     "fx": {
+      "aoe": 0.08
+     }
+    },
+    {
+     "id": "b1",
+     "name": "Carga dupla",
+     "desc": "+8% de dano",
+     "cost": 2,
+     "row": 4,
+     "col": 2,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "a1"
+     ],
+     "fx": {
+      "dmg": 0.08
+     }
+    },
+    {
+     "id": "b2",
+     "name": "Projétil perfurante",
+     "desc": "+10% de dano contra Blindagem pesada",
+     "cost": 3,
+     "row": 5,
+     "col": 2,
+     "req": [
+      "b1"
+     ],
+     "excl": [],
+     "fx": {
+      "vs.PES": 0.1
+     }
+    },
+    {
+     "id": "b3",
+     "name": "Longo alcance",
+     "desc": "+8% de alcance",
+     "cost": 3,
+     "row": 6,
+     "col": 2,
+     "req": [
+      "b2"
+     ],
+     "excl": [],
+     "fx": {
+      "range": 0.08
+     }
+    }
+   ]
+  },
+  "aa": {
+   "branchA": "Defesa de área",
+   "branchB": "Caça-helicópteros",
+   "nodes": [
+    {
+     "id": "n1",
+     "name": "Ogivas melhoradas",
+     "desc": "+5% de dano",
+     "cost": 1,
+     "row": 0,
+     "col": 1,
+     "req": [],
+     "excl": [],
+     "fx": {
+      "dmg": 0.05
+     }
+    },
+    {
+     "id": "n2",
+     "name": "Radar de busca",
+     "desc": "+5% de alcance",
+     "cost": 1,
+     "row": 1,
+     "col": 0,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "range": 0.05
+     }
+    },
+    {
+     "id": "n3",
+     "name": "Lançador modular",
+     "desc": "-6% no custo de construção",
+     "cost": 1,
+     "row": 1,
+     "col": 2,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "cost": -0.06
+     }
+    },
+    {
+     "id": "n4",
+     "name": "Recarga rápida",
+     "desc": "+6% de cadência",
+     "cost": 2,
+     "row": 2,
+     "col": 0,
+     "req": [
+      "n2"
+     ],
+     "excl": [],
+     "fx": {
+      "rate": 0.06
+     }
+    },
+    {
+     "id": "n5",
+     "name": "Fragmentação",
+     "desc": "+8% de raio da explosão",
+     "cost": 2,
+     "row": 2,
+     "col": 2,
+     "req": [
+      "n3"
+     ],
+     "excl": [],
+     "fx": {
+      "aoe": 0.08
+     }
+    },
+    {
+     "id": "n6",
+     "name": "Guiagem infravermelha",
+     "desc": "+6% de dano",
+     "cost": 2,
+     "row": 3,
+     "col": 1,
+     "req": [
+      "n4",
+      "n5"
+     ],
+     "excl": [],
+     "fx": {
+      "dmg": 0.06
+     }
+    },
+    {
+     "id": "a1",
+     "name": "Espoleta de proximidade",
+     "desc": "+10% de raio da explosão",
+     "cost": 2,
+     "row": 4,
+     "col": 0,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "b1"
+     ],
+     "fx": {
+      "aoe": 0.1
+     }
+    },
+    {
+     "id": "a2",
+     "name": "Salva rápida",
+     "desc": "+8% de cadência",
+     "cost": 3,
+     "row": 5,
+     "col": 0,
+     "req": [
+      "a1"
+     ],
+     "excl": [],
+     "fx": {
+      "rate": 0.08
+     }
+    },
+    {
+     "id": "a3",
+     "name": "Carga ampliada",
+     "desc": "+6% de dano",
+     "cost": 3,
+     "row": 6,
+     "col": 0,
+     "req": [
+      "a2"
+     ],
+     "excl": [],
+     "fx": {
+      "dmg": 0.06
+     }
+    },
+    {
+     "id": "b1",
+     "name": "Ogiva pesada",
+     "desc": "+8% de dano",
+     "cost": 2,
+     "row": 4,
+     "col": 2,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "a1"
+     ],
+     "fx": {
+      "dmg": 0.08
+     }
+    },
+    {
+     "id": "b2",
+     "name": "Radar de longo alcance",
+     "desc": "+8% de alcance",
+     "cost": 3,
+     "row": 5,
+     "col": 2,
+     "req": [
+      "b1"
+     ],
+     "excl": [],
+     "fx": {
+      "range": 0.08
+     }
+    },
+    {
+     "id": "b3",
+     "name": "Míssil perfurante",
+     "desc": "+10% de dano contra Aéreos",
+     "cost": 3,
+     "row": 6,
+     "col": 2,
+     "req": [
+      "b2"
+     ],
+     "excl": [],
+     "fx": {
+      "vs.AER": 0.1
+     }
+    }
+   ]
+  },
+  "sn": {
+   "branchA": "Caçador de blindados",
+   "branchB": "Atirador de elite",
+   "nodes": [
+    {
+     "id": "n1",
+     "name": "Luneta melhorada",
+     "desc": "+5% de alcance",
+     "cost": 1,
+     "row": 0,
+     "col": 1,
+     "req": [],
+     "excl": [],
+     "fx": {
+      "range": 0.05
+     }
+    },
+    {
+     "id": "n2",
+     "name": "Cano longo",
+     "desc": "+6% de dano",
+     "cost": 1,
+     "row": 1,
+     "col": 0,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "dmg": 0.06
+     }
+    },
+    {
+     "id": "n3",
+     "name": "Contrato militar",
+     "desc": "-6% no custo de construção",
+     "cost": 1,
+     "row": 1,
+     "col": 2,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "cost": -0.06
+     }
+    },
+    {
+     "id": "n4",
+     "name": "Pente estendido",
+     "desc": "+6% de cadência",
+     "cost": 2,
+     "row": 2,
+     "col": 0,
+     "req": [
+      "n2"
+     ],
+     "excl": [],
+     "fx": {
+      "rate": 0.06
+     }
+    },
+    {
+     "id": "n5",
+     "name": "Treinamento de tiro",
+     "desc": "+5% de cadência",
+     "cost": 2,
+     "row": 2,
+     "col": 2,
+     "req": [
+      "n3"
+     ],
+     "excl": [],
+     "fx": {
+      "rate": 0.05
+     }
+    },
+    {
+     "id": "n6",
+     "name": "Ponto vital",
+     "desc": "+6% de chance de tiro crítico (dano dobrado)",
+     "cost": 2,
+     "row": 3,
+     "col": 1,
+     "req": [
+      "n4",
+      "n5"
+     ],
+     "excl": [],
+     "fx": {
+      "crit": 0.06
+     }
+    },
+    {
+     "id": "a1",
+     "name": "Projétil de tungstênio",
+     "desc": "+10% de dano contra Blindagem pesada",
+     "cost": 2,
+     "row": 4,
+     "col": 0,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "b1"
+     ],
+     "fx": {
+      "vs.PES": 0.1
+     }
+    },
+    {
+     "id": "a2",
+     "name": "Calibre .50",
+     "desc": "+8% de dano",
+     "cost": 3,
+     "row": 5,
+     "col": 0,
+     "req": [
+      "a1"
+     ],
+     "excl": [],
+     "fx": {
+      "dmg": 0.08
+     }
+    },
+    {
+     "id": "a3",
+     "name": "Perfuração total",
+     "desc": "+10% de dano contra Blindagem leve",
+     "cost": 3,
+     "row": 6,
+     "col": 0,
+     "req": [
+      "a2"
+     ],
+     "excl": [],
+     "fx": {
+      "vs.LEV": 0.1
+     }
+    },
+    {
+     "id": "b1",
+     "name": "Respiração controlada",
+     "desc": "+8% de chance de tiro crítico (dano dobrado)",
+     "cost": 2,
+     "row": 4,
+     "col": 2,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "a1"
+     ],
+     "fx": {
+      "crit": 0.08
+     }
+    },
+    {
+     "id": "b2",
+     "name": "Visão térmica",
+     "desc": "+8% de alcance",
+     "cost": 3,
+     "row": 5,
+     "col": 2,
+     "req": [
+      "b1"
+     ],
+     "excl": [],
+     "fx": {
+      "range": 0.08
+     }
+    },
+    {
+     "id": "b3",
+     "name": "Abate rápido",
+     "desc": "+8% de cadência",
+     "cost": 3,
+     "row": 6,
+     "col": 2,
+     "req": [
+      "b2"
+     ],
+     "excl": [],
+     "fx": {
+      "rate": 0.08
+     }
+    }
+   ]
+  },
+  "fl": {
+   "branchA": "Inferno",
+   "branchB": "Chama pesada",
+   "nodes": [
+    {
+     "id": "n1",
+     "name": "Combustível denso",
+     "desc": "+5% de dano",
+     "cost": 1,
+     "row": 0,
+     "col": 1,
+     "req": [],
+     "excl": [],
+     "fx": {
+      "dmg": 0.05
+     }
+    },
+    {
+     "id": "n2",
+     "name": "Bocal largo",
+     "desc": "+5% de alcance",
+     "cost": 1,
+     "row": 1,
+     "col": 0,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "range": 0.05
+     }
+    },
+    {
+     "id": "n3",
+     "name": "Tanque econômico",
+     "desc": "-6% no custo de construção",
+     "cost": 1,
+     "row": 1,
+     "col": 2,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "cost": -0.06
+     }
+    },
+    {
+     "id": "n4",
+     "name": "Gel incendiário",
+     "desc": "+8% de queimadura",
+     "cost": 2,
+     "row": 2,
+     "col": 0,
+     "req": [
+      "n2"
+     ],
+     "excl": [],
+     "fx": {
+      "burn": 0.08
+     }
+    },
+    {
+     "id": "n5",
+     "name": "Pressão extra",
+     "desc": "+6% de dano",
+     "cost": 2,
+     "row": 2,
+     "col": 2,
+     "req": [
+      "n3"
+     ],
+     "excl": [],
+     "fx": {
+      "dmg": 0.06
+     }
+    },
+    {
+     "id": "n6",
+     "name": "Manutenção",
+     "desc": "-8% no custo de melhorias",
+     "cost": 2,
+     "row": 3,
+     "col": 1,
+     "req": [
+      "n4",
+      "n5"
+     ],
+     "excl": [],
+     "fx": {
+      "upg": -0.08
+     }
+    },
+    {
+     "id": "a1",
+     "name": "Napalm líquido",
+     "desc": "+10% de queimadura",
+     "cost": 2,
+     "row": 4,
+     "col": 0,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "b1"
+     ],
+     "fx": {
+      "burn": 0.1
+     }
+    },
+    {
+     "id": "a2",
+     "name": "Fogo branco",
+     "desc": "+8% de dano",
+     "cost": 3,
+     "row": 5,
+     "col": 0,
+     "req": [
+      "a1"
+     ],
+     "excl": [],
+     "fx": {
+      "dmg": 0.08
+     }
+    },
+    {
+     "id": "a3",
+     "name": "Chama persistente",
+     "desc": "+10% de queimadura",
+     "cost": 3,
+     "row": 6,
+     "col": 0,
+     "req": [
+      "a2"
+     ],
+     "excl": [],
+     "fx": {
+      "burn": 0.1
+     }
+    },
+    {
+     "id": "b1",
+     "name": "Bico de longo alcance",
+     "desc": "+8% de alcance",
+     "cost": 2,
+     "row": 4,
+     "col": 2,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "a1"
+     ],
+     "fx": {
+      "range": 0.08
+     }
+    },
+    {
+     "id": "b2",
+     "name": "Termita",
+     "desc": "+10% de dano contra Blindagem leve",
+     "cost": 3,
+     "row": 5,
+     "col": 2,
+     "req": [
+      "b1"
+     ],
+     "excl": [],
+     "fx": {
+      "vs.LEV": 0.1
+     }
+    },
+    {
+     "id": "b3",
+     "name": "Pressão máxima",
+     "desc": "+8% de dano",
+     "cost": 3,
+     "row": 6,
+     "col": 2,
+     "req": [
+      "b2"
+     ],
+     "excl": [],
+     "fx": {
+      "dmg": 0.08
+     }
+    }
+   ]
+  },
+  "su": {
+   "branchA": "Guerra eletrônica",
+   "branchB": "Inteligência",
+   "nodes": [
+    {
+     "id": "n1",
+     "name": "Antena ampliada",
+     "desc": "+6% de raio do radar",
+     "cost": 1,
+     "row": 0,
+     "col": 1,
+     "req": [],
+     "excl": [],
+     "fx": {
+      "reveal": 0.06
+     }
+    },
+    {
+     "id": "n2",
+     "name": "Interferência",
+     "desc": "+8% de lentidão aplicada",
+     "cost": 1,
+     "row": 1,
+     "col": 0,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "slow": 0.08
+     }
+    },
+    {
+     "id": "n3",
+     "name": "Kit compacto",
+     "desc": "-6% no custo de construção",
+     "cost": 1,
+     "row": 1,
+     "col": 2,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "cost": -0.06
+     }
+    },
+    {
+     "id": "n4",
+     "name": "Rede de dados",
+     "desc": "+8% no bônus de alcance dado às vizinhas",
+     "cost": 2,
+     "row": 2,
+     "col": 0,
+     "req": [
+      "n2"
+     ],
+     "excl": [],
+     "fx": {
+      "aura": 0.08
+     }
+    },
+    {
+     "id": "n5",
+     "name": "Bateria extra",
+     "desc": "+6% de raio do radar",
+     "cost": 2,
+     "row": 2,
+     "col": 2,
+     "req": [
+      "n3"
+     ],
+     "excl": [],
+     "fx": {
+      "reveal": 0.06
+     }
+    },
+    {
+     "id": "n6",
+     "name": "Manutenção barata",
+     "desc": "-8% no custo de melhorias",
+     "cost": 2,
+     "row": 3,
+     "col": 1,
+     "req": [
+      "n4",
+      "n5"
+     ],
+     "excl": [],
+     "fx": {
+      "upg": -0.08
+     }
+    },
+    {
+     "id": "a1",
+     "name": "Bloqueio de motores",
+     "desc": "+10% de lentidão aplicada",
+     "cost": 2,
+     "row": 4,
+     "col": 0,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "b1"
+     ],
+     "fx": {
+      "slow": 0.1
+     }
+    },
+    {
+     "id": "a2",
+     "name": "Pulso contínuo",
+     "desc": "+10% de lentidão aplicada",
+     "cost": 3,
+     "row": 5,
+     "col": 0,
+     "req": [
+      "a1"
+     ],
+     "excl": [],
+     "fx": {
+      "slow": 0.1
+     }
+    },
+    {
+     "id": "a3",
+     "name": "Sobrecarga de rede",
+     "desc": "+10% no bônus de alcance dado às vizinhas",
+     "cost": 3,
+     "row": 6,
+     "col": 0,
+     "req": [
+      "a2"
+     ],
+     "excl": [],
+     "fx": {
+      "aura": 0.1
+     }
+    },
+    {
+     "id": "b1",
+     "name": "Varredura ampla",
+     "desc": "+8% de raio do radar",
+     "cost": 2,
+     "row": 4,
+     "col": 2,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "a1"
+     ],
+     "fx": {
+      "reveal": 0.08
+     }
+    },
+    {
+     "id": "b2",
+     "name": "Marcação de alvos",
+     "desc": "+5 pontos % de dano para torres vizinhas",
+     "cost": 3,
+     "row": 5,
+     "col": 2,
+     "req": [
+      "b1"
+     ],
+     "excl": [],
+     "fx": {
+      "auraDmg": 0.05
+     }
+    },
+    {
+     "id": "b3",
+     "name": "Link de satélite",
+     "desc": "+10% no bônus de alcance dado às vizinhas",
+     "cost": 3,
+     "row": 6,
+     "col": 2,
+     "req": [
+      "b2"
+     ],
+     "excl": [],
+     "fx": {
+      "aura": 0.1
+     }
+    }
+   ]
+  },
+  "la": {
+   "branchA": "Desintegrador",
+   "branchB": "Feixe tático",
+   "nodes": [
+    {
+     "id": "n1",
+     "name": "Lentes polidas",
+     "desc": "+5% de dano",
+     "cost": 1,
+     "row": 0,
+     "col": 1,
+     "req": [],
+     "excl": [],
+     "fx": {
+      "dmg": 0.05
+     }
+    },
+    {
+     "id": "n2",
+     "name": "Capacitores",
+     "desc": "+6% no dano máximo acumulado",
+     "cost": 1,
+     "row": 1,
+     "col": 0,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "ramp": 0.06
+     }
+    },
+    {
+     "id": "n3",
+     "name": "Produção em série",
+     "desc": "-6% no custo de construção",
+     "cost": 1,
+     "row": 1,
+     "col": 2,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "cost": -0.06
+     }
+    },
+    {
+     "id": "n4",
+     "name": "Foco estreito",
+     "desc": "+5% de alcance",
+     "cost": 2,
+     "row": 2,
+     "col": 0,
+     "req": [
+      "n2"
+     ],
+     "excl": [],
+     "fx": {
+      "range": 0.05
+     }
+    },
+    {
+     "id": "n5",
+     "name": "Refrigeração",
+     "desc": "+6% de dano",
+     "cost": 2,
+     "row": 2,
+     "col": 2,
+     "req": [
+      "n3"
+     ],
+     "excl": [],
+     "fx": {
+      "dmg": 0.06
+     }
+    },
+    {
+     "id": "n6",
+     "name": "Sobrecarga",
+     "desc": "+8% no dano máximo acumulado",
+     "cost": 2,
+     "row": 3,
+     "col": 1,
+     "req": [
+      "n4",
+      "n5"
+     ],
+     "excl": [],
+     "fx": {
+      "ramp": 0.08
+     }
+    },
+    {
+     "id": "a1",
+     "name": "Frequência de escudo",
+     "desc": "+10% de dano contra Escudo de energia",
+     "cost": 2,
+     "row": 4,
+     "col": 0,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "b1"
+     ],
+     "fx": {
+      "vs.ESC": 0.1
+     }
+    },
+    {
+     "id": "a2",
+     "name": "Feixe contínuo",
+     "desc": "+10% no dano máximo acumulado",
+     "cost": 3,
+     "row": 5,
+     "col": 0,
+     "req": [
+      "a1"
+     ],
+     "excl": [],
+     "fx": {
+      "ramp": 0.1
+     }
+    },
+    {
+     "id": "a3",
+     "name": "Potência máxima",
+     "desc": "+8% de dano",
+     "cost": 3,
+     "row": 6,
+     "col": 0,
+     "req": [
+      "a2"
+     ],
+     "excl": [],
+     "fx": {
+      "dmg": 0.08
+     }
+    },
+    {
+     "id": "b1",
+     "name": "Aquisição rápida",
+     "desc": "+10% na velocidade de aquecimento",
+     "cost": 2,
+     "row": 4,
+     "col": 2,
+     "req": [
+      "n6"
+     ],
+     "excl": [
+      "a1"
+     ],
+     "fx": {
+      "rampSpeed": 0.1
+     }
+    },
+    {
+     "id": "b2",
+     "name": "Óptica adaptativa",
+     "desc": "+8% de alcance",
+     "cost": 3,
+     "row": 5,
+     "col": 2,
+     "req": [
+      "b1"
+     ],
+     "excl": [],
+     "fx": {
+      "range": 0.08
+     }
+    },
+    {
+     "id": "b3",
+     "name": "Feixe antiaéreo",
+     "desc": "+10% de dano contra Aéreos",
+     "cost": 3,
+     "row": 6,
+     "col": 2,
+     "req": [
+      "b2"
+     ],
+     "excl": [],
+     "fx": {
+      "vs.AER": 0.1
+     }
+    }
+   ]
+  }
+ },
+ "abilities": {
+  "aereo": {
+   "branchA": "Bombas pesadas",
+   "branchB": "Bombardeio ágil",
+   "nodes": [
+    {
+     "id": "n1",
+     "name": "Carga extra",
+     "desc": "+8% de potência",
+     "cost": 1,
+     "row": 0,
+     "col": 1,
+     "req": [],
+     "excl": [],
+     "fx": {
+      "power": 0.08
+     }
+    },
+    {
+     "id": "n2",
+     "name": "Pilotos treinados",
+     "desc": "-8% no tempo de recarga",
+     "cost": 1,
+     "row": 1,
+     "col": 0,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "cd": -0.08
+     }
+    },
+    {
+     "id": "n3",
+     "name": "Dispersão",
+     "desc": "+8% de raio",
+     "cost": 1,
+     "row": 1,
+     "col": 2,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "radius": 0.08
+     }
+    },
+    {
+     "id": "x",
+     "name": "Bombas pesadas",
+     "desc": "+10% de potência",
+     "cost": 2,
+     "row": 2,
+     "col": 0,
+     "req": [
+      "n2",
+      "n3"
+     ],
+     "excl": [
+      "y"
+     ],
+     "fx": {
+      "power": 0.1
+     }
+    },
+    {
+     "id": "y",
+     "name": "Bombardeio ágil",
+     "desc": "-10% no tempo de recarga",
+     "cost": 2,
+     "row": 2,
+     "col": 2,
+     "req": [
+      "n2",
+      "n3"
+     ],
+     "excl": [
+      "x"
+     ],
+     "fx": {
+      "cd": -0.1
+     }
+    },
+    {
+     "id": "n6",
+     "name": "Tapete de bombas",
+     "desc": "+10% de raio",
+     "cost": 3,
+     "row": 3,
+     "col": 1,
+     "req": [
+      "x",
+      "y"
+     ],
+     "excl": [],
+     "fx": {
+      "radius": 0.1
+     }
+    }
+   ]
+  },
+  "minas": {
+   "branchA": "Antitanque",
+   "branchB": "Fragmentação",
+   "nodes": [
+    {
+     "id": "n1",
+     "name": "Carga extra",
+     "desc": "+8% de potência",
+     "cost": 1,
+     "row": 0,
+     "col": 1,
+     "req": [],
+     "excl": [],
+     "fx": {
+      "power": 0.08
+     }
+    },
+    {
+     "id": "n2",
+     "name": "Detonador rápido",
+     "desc": "-8% no tempo de recarga",
+     "cost": 1,
+     "row": 1,
+     "col": 0,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "cd": -0.08
+     }
+    },
+    {
+     "id": "n3",
+     "name": "Espoleta sensível",
+     "desc": "+8% de raio",
+     "cost": 1,
+     "row": 1,
+     "col": 2,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "radius": 0.08
+     }
+    },
+    {
+     "id": "x",
+     "name": "Minas antitanque",
+     "desc": "+10% de potência",
+     "cost": 2,
+     "row": 2,
+     "col": 0,
+     "req": [
+      "n2",
+      "n3"
+     ],
+     "excl": [
+      "y"
+     ],
+     "fx": {
+      "power": 0.1
+     }
+    },
+    {
+     "id": "y",
+     "name": "Minas de fragmentação",
+     "desc": "+10% de raio",
+     "cost": 2,
+     "row": 2,
+     "col": 2,
+     "req": [
+      "n2",
+      "n3"
+     ],
+     "excl": [
+      "x"
+     ],
+     "fx": {
+      "radius": 0.1
+     }
+    },
+    {
+     "id": "n6",
+     "name": "Estoque reserva",
+     "desc": "-10% no tempo de recarga",
+     "cost": 3,
+     "row": 3,
+     "col": 1,
+     "req": [
+      "x",
+      "y"
+     ],
+     "excl": [],
+     "fx": {
+      "cd": -0.1
+     }
+    }
+   ]
+  },
+  "suprimentos": {
+   "branchA": "Logística",
+   "branchB": "Rota curta",
+   "nodes": [
+    {
+     "id": "n1",
+     "name": "Caixa reforçada",
+     "desc": "+8% de potência",
+     "cost": 1,
+     "row": 0,
+     "col": 1,
+     "req": [],
+     "excl": [],
+     "fx": {
+      "power": 0.08
+     }
+    },
+    {
+     "id": "n2",
+     "name": "Rota rápida",
+     "desc": "-8% no tempo de recarga",
+     "cost": 1,
+     "row": 1,
+     "col": 0,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "cd": -0.08
+     }
+    },
+    {
+     "id": "n3",
+     "name": "Contatos",
+     "desc": "+6% de potência",
+     "cost": 1,
+     "row": 1,
+     "col": 2,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "power": 0.06
+     }
+    },
+    {
+     "id": "x",
+     "name": "Logística pesada",
+     "desc": "+10% de potência",
+     "cost": 2,
+     "row": 2,
+     "col": 0,
+     "req": [
+      "n2",
+      "n3"
+     ],
+     "excl": [
+      "y"
+     ],
+     "fx": {
+      "power": 0.1
+     }
+    },
+    {
+     "id": "y",
+     "name": "Rota curta",
+     "desc": "-10% no tempo de recarga",
+     "cost": 2,
+     "row": 2,
+     "col": 2,
+     "req": [
+      "n2",
+      "n3"
+     ],
+     "excl": [
+      "x"
+     ],
+     "fx": {
+      "cd": -0.1
+     }
+    },
+    {
+     "id": "n6",
+     "name": "Contrabando",
+     "desc": "+10% de potência",
+     "cost": 3,
+     "row": 3,
+     "col": 1,
+     "req": [
+      "x",
+      "y"
+     ],
+     "excl": [],
+     "fx": {
+      "power": 0.1
+     }
+    }
+   ]
+  },
+  "arame": {
+   "branchA": "Concertina",
+   "branchB": "Emaranhado",
+   "nodes": [
+    {
+     "id": "n1",
+     "name": "Farpas afiadas",
+     "desc": "+8% de potência",
+     "cost": 1,
+     "row": 0,
+     "col": 1,
+     "req": [],
+     "excl": [],
+     "fx": {
+      "power": 0.08
+     }
+    },
+    {
+     "id": "n2",
+     "name": "Estacas",
+     "desc": "+8% de duração",
+     "cost": 1,
+     "row": 1,
+     "col": 0,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "duration": 0.08
+     }
+    },
+    {
+     "id": "n3",
+     "name": "Equipe rápida",
+     "desc": "-8% no tempo de recarga",
+     "cost": 1,
+     "row": 1,
+     "col": 2,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "cd": -0.08
+     }
+    },
+    {
+     "id": "x",
+     "name": "Concertina",
+     "desc": "+10% de raio",
+     "cost": 2,
+     "row": 2,
+     "col": 0,
+     "req": [
+      "n2",
+      "n3"
+     ],
+     "excl": [
+      "y"
+     ],
+     "fx": {
+      "radius": 0.1
+     }
+    },
+    {
+     "id": "y",
+     "name": "Emaranhado",
+     "desc": "+10% de potência",
+     "cost": 2,
+     "row": 2,
+     "col": 2,
+     "req": [
+      "n2",
+      "n3"
+     ],
+     "excl": [
+      "x"
+     ],
+     "fx": {
+      "power": 0.1
+     }
+    },
+    {
+     "id": "n6",
+     "name": "Arame reforçado",
+     "desc": "+10% de duração",
+     "cost": 3,
+     "row": 3,
+     "col": 1,
+     "req": [
+      "x",
+      "y"
+     ],
+     "excl": [],
+     "fx": {
+      "duration": 0.1
+     }
+    }
+   ]
+  },
+  "napalm": {
+   "branchA": "Área ampla",
+   "branchB": "Gel concentrado",
+   "nodes": [
+    {
+     "id": "n1",
+     "name": "Mistura densa",
+     "desc": "+8% de potência",
+     "cost": 1,
+     "row": 0,
+     "col": 1,
+     "req": [],
+     "excl": [],
+     "fx": {
+      "power": 0.08
+     }
+    },
+    {
+     "id": "n2",
+     "name": "Queima longa",
+     "desc": "+8% de duração",
+     "cost": 1,
+     "row": 1,
+     "col": 0,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "duration": 0.08
+     }
+    },
+    {
+     "id": "n3",
+     "name": "Recarga",
+     "desc": "-8% no tempo de recarga",
+     "cost": 1,
+     "row": 1,
+     "col": 2,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "cd": -0.08
+     }
+    },
+    {
+     "id": "x",
+     "name": "Área ampla",
+     "desc": "+10% de raio",
+     "cost": 2,
+     "row": 2,
+     "col": 0,
+     "req": [
+      "n2",
+      "n3"
+     ],
+     "excl": [
+      "y"
+     ],
+     "fx": {
+      "radius": 0.1
+     }
+    },
+    {
+     "id": "y",
+     "name": "Gel concentrado",
+     "desc": "+10% de potência",
+     "cost": 2,
+     "row": 2,
+     "col": 2,
+     "req": [
+      "n2",
+      "n3"
+     ],
+     "excl": [
+      "x"
+     ],
+     "fx": {
+      "power": 0.1
+     }
+    },
+    {
+     "id": "n6",
+     "name": "Esquadrilha",
+     "desc": "-10% no tempo de recarga",
+     "cost": 3,
+     "row": 3,
+     "col": 1,
+     "req": [
+      "x",
+      "y"
+     ],
+     "excl": [],
+     "fx": {
+      "cd": -0.1
+     }
+    }
+   ]
+  },
+  "emp": {
+   "branchA": "Sobrecarga",
+   "branchB": "Onda longa",
+   "nodes": [
+    {
+     "id": "n1",
+     "name": "Bobinas",
+     "desc": "+8% de raio",
+     "cost": 1,
+     "row": 0,
+     "col": 1,
+     "req": [],
+     "excl": [],
+     "fx": {
+      "radius": 0.08
+     }
+    },
+    {
+     "id": "n2",
+     "name": "Pulso estendido",
+     "desc": "+8% de duração",
+     "cost": 1,
+     "row": 1,
+     "col": 0,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "duration": 0.08
+     }
+    },
+    {
+     "id": "n3",
+     "name": "Capacitor rápido",
+     "desc": "-8% no tempo de recarga",
+     "cost": 1,
+     "row": 1,
+     "col": 2,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "cd": -0.08
+     }
+    },
+    {
+     "id": "x",
+     "name": "Sobrecarga",
+     "desc": "+10% de potência",
+     "cost": 2,
+     "row": 2,
+     "col": 0,
+     "req": [
+      "n2",
+      "n3"
+     ],
+     "excl": [
+      "y"
+     ],
+     "fx": {
+      "power": 0.1
+     }
+    },
+    {
+     "id": "y",
+     "name": "Onda longa",
+     "desc": "+10% de raio",
+     "cost": 2,
+     "row": 2,
+     "col": 2,
+     "req": [
+      "n2",
+      "n3"
+     ],
+     "excl": [
+      "x"
+     ],
+     "fx": {
+      "radius": 0.1
+     }
+    },
+    {
+     "id": "n6",
+     "name": "Reator extra",
+     "desc": "-10% no tempo de recarga",
+     "cost": 3,
+     "row": 3,
+     "col": 1,
+     "req": [
+      "x",
+      "y"
+     ],
+     "excl": [],
+     "fx": {
+      "cd": -0.1
+     }
+    }
+   ]
+  },
+  "reforcos": {
+   "branchA": "Atiradores",
+   "branchB": "Veteranos",
+   "nodes": [
+    {
+     "id": "n1",
+     "name": "Munição extra",
+     "desc": "+8% de potência",
+     "cost": 1,
+     "row": 0,
+     "col": 1,
+     "req": [],
+     "excl": [],
+     "fx": {
+      "power": 0.08
+     }
+    },
+    {
+     "id": "n2",
+     "name": "Rações",
+     "desc": "+8% de duração",
+     "cost": 1,
+     "row": 1,
+     "col": 0,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "duration": 0.08
+     }
+    },
+    {
+     "id": "n3",
+     "name": "Rádio",
+     "desc": "-8% no tempo de recarga",
+     "cost": 1,
+     "row": 1,
+     "col": 2,
+     "req": [
+      "n1"
+     ],
+     "excl": [],
+     "fx": {
+      "cd": -0.08
+     }
+    },
+    {
+     "id": "x",
+     "name": "Atiradores",
+     "desc": "+10% de potência",
+     "cost": 2,
+     "row": 2,
+     "col": 0,
+     "req": [
+      "n2",
+      "n3"
+     ],
+     "excl": [
+      "y"
+     ],
+     "fx": {
+      "power": 0.1
+     }
+    },
+    {
+     "id": "y",
+     "name": "Veteranos",
+     "desc": "+10% de duração",
+     "cost": 2,
+     "row": 2,
+     "col": 2,
+     "req": [
+      "n2",
+      "n3"
+     ],
+     "excl": [
+      "x"
+     ],
+     "fx": {
+      "duration": 0.1
+     }
+    },
+    {
+     "id": "n6",
+     "name": "Helicóptero de apoio",
+     "desc": "-10% no tempo de recarga",
+     "cost": 3,
+     "row": 3,
+     "col": 1,
+     "req": [
+      "x",
+      "y"
+     ],
+     "excl": [],
+     "fx": {
+      "cd": -0.1
+     }
+    }
+   ]
+  }
+ }
+}

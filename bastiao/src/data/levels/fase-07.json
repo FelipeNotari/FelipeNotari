@@ -1,0 +1,600 @@
+{
+ "id": 7,
+ "name": "Distrito Fantasma",
+ "biome": "cidade",
+ "map": {
+  "x": 0.347,
+  "y": 0.73
+ },
+ "startMoney": 540,
+ "lives": 20,
+ "hpMult": 1,
+ "waveGap": 15,
+ "towers": [
+  "mg",
+  "at",
+  "aa",
+  "mo",
+  "sn",
+  "fl",
+  "su"
+ ],
+ "abilities": [
+  "aereo",
+  "minas",
+  "suprimentos",
+  "arame",
+  "napalm"
+ ],
+ "paths": [
+  [
+   [
+    -1,
+    4
+   ],
+   [
+    6,
+    4
+   ],
+   [
+    6,
+    1
+   ],
+   [
+    13,
+    1
+   ],
+   [
+    13,
+    6
+   ],
+   [
+    23,
+    6
+   ]
+  ],
+  [
+   [
+    6,
+    14
+   ],
+   [
+    6,
+    10
+   ],
+   [
+    13,
+    10
+   ],
+   [
+    13,
+    6
+   ],
+   [
+    23,
+    6
+   ]
+  ]
+ ],
+ "airPaths": [
+  [
+   [
+    -1,
+    13
+   ],
+   [
+    23,
+    6
+   ]
+  ]
+ ],
+ "obstacles": [
+  {
+   "type": "carcaca",
+   "x": 15,
+   "y": 7
+  },
+  {
+   "type": "carcaca",
+   "x": 15,
+   "y": 8
+  },
+  {
+   "type": "conteiner",
+   "x": 15,
+   "y": 5
+  },
+  {
+   "type": "conteiner",
+   "x": 14,
+   "y": 7
+  },
+  {
+   "type": "carcaca",
+   "x": 14,
+   "y": 8
+  },
+  {
+   "type": "destrocos",
+   "x": 14,
+   "y": 5
+  },
+  {
+   "type": "carcaca",
+   "x": 16,
+   "y": 7
+  },
+  {
+   "type": "arvore",
+   "x": 17,
+   "y": 7
+  },
+  {
+   "type": "destrocos",
+   "x": 18,
+   "y": 7
+  },
+  {
+   "type": "arvore",
+   "x": 19,
+   "y": 7
+  },
+  {
+   "type": "carcaca",
+   "x": 20,
+   "y": 5
+  },
+  {
+   "type": "barril",
+   "x": 14,
+   "y": 4
+  },
+  {
+   "type": "destrocos",
+   "x": 13,
+   "y": 11
+  },
+  {
+   "type": "barril",
+   "x": 4,
+   "y": 5
+  },
+  {
+   "type": "barril",
+   "x": 4,
+   "y": 9
+  },
+  {
+   "type": "barril",
+   "x": 1,
+   "y": 3
+  },
+  {
+   "type": "arvore",
+   "x": 5,
+   "y": 8
+  },
+  {
+   "type": "barril",
+   "x": 18,
+   "y": 9
+  },
+  {
+   "type": "destrocos",
+   "x": 3,
+   "y": 12
+  },
+  {
+   "type": "barril",
+   "x": 15,
+   "y": 1
+  },
+  {
+   "type": "destrocos",
+   "x": 2,
+   "y": 12
+  },
+  {
+   "type": "barril",
+   "x": 1,
+   "y": 11
+  },
+  {
+   "type": "arvore",
+   "x": 1,
+   "y": 10
+  },
+  {
+   "type": "arvore",
+   "x": 20,
+   "y": 10
+  },
+  {
+   "type": "destrocos",
+   "x": 22,
+   "y": 10
+  },
+  {
+   "type": "destrocos",
+   "x": 23,
+   "y": 9
+  },
+  {
+   "type": "destrocos",
+   "x": 14,
+   "y": 13
+  },
+  {
+   "type": "barril",
+   "x": 4,
+   "y": 7
+  },
+  {
+   "type": "destrocos",
+   "x": 2,
+   "y": 0
+  },
+  {
+   "type": "carcaca",
+   "x": 22,
+   "y": 0
+  },
+  {
+   "type": "barril",
+   "x": 23,
+   "y": 0
+  },
+  {
+   "type": "destrocos",
+   "x": 1,
+   "y": 1
+  },
+  {
+   "type": "arvore",
+   "x": 19,
+   "y": 1
+  },
+  {
+   "type": "destrocos",
+   "x": 22,
+   "y": 1
+  },
+  {
+   "type": "arvore",
+   "x": 19,
+   "y": 2
+  },
+  {
+   "type": "carcaca",
+   "x": 0,
+   "y": 8
+  },
+  {
+   "type": "barril",
+   "x": 23,
+   "y": 11
+  },
+  {
+   "type": "arvore",
+   "x": 20,
+   "y": 12
+  },
+  {
+   "type": "destrocos",
+   "x": 16,
+   "y": 13
+  },
+  {
+   "type": "destrocos",
+   "x": 22,
+   "y": 13
+  }
+ ],
+ "waves": [
+  {
+   "bonus": 39,
+   "groups": [
+    {
+     "enemy": "camuflado",
+     "count": 1,
+     "interval": 1.1,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 21,
+     "interval": 0.35,
+     "delay": 2.6,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 45,
+   "groups": [
+    {
+     "enemy": "camuflado",
+     "count": 1,
+     "interval": 1.1,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "heli",
+     "count": 1,
+     "interval": 2.6,
+     "delay": 2.6,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 51,
+   "groups": [
+    {
+     "enemy": "elite",
+     "count": 3,
+     "interval": 1,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "reparo",
+     "count": 1,
+     "interval": 3,
+     "delay": 3,
+     "path": 1
+    },
+    {
+     "enemy": "escudo",
+     "count": 2,
+     "interval": 1.2,
+     "delay": 4.5,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 57,
+   "groups": [
+    {
+     "enemy": "jipe",
+     "count": 2,
+     "interval": 1.5,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "camuflado",
+     "count": 2,
+     "interval": 1.1,
+     "delay": 3,
+     "path": 0
+    },
+    {
+     "enemy": "escudo",
+     "count": 2,
+     "interval": 1.2,
+     "delay": 5.6,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 63,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 16,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 4,
+     "interval": 1.5,
+     "delay": 6.3,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 69,
+   "groups": [
+    {
+     "enemy": "camuflado",
+     "count": 6,
+     "interval": 1.1,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "moto",
+     "count": 7,
+     "interval": 0.7,
+     "delay": 3.7,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 75,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 25,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "reparo",
+     "count": 1,
+     "interval": 3,
+     "delay": 8,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 81,
+   "groups": [
+    {
+     "enemy": "moto",
+     "count": 8,
+     "interval": 0.7,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "soldado",
+     "count": 20,
+     "interval": 0.8,
+     "delay": 5.4,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 87,
+   "groups": [
+    {
+     "enemy": "reparo",
+     "count": 1,
+     "interval": 3,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "caminhao",
+     "count": 2,
+     "interval": 3,
+     "delay": 1.5,
+     "path": 1
+    },
+    {
+     "enemy": "moto",
+     "count": 2,
+     "interval": 0.7,
+     "delay": 6,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 2,
+     "interval": 2.4,
+     "delay": 10,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 93,
+   "groups": [
+    {
+     "enemy": "soldado",
+     "count": 23,
+     "interval": 0.8,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 6,
+     "interval": 1.5,
+     "delay": 8,
+     "path": 1
+    }
+   ]
+  },
+  {
+   "bonus": 99,
+   "groups": [
+    {
+     "enemy": "heli",
+     "count": 3,
+     "interval": 2.6,
+     "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 35,
+     "interval": 0.35,
+     "delay": 4.1,
+     "path": 0
+    },
+    {
+     "enemy": "elite",
+     "count": 1,
+     "interval": 1,
+     "delay": 9.8,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 105,
+   "groups": [
+    {
+     "enemy": "moto",
+     "count": 4,
+     "interval": 0.7,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "jipe",
+     "count": 2,
+     "interval": 1.5,
+     "delay": 4,
+     "path": 0
+    },
+    {
+     "enemy": "caminhao",
+     "count": 2,
+     "interval": 3,
+     "delay": 8.5,
+     "path": 1
+    },
+    {
+     "enemy": "soldado",
+     "count": 14,
+     "interval": 0.8,
+     "delay": 13,
+     "path": 0
+    }
+   ]
+  },
+  {
+   "bonus": 111,
+   "groups": [
+    {
+     "enemy": "tanque_leve",
+     "count": 3,
+     "interval": 2.4,
+     "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "camuflado",
+     "count": 4,
+     "interval": 1.1,
+     "delay": 3.9,
+     "path": 0
+    },
+    {
+     "enemy": "elite",
+     "count": 5,
+     "interval": 1,
+     "delay": 8.2,
+     "path": 1
+    }
+   ]
+  }
+ ],
+ "briefing": "Unidades camufladas são invisíveis para as torres. O Radar de Suporte as revela e ainda reforça as vizinhas.",
+ "waveHpGrowth": 0.025
+}
