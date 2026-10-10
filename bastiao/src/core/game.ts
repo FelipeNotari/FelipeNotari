@@ -169,6 +169,7 @@ export class Projectile {
   obs: Obstacle | null = null;
   tower: Tower | null = null;
   a = 0;
+  miss = false;
 }
 
 export type ZoneKind = 'strike' | 'mine' | 'napalm' | 'wire';
@@ -1360,6 +1361,8 @@ export class Game {
     p.obs = o;
     p.tower = t;
     p.a = t.angle;
+    // projétil de canhão erra metade dos tiros contra infantaria (alvo pequeno e ágil)
+    p.miss = kind === 'shell' && !!e && e.cls === 'INF' && this.rng.next() < 0.5;
     this.events.push(EV.LAUNCH, t.x, t.y, 0, kind, tx, ty);
   }
 
@@ -1416,7 +1419,8 @@ export class Game {
         p.x = p.tx;
         p.y = p.ty;
         if (p.kind === 'shell') {
-          if (tgt) this.damageEnemy(tgt, p.dmg, p.dtype, p.tower);
+          if (tgt && p.miss) this.events.push(EV.HIT, p.x, p.y - 0.3, 0, 'erro');
+          else if (tgt) this.damageEnemy(tgt, p.dmg, p.dtype, p.tower);
           else if (p.obs && p.obs.alive) this.damageObstacle(p.obs, p.dmg, p.dtype);
           this.events.push(EV.EXPLOSION, p.x, p.y, 0.3, 'p');
         } else {

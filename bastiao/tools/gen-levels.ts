@@ -11,8 +11,8 @@ import type { LevelData, WaveDef, WaveGroup } from '../src/core/types';
 const OUT = path.resolve(import.meta.dirname, '../src/data/levels');
 
 const INTERVAL: Record<string, number> = {
-  soldado: 0.8, elite: 1.0, escudo: 1.2, moto: 0.7, jipe: 1.5, tanque_leve: 2.4, drone: 0.35, heli: 2.6,
-  caminhao: 3.0, reparo: 3.0, camuflado: 1.1, gerador: 3.0, tanque_pesado: 3.8, kamikaze: 1.4,
+  soldado: 0.55, elite: 0.7, escudo: 1.2, moto: 0.7, jipe: 1.5, tanque_leve: 2.4, drone: 0.35, heli: 2.6,
+  caminhao: 3.0, reparo: 3.0, camuflado: 0.8, gerador: 3.0, tanque_pesado: 3.8, kamikaze: 1.4,
 };
 const MAXCOUNT: Record<string, number> = { reparo: 3, gerador: 3, heli: 8, tanque_pesado: 8 };
 
@@ -119,12 +119,13 @@ const GROUP: Record<string, string> = {
 /** Proporção (em recompensa) de cada grupo de classe numa onda. */
 function waveShares(spec: LevelSpec, theme: string, groups: Set<string>): Record<string, number> {
   // cotas fixas por onda: cada classe precisa de um counter próprio
-  const base: Record<string, number> = { INF: 0.34, LEV: 0.17, PES: 0.2, AER: 0.24, ESC: spec.id >= 8 ? 0.05 : 0, KAM: spec.id >= 11 ? 0.06 : 0 };
+  const base: Record<string, number> = { INF: 0.38, LEV: 0.15, PES: 0.2, AER: 0.22, ESC: spec.id >= 8 ? 0.05 : 0, KAM: spec.id >= 11 ? 0.06 : 0 };
   if (spec.id < 3) {
     for (const k of Object.keys(base)) base[k] = 0;
     base.INF = spec.id === 1 ? 1 : 0.5;
     base.LEV = spec.id === 1 ? 0 : 0.5;
   }
+  if (spec.shares && spec.id >= 3) Object.assign(base, spec.shares);
   const tilt: Record<string, string> = { infantaria: 'INF', blindado: 'PES', aereo: 'AER', rapido: 'LEV' };
   if (tilt[theme] && base[tilt[theme]] > 0) base[tilt[theme]] *= 1.6;
   let tot = 0;
@@ -136,12 +137,20 @@ function waveShares(spec: LevelSpec, theme: string, groups: Set<string>): Record
   return base;
 }
 
-function pickType(spec: LevelSpec, grp: string, theme: string, rng: Rng, w: number): string | null {
-  const ids = Object.keys(spec.pool).filter((id) => GROUP[id] === grp);
+function pickType(spec: LevelSpec, grp: string, theme: string, rng: Rng, w: number, budget: number): string | null {
+  let ids = Object.keys(spec.pool).filter((id) => GROUP[id] === grp);
   if (!ids.length) return null;
+  // só unidades que cabem no orçamento do grupo (evita tanque pesado na onda 1)
+  const fit = ids.filter((id) => ENEMY_BY_ID[id].reward <= budget * 1.3);
+  if (fit.length) ids = fit;
+  else {
+    const cheapest = ids.reduce((a, b) => (ENEMY_BY_ID[a].reward <= ENEMY_BY_ID[b].reward ? a : b));
+    if (ENEMY_BY_ID[cheapest].reward > budget * 2.2 && grp !== 'INF') return null;
+    ids = [cheapest];
+  }
   // ondas de apresentação: o inimigo novo aparece com destaque
   const intro = spec.intro[w - 1];
-  if (intro && GROUP[intro] === grp) return intro;
+  if (intro && GROUP[intro] === grp && ids.includes(intro)) return intro;
   const weights = ids.map((id) => spec.pool[id] * THEMES[theme](id) * (spec.intro.includes(id) && w < 4 ? 1.5 : 1));
   let r = rng.next() * weights.reduce((a, b) => a + b, 0);
   for (let i = 0; i < ids.length; i++) {
@@ -174,9 +183,10 @@ function makeWaves(spec: LevelSpec, rng: Rng): WaveDef[] {
       // às vezes divide o grupo em dois tipos para variar
       const split = sh * budget > 40 && rng.next() < 0.45 ? 2 : 1;
       const used = new Set<string>();
+      const gBudget = (budget * share * sh) / split;
       for (let k = 0; k < split; k++) {
-        let id = pickType(spec, grp, theme, rng, w);
-        if (id && used.has(id)) id = pickType(spec, grp, theme, rng, w + 99);
+        let id = pickType(spec, grp, theme, rng, w, gBudget);
+        if (id && used.has(id)) id = pickType(spec, grp, theme, rng, w + 99, gBudget);
         if (!id || used.has(id)) continue;
         used.add(id);
         const def = ENEMY_BY_ID[id];

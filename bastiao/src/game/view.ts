@@ -481,6 +481,11 @@ export class BattleView {
           } else Sfx.play('missile');
           break;
         case EV.HIT:
+          if (ev.k === 'erro') {
+            if (st.numbers) this.number(x, y, 'ERROU', 0xa9b0b6, 0.7);
+            this.fx.emit('fumaca', x, y + 20, { count: 2, speed: [10, 40], life: [0.3, 0.5], scale: [0.3, 0.6], alpha: [0.6, 0], tint: 0xb9a888 });
+            break;
+          }
           if (st.numbers) this.number(x + (Math.random() - 0.5) * 16, y, String(Math.round(ev.v)), ev.k === 'ENE' ? 0x9fe8ff : 0xffffff);
           break;
         case EV.EXPLOSION:

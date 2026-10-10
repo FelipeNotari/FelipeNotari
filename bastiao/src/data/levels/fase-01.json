@@ -8,7 +8,7 @@
  },
  "startMoney": 260,
  "lives": 20,
- "hpMult": 5.05,
+ "hpMult": 4.539,
  "waveGap": 15,
  "towers": [
   "mg"
@@ -214,7 +214,7 @@
     {
      "enemy": "soldado",
      "count": 6,
-     "interval": 0.8,
+     "interval": 0.55,
      "delay": 0,
      "path": 0
     }
@@ -226,7 +226,7 @@
     {
      "enemy": "soldado",
      "count": 8,
-     "interval": 0.8,
+     "interval": 0.55,
      "delay": 0,
      "path": 0
     }
@@ -238,7 +238,7 @@
     {
      "enemy": "soldado",
      "count": 5,
-     "interval": 0.8,
+     "interval": 0.55,
      "delay": 0,
      "path": 0
     }
@@ -250,7 +250,7 @@
     {
      "enemy": "soldado",
      "count": 6,
-     "interval": 0.8,
+     "interval": 0.55,
      "delay": 0,
      "path": 0
     }
@@ -262,7 +262,7 @@
     {
      "enemy": "soldado",
      "count": 14,
-     "interval": 0.8,
+     "interval": 0.55,
      "delay": 0,
      "path": 0
     }
@@ -274,7 +274,7 @@
     {
      "enemy": "soldado",
      "count": 15,
-     "interval": 0.8,
+     "interval": 0.55,
      "delay": 0,
      "path": 0
     }

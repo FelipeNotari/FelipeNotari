@@ -33,7 +33,7 @@
   "id": "at",
   "name": "Canhão Antitanque",
   "short": "Antitanque",
-  "role": "Perfurante pesado, lento, alvo único. Destrói blindados; desperdiça tiros em infantaria. Não atinge aéreos.",
+  "role": "Perfurante pesado, lento, alvo único. Destrói blindados; contra infantaria erra metade dos tiros. Não atinge aéreos.",
   "dmgType": "PER",
   "targets": "ground",
   "attack": "shell",
@@ -152,19 +152,19 @@
   "levels": [
    {
     "cost": 150,
-    "dmg": 36,
+    "dmg": 32,
     "rate": 0.5,
     "range": 5.5
    },
    {
     "cost": 110,
-    "dmg": 58,
+    "dmg": 52,
     "rate": 0.55,
     "range": 5.8
    },
    {
     "cost": 170,
-    "dmg": 88,
+    "dmg": 80,
     "rate": 0.6,
     "range": 6.2,
     "revealCamo": true

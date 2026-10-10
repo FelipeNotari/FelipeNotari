@@ -20,6 +20,7 @@ export interface LevelSpec {
   budget: number; // vida total da 1ª onda (antes do hpMult)
   growth: number; // crescimento linear do orçamento por onda
   blocked: number; // quantos dos melhores pontos começam bloqueados
+  shares?: Record<string, number>; // ajuste opcional das cotas de classe por onda
 }
 
 const T = ['mg', 'at', 'aa', 'mo', 'sn', 'fl', 'su', 'la'];
@@ -43,7 +44,7 @@ export const SPECS: LevelSpec[] = [
     airPaths: [], waves: 8, towers: towersUpTo(2), abilities: abilUpTo(2),
     pool: { soldado: 3, moto: 1.5, jipe: 1.5 }, intro: ['moto', 'jipe'],
     briefing: 'Veículos leves à vista. Balas comuns rendem pouco contra blindagem: o Canhão Antitanque chegou.',
-    startMoney: 320, hpMult: 1, budget: 512, growth: 0.3, blocked: 7,
+    startMoney: 280, hpMult: 1, budget: 512, growth: 0.3, blocked: 7,
   },
   {
     id: 3, name: 'Oásis Seco', biome: 'deserto',
@@ -162,7 +163,7 @@ export const SPECS: LevelSpec[] = [
     pool: { soldado: 2, elite: 1.5, escudo: 1, moto: 1.2, jipe: 1, tanque_leve: 1, drone: 1, heli: 0.8, caminhao: 0.8, reparo: 0.7, camuflado: 1, gerador: 0.8, tanque_pesado: 0.8, kamikaze: 1 },
     intro: [],
     briefing: 'Três rotas convergem no lago. Espalhar a defesa custa caro: escolha bem os pontos de encontro.',
-    startMoney: 780, hpMult: 1, budget: 1248, growth: 0.25, blocked: 13,
+    startMoney: 840, hpMult: 1, budget: 1248, growth: 0.25, blocked: 13,
   },
   {
     id: 14, name: 'Estação Polar', biome: 'neve',
@@ -210,7 +211,7 @@ export const SPECS: LevelSpec[] = [
     pool: { soldado: 2, elite: 1.6, escudo: 1.1, moto: 1, jipe: 1, tanque_leve: 1, drone: 1.1, heli: 1, caminhao: 0.9, reparo: 0.8, camuflado: 1, gerador: 1, tanque_pesado: 1, kamikaze: 1.1 },
     intro: [],
     briefing: 'Barris de combustível por toda parte: explodem quando destruídos e ferem quem estiver perto.',
-    startMoney: 940, hpMult: 1, budget: 1504, growth: 0.25, blocked: 15,
+    startMoney: 1080, hpMult: 1, budget: 1504, growth: 0.25, blocked: 15,
   },
   {
     id: 18, name: 'Altos-Fornos', biome: 'industrial',
@@ -223,7 +224,7 @@ export const SPECS: LevelSpec[] = [
     pool: { soldado: 2, elite: 1.6, escudo: 1.1, moto: 1, jipe: 1, tanque_leve: 1, drone: 1, heli: 0.9, caminhao: 0.9, reparo: 0.8, camuflado: 1, gerador: 1, tanque_pesado: 1.1, kamikaze: 1 },
     intro: [],
     briefing: 'Três frentes e calor infernal. Defina sua especialização e não desperdice nada.',
-    startMoney: 980, hpMult: 1, budget: 1568, growth: 0.25, blocked: 16,
+    startMoney: 1100, hpMult: 1, budget: 1568, growth: 0.25, blocked: 16,
   },
   {
     id: 19, name: 'Usina Norte', biome: 'industrial',
@@ -232,10 +233,11 @@ export const SPECS: LevelSpec[] = [
       [[11, -1], [11, 4], [18, 4], [18, 7]],
     ],
     airPaths: [[[-1, 13], [23, 7]], [[-1, 0], [14, 1], [23, 7]]], waves: 20, towers: towersUpTo(8), abilities: abilUpTo(19),
-    pool: { soldado: 2, elite: 1.6, escudo: 1.1, moto: 1.1, jipe: 1, tanque_leve: 1, drone: 1.1, heli: 1, caminhao: 0.9, reparo: 0.8, camuflado: 1.1, gerador: 1.1, tanque_pesado: 1.1, kamikaze: 1.1 },
+    pool: { soldado: 2, elite: 1.6, escudo: 1.1, moto: 1.1, jipe: 1, tanque_leve: 0.6, drone: 0.35, heli: 1.8, caminhao: 0.9, reparo: 0.8, camuflado: 1.1, gerador: 1.1, tanque_pesado: 2.2, kamikaze: 1.1 },
     intro: [],
     briefing: 'Última linha antes do ninho do Ciclope. Tudo o que a Legião tem virá por terra e ar.',
-    startMoney: 1020, hpMult: 1, budget: 1632, growth: 0.25, blocked: 16,
+    startMoney: 1150, hpMult: 1, budget: 1632, growth: 0.25, blocked: 16,
+    shares: { AER: 0.3, INF: 0.33 },
   },
   {
     id: 20, name: 'Ninho do Ciclope', biome: 'industrial',

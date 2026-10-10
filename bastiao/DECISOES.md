@@ -45,3 +45,12 @@
     Configurações e na pausa.
 19. **Tela cheia e paisagem**: o app trava em paisagem e esconde as barras do Android (modo imersivo).
 20. **Ícone e tela de abertura**: gerados a partir da arte do jogo (torre antitanque sobre faixa de perigo).
+23. **Antitanque erra 50% contra infantaria**: o projétil é lento e feito para alvos grandes. Sem isso, um "tapete" de
+    canhões dava conta de tudo no chão (o multiplicador 0,25× sozinho não bastava, porque o canhão tem muito dano bruto).
+24. **Explosivo contra blindagem pesada = 0,5×**: o Morteiro virou especialista em grupos (infantaria e blindados leves).
+25. **Infantaria e drones em colunas densas**: favorece torres de cadência alta ou de área e pune torres lentas.
+26. **Ajustes pontuais por fase** (todos no arquivo de especificação das fases, refletidos nos JSON): dinheiro inicial
+    das fases 2, 13, 17, 18 e 19 e a proporção de aéreos/tanques pesados da fase 19 foram corrigidos para que a
+    economia ficasse dentro de 1,15–1,30× e nenhuma dupla de torres vencesse.
+27. **Estrategista sem habilidade "Caixa de Suprimentos"** no simulador (ela dá dinheiro extra, o que distorceria a
+    medida de economia). Ele usa até 3 entre Ataque Aéreo, Minas, Napalm, EMP, Arame e Reforços.

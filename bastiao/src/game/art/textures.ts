@@ -284,7 +284,7 @@ function proceduralTextures(scene: Phaser.Scene): void {
 /** Fonte bitmap para números de dano (barata de atualizar). */
 function damageFont(scene: Phaser.Scene): void {
   if (scene.cache.bitmapFont.exists('dano')) return;
-  const chars = '0123456789+-$!';
+  const chars = '0123456789+-$!ACEIORTU';
   const cw = 28;
   const ch = 36;
   canvasTex(scene, 'fonte_dano', cw * chars.length, ch, (g) => {

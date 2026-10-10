@@ -23,7 +23,7 @@ export function effDps(t: Tower, c: ArmorClass): number {
       if (t.def.id === 'sn' && c === 'INF') dps *= 0.7;
       break;
     case 'shell':
-      dps = s.dmg * s.rate * (c === 'INF' ? 0.45 : 1);
+      dps = s.dmg * s.rate * (c === 'INF' ? 0.35 : 1);
       break;
     case 'mortar':
       dps = s.dmg * s.rate * (1 + 1.6 * s.aoe) * 0.75;
@@ -209,7 +209,7 @@ export class StrategistBot {
       const gap = Math.max(0.3, ci.gap);
       let hits = 1;
       if (t.def.attack === 'mortar') hits = Math.min(4, 1 + (2 * s.aoe) / gap) * 0.8;
-      else if (t.def.attack === 'flame') hits = Math.min(4, 1 + (1.2 * s.range) / gap);
+      else if (t.def.attack === 'flame') hits = Math.min(2.4, 1 + (0.6 * s.range) / gap);
       else if (t.def.attack === 'missile' && c === 'AER') hits = Math.min(2.5, 1 + (s.aoe * 0.5) / gap);
       const T = cov / Math.max(0.3, ci.speed); // segundos de cada inimigo no alcance
       const spacing = gap / Math.max(0.3, ci.speed);

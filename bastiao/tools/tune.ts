@@ -17,7 +17,7 @@ export function capTarget(level: LevelData): number {
   // curva crescente e suave: 0,77 na fase 1 até ~0,855 na 20; chefes um pouco acima (pico)
   // curva crescente e suave até o limite da faixa econômica (renda >= 1,15x); chefes no topo
   const base = Math.min(0.84, 0.775 + 0.011 * (level.id - 1));
-  return Math.min(0.855, base + (boss ? 0.015 : 0));
+  return Math.min(0.848, base + (boss ? 0.012 : 0));
 }
 
 const r3 = (h: number) => Math.round(h * 1000) / 1000;

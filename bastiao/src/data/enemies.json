@@ -245,7 +245,7 @@
   "id": "boss_fortaleza",
   "name": "Fortaleza Polar",
   "cls": "PES",
-  "hp": 22000,
+  "hp": 16000,
   "speed": 0.45,
   "reward": 600,
   "lives": 20,
@@ -254,8 +254,8 @@
   "boss": "fortaleza",
   "intro": 15,
   "bossParams": {
-   "shieldPct": 0.3,
-   "regenPct": 0.025,
+   "shieldPct": 0.25,
+   "regenPct": 0.02,
    "downTime": 8,
    "stun": 2
   },

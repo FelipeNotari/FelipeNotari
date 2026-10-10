@@ -13,7 +13,7 @@
     "EXP": {
       "name": "Explosivo",
       "color": "#ff8a1f",
-      "desc": "Dano em área. Não atinge unidades aéreas."
+      "desc": "Dano em área. Ótimo contra grupos de infantaria e blindados leves; fraco contra blindagem pesada; não atinge aéreos."
     },
     "ENE": {
       "name": "Energia",
@@ -66,7 +66,7 @@
     "EXP": {
       "INF": 1.25,
       "LEV": 1.25,
-      "PES": 0.75,
+      "PES": 0.5,
       "AER": 0,
       "ESC": 0.5
     },

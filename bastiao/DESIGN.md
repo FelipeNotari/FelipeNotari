@@ -28,7 +28,7 @@ Paleta: verde-oliva, areia, aço escuro, laranja de sinalização e amarelo de p
 |---|---|---|---|---|---|
 | **Balístico** | **1,5** | 0,5 | 0,25 | 0,25 | 0,5 |
 | **Perfurante** | 0,25 | **1,5** | **2,0** | 1,0 | 0,5 |
-| **Explosivo** (área) | 1,25 | 1,25 | 0,75 | não atinge | 0,5 |
+| **Explosivo** (área) | 1,25 | 1,25 | 0,5 | não atinge | 0,5 |
 | **Energia** | 0,5 | 0,5 | 0,5 | 0,5 | **2,0** |
 | **Fogo** | **2,0** | 0,5 | nulo (0) | 0,5 | 0,25 |
 
@@ -36,7 +36,7 @@ Escudo de energia: enquanto um inimigo tem escudo (do Gerador ou do chefe), o da
 "Escudo de energia"; o que sobra passa para a vida com a classe original.
 
 Leitura rápida dos papéis (por isso nenhuma torre resolve tudo):
-infantaria → Metralhadora / Lança-chamas / Morteiro; blindados → Antitanque / Sniper (Morteiro para leves em grupo);
+infantaria → Metralhadora / Lança-chamas / Morteiro; blindados pesados → Antitanque / Sniper; blindados leves → Antitanque / Sniper / Morteiro;
 aéreos → Bateria Antiaérea; escudos → Laser.
 
 ## 3. Torres (`src/data/towers.json`)
@@ -46,10 +46,10 @@ Custo do nível 1 = construir; níveis 2 e 3 = custo do upgrade. Dano por tiro (
 | Torre | Dano | Alvos | Desbloq. | Custo (N1/N2/N3) | Dano N1→N3 | Cadência | Alcance | Especial |
 |---|---|---|---|---|---|---|---|---|
 | Metralhadora | Balístico | terra+ar | fase 1 | 100 / 75 / 120 | 8 → 16 | 5 → 6,5/s | 2,8 → 3,1 | barata, rajada |
-| Canhão Antitanque | Perfurante | terra | fase 2 | 200 / 150 / 230 | 160 → 380 | 0,5 → 0,55/s | 3,2 → 3,5 | projétil único |
+| Canhão Antitanque | Perfurante | terra | fase 2 | 200 / 150 / 230 | 160 → 380 | 0,5 → 0,55/s | 3,2 → 3,5 | projétil único; erra 50% contra infantaria |
 | Bateria Antiaérea | Perfurante | só ar | fase 3 | 160 / 120 / 190 | 2×55 → 2×125 | 0,83 → 1 salva/s | 4,5 → 5,2 | teleguiado, fragmentação 0,5 |
 | Morteiro | Explosivo | terra | fase 4 | 175 / 130 / 200 | 50 → 120 | 0,5 → 0,6/s | 5,0 → 5,5 | área 1,1→1,35; ponto cego 1,6; voo 1,1 s |
-| Sniper | Perfurante | terra | fase 5 | 150 / 110 / 170 | 36 → 88 | 0,5 → 0,6/s | 5,5 → 6,2 | N3 revela camuflados |
+| Sniper | Perfurante | terra | fase 5 | 150 / 110 / 170 | 32 → 80 | 0,5 → 0,6/s | 5,5 → 6,2 | N3 revela camuflados |
 | Lança-chamas | Fogo | terra | fase 6 | 130 / 100 / 160 | 18 → 42/s | contínuo | 1,8 → 2,1 | cone 50°→60°, queimadura 8→18/s por 3 s |
 | Radar de Suporte | — | — | fase 7 | 150 / 120 / 180 | — | — | 3,5 → 4,5 | revela camuflados; −15→−30% vel. de veículos; +10→+20% alcance às vizinhas (raio 2); N3 +10% dano |
 | Laser | Energia | terra+ar | fase 8 | 220 / 170 / 250 | 30 → 70/s | contínuo | 3,2 → 3,6 | dano sobe até ×2 (×2,5 no N3) em 2,5 s no mesmo alvo |
@@ -80,7 +80,7 @@ em no máximo duas classes e rende menos da metade da melhor opção (ou não at
 | Drone Kamikaze | Aéreo | 140 | 2,3 | 10 | 1 | 11 | mergulha e desliga torres por 5 s |
 | **Escorpião do Deserto** | Pesada | 9000 | 0,55 | 300 | 20 | 5 | cortina de fumaça a cada 12 s: imune a mira 3,5 s |
 | **Colosso Urbano** | Pesada→Leve | 16000 | 0,5 | 450 | 20 | 10 | com 50% solta a blindagem, acelera ×1,6, desembarca 6 elites |
-| **Fortaleza Polar** | Pesada + Escudo | 22000 | 0,45 | 600 | 20 | 15 | escudo de 30% regenerando; quando cai, trava 2 s e fica 8 s exposta |
+| **Fortaleza Polar** | Pesada + Escudo | 16000 | 0,45 | 600 | 20 | 15 | escudo de 25% regenerando; quando cai, trava 2 s e fica 8 s exposta |
 | **Ciclope** | Aéreo | 30000 | 0,4 | 800 | 20 | 20 | EMP a cada 10 s (desliga torres 3 s, raio 3); 6 drones a cada 14 s |
 
 A vida é multiplicada pelo `hpMult` do JSON da fase e cresce 2,5% a cada onda dentro da fase.

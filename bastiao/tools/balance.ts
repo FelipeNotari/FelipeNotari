@@ -191,18 +191,19 @@ function report(reports: LevelReport[], levels: LevelData[]): string {
   L.push('- **Renda total** = dinheiro inicial + recompensas de todos os inimigos (inclusive os que saem de caminhões/chefes) +');
   L.push('  bônus de onda + recompensa de todos os obstáculos. Bônus opcionais (chamar onda cedo, Caixa de Suprimentos) ficam de fora.');
   L.push('- **Ajuste automático** (`tools/tune.ts`): para cada fase, busca o `hpMult` (multiplicador de vida dos inimigos) em que o');
-  L.push('  estrategista vence gastando só 80% da renda (84% nas fases de chefe = pico de dificuldade).');
+  L.push('  gasto mínimo do estrategista atinge a meta da curva de dificuldade: 77,5% da renda na fase 1, +1,1 ponto por fase até 84%,');
+  L.push('  com os chefes +1,2 ponto (pico). Também exige vitória com orçamento cheio em 5 sementes diferentes.');
   L.push('- **Teste de combinação**: o estrategista é restrito a cada tipo isolado e a cada par de tipos liberados; todos devem perder.');
   L.push('');
   L.push('## Resultado por fase');
   L.push('');
-  L.push('| Fase | hpMult | Renda total | Cap mínimo | Renda/ref. | Estrategista (vidas, ★) | 5 sementes (vitórias, ★ média) | Tipos usados | Aleatório (vitórias) | Melhor par (vidas) | Bloqueio top-10 |');
+  L.push('| Fase | hpMult | Renda total | Cap mínimo | Renda/ref. | Estrategista (vidas, ★) | 5 sementes (vitórias, ★ média) | Tipos usados | Aleatório (vitórias) | Teste de pares | Bloqueio top-10 |');
   L.push('|---|---|---|---|---|---|---|---|---|---|---|');
   for (const r of reports) {
-    const bestPair = r.pairs.length ? r.pairs.reduce((a, b) => (b.lives > a.lives ? b : a)) : null;
+    const winners = r.pairs.filter((p) => p.won).map((p) => p.pair).concat(r.singles.filter((x) => x.won).map((x) => x.t));
     const avgS = r.stratSeeds.stars.reduce((a, b) => a + b, 0) / r.stratSeeds.stars.length;
     L.push(
-      `| ${r.id} ${r.name} | ${r.hpMult.toFixed(2)} | ${r.potential} | ${r.cap.toFixed(3)} | ${r.ratio.toFixed(2)}× ${ok(r.ratio >= 1.15 && r.ratio <= 1.3)} | ${r.full.won ? 'vitória' : 'DERROTA'} (${r.full.lives}, ${r.full.stars}★) | ${r.stratSeeds.won}/5, ${avgS.toFixed(1)}★ | ${r.typesUsed} | ${r.randomWins}/${r.randomRuns} ${ok(r.id < 3 || r.randomWins / r.randomRuns < 0.1)} | ${bestPair ? `${bestPair.pair} (${bestPair.won ? 'VENCE' : 'perde'}, ${bestPair.lives})` : '—'} | ${(r.blockedTop * 100).toFixed(0)}% |`,
+      `| ${r.id} ${r.name} | ${r.hpMult.toFixed(2)} | ${r.potential} | ${r.cap.toFixed(3)} | ${r.ratio.toFixed(2)}× ${ok(r.ratio >= 1.15 && r.ratio <= 1.3)} | ${r.full.won ? 'vitória' : 'DERROTA'} (${r.full.lives}, ${r.full.stars}★) | ${r.stratSeeds.won}/5, ${avgS.toFixed(1)}★ | ${r.typesUsed} | ${r.randomWins}/${r.randomRuns} ${ok(r.id < 3 || r.randomWins / r.randomRuns < 0.1)} | ${r.pairs.length ? (winners.length ? `VENCEM: ${winners.join(', ')}` : `todos os ${r.pairs.length} pares e ${r.singles.length} isoladas perdem`) : '—'} | ${(r.blockedTop * 100).toFixed(0)}% |`,
     );
   }
   L.push('');
