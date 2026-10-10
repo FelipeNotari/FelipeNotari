@@ -26,6 +26,7 @@ interface TowerView {
   pips: Phaser.GameObjects.Image[];
   beam?: Phaser.GameObjects.Image;
   level: number;
+  seen: number;
   shots: number;
   recoil: number;
   angle: number;
@@ -71,6 +72,7 @@ export class BattleView {
   decals: Phaser.GameObjects.RenderTexture;
   private enemies: (EnemyView | null)[] = [];
   private towers = new Map<number, TowerView>();
+  private frame = 0;
   private projs: Phaser.GameObjects.Image[] = [];
   private projShadows: Phaser.GameObjects.Image[] = [];
   private obs: ObsView[] = [];
@@ -90,7 +92,14 @@ export class BattleView {
     this.stamp = scene.make.image({ x: 0, y: 0, key: 'marca', add: false });
     this.fx = new Fx(scene, 650, D.fx);
     this.fxTop = new Fx(scene, 120, D.numbers - 1);
-    for (let i = 0; i < game.enemyPool.length; i++) this.enemies.push(null);
+    // pré-cria parte dos sprites de inimigos para evitar engasgos na primeira onda grande
+    for (let i = 0; i < game.enemyPool.length; i++) {
+      if (i < 90) {
+        const v = this.makeEnemyView();
+        this.hideEnemy(v);
+        this.enemies.push(v);
+      } else this.enemies.push(null);
+    }
     for (let i = 0; i < game.projPool.length; i++) {
       this.projShadows.push(scene.add.image(0, 0, 'sombra').setVisible(false).setDepth(D.shadow).setAlpha(0.6));
       this.projs.push(scene.add.image(0, 0, 'proj_shell').setVisible(false).setDepth(D.proj));
@@ -235,20 +244,23 @@ export class BattleView {
   }
 
   private syncTowers(dt: number): void {
-    const seen = new Set<number>();
+    const f = ++this.frame;
     this.flameCount = 0;
     this.laserCount = 0;
-    for (const t of this.game.towers) {
-      seen.add(t.uid);
+    const list = this.game.towers;
+    for (let i = 0; i < list.length; i++) {
+      const t = list[i];
       let v = this.towers.get(t.uid);
       if (!v) {
         v = this.makeTowerView(t);
         this.towers.set(t.uid, v);
       }
+      v.seen = f;
       this.updateTower(v, t, dt);
     }
+    if (this.towers.size === list.length) return;
     for (const [uid, v] of this.towers) {
-      if (!seen.has(uid)) {
+      if (v.seen !== f) {
         v.base.destroy();
         v.turret.destroy();
         v.beam?.destroy();
@@ -266,7 +278,7 @@ export class BattleView {
       const base = s.add.image(x, y, 'base_mg').setDisplaySize(TILE * 0.85, TILE * 0.85).setDepth(D.towerBase).setTint(0xb8c79a);
       const turret = s.add.image(x, y, 'tur_mg_1').setDisplaySize(TILE * 0.95, TILE * 0.95).setDepth(D.turret);
       this.fx.emit('fumaca', x, y, { count: 8, speed: [30, 80], life: [0.5, 0.9], scale: [0.5, 1.2], alpha: [0.6, 0], tint: 0xcfc6a8 });
-      return { base, turret, pips: [], level: 0, shots: 0, recoil: 0, angle: t.angle, fxT: 0 };
+      return { base, turret, pips: [], level: 0, seen: 0, shots: 0, recoil: 0, angle: t.angle, fxT: 0 };
     }
     const base = s.add.image(x, y, `base_${t.def.id}`).setDisplaySize(TILE, TILE).setDepth(D.towerBase);
     const turret = s.add.image(x, y, `tur_${t.def.id}_${t.level}`).setDisplaySize(TILE * 1.22, TILE * 1.22).setDepth(D.turret);
@@ -275,7 +287,7 @@ export class BattleView {
     let beam: Phaser.GameObjects.Image | undefined;
     if (t.def.attack === 'beam') beam = s.add.image(x, y, 'feixe').setOrigin(0, 0.5).setBlendMode(Phaser.BlendModes.ADD).setDepth(D.beam).setVisible(false);
     this.fx.emit('fumaca', x, y, { count: 10, speed: [40, 110], life: [0.5, 0.9], scale: [0.5, 1.3], alpha: [0.7, 0], tint: 0xcfc6a8 });
-    return { base, turret, pips, beam, level: t.level, shots: t.shots, recoil: 0, angle: t.angle, fxT: 0 };
+    return { base, turret, pips, beam, level: t.level, seen: 0, shots: t.shots, recoil: 0, angle: t.angle, fxT: 0 };
   }
 
   private updateTower(v: TowerView, t: Tower, dt: number): void {
@@ -499,7 +511,7 @@ export class BattleView {
           break;
         case EV.OBST_DOWN: {
           Sfx.play('crack');
-          const v = this.obs.find((o, idx) => this.game.obstacles[idx].x === ev.x && this.game.obstacles[idx].y === ev.y);
+          const v = this.obs[ev.x2];
           if (v) v.shake = 0;
           this.fx.emit('detrito', x, y, { count: 14, speed: [80, 220], life: [0.4, 0.8], grav: 420, spin: 10, scale: [1.6, 1] });
           this.fx.emit('fumaca', x, y, { count: 8, speed: [20, 70], life: [0.6, 1.1], scale: [0.6, 1.5], alpha: [0.7, 0], tint: 0xc9bfa5 });
@@ -507,8 +519,8 @@ export class BattleView {
           break;
         }
         case EV.OBST_HIT: {
-          const idx = this.game.obstacles.findIndex((o) => o.x === ev.x && o.y === ev.y);
-          if (idx >= 0) this.obs[idx].shake = 0.12;
+          const ov = this.obs[ev.x2];
+          if (ov) ov.shake = 0.12;
           if (Math.random() < 0.3) this.fx.emit('detrito', x, y, { count: 1, speed: [60, 140], life: [0.3, 0.5], grav: 300, spin: 8 });
           break;
         }
@@ -621,8 +633,8 @@ export class BattleView {
     this.fx.emit('faisca', x, y, { count: Math.round(6 * n), speed: [r * 2, r * 4], life: [0.15, 0.3], tint: 0xffd27a, add: true, rotateToVel: true });
     if (big) this.ring(x, y, r * 1.2, 0xffe0a0);
     if (decal) {
-      const s = (r * 2.2) / 96;
-      this.stamp.setScale(s).setRotation(Math.random() * 6.28).setAlpha(0.55);
+      const s = (Math.min(r, TILE * 1.6) * 1.6) / 96;
+      this.stamp.setScale(s).setRotation(Math.random() * 6.28).setAlpha(big ? 0.28 : 0.16);
       this.decals.draw(this.stamp, x - MAP_X, y - MAP_Y);
     }
     if (big) this.shake(0.008, 260);
@@ -648,7 +660,12 @@ export class BattleView {
   }
 
   private tracer(x1: number, y1: number, x2: number, y2: number, tint: number, life: number): void {
-    const tr = this.tracers.find((t) => t.life <= 0);
+    let tr: { img: Phaser.GameObjects.Image; life: number } | null = null;
+    for (let i = 0; i < this.tracers.length; i++)
+      if (this.tracers[i].life <= 0) {
+        tr = this.tracers[i];
+        break;
+      }
     if (!tr) return;
     const len = Phaser.Math.Distance.Between(x1, y1, x2, y2);
     tr.life = life;
@@ -666,7 +683,12 @@ export class BattleView {
 
   number(x: number, y: number, text: string, tint: number, scale = 1): void {
     if (this.numCount > 40) return;
-    const f = this.floaters.find((q) => q.life <= 0);
+    let f: Floater | null = null;
+    for (let i = 0; i < this.floaters.length; i++)
+      if (this.floaters[i].life <= 0) {
+        f = this.floaters[i];
+        break;
+      }
     if (!f) return;
     f.life = 0.8;
     f.vy = -60;

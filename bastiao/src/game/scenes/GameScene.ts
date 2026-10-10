@@ -49,7 +49,6 @@ export class GameScene extends Phaser.Scene {
   private moneyText!: Phaser.GameObjects.Text;
   private waveText!: Phaser.GameObjects.Text;
   private previewIcons: Phaser.GameObjects.GameObject[] = [];
-  private previewKey = '';
   private towerBtns: TowerBtn[] = [];
   private abilBtns: AbilBtn[] = [];
   callBtn!: Button;
@@ -64,11 +63,13 @@ export class GameScene extends Phaser.Scene {
   private abilRing!: Phaser.GameObjects.Image;
   private popup: Phaser.GameObjects.Container | null = null;
   private popupTower: Tower | null = null;
-  private popupKey = '';
+  private popupKey = -1;
   private toastText!: Phaser.GameObjects.Text;
   private leakFlash!: Phaser.GameObjects.Rectangle;
   private pauseMenu: Phaser.GameObjects.Container | null = null;
-  private last = { lives: -1, money: -1, wave: -1, state: '', cd: '' };
+  private bossBar: { c: Phaser.GameObjects.Container; fill: Phaser.GameObjects.Rectangle; shield: Phaser.GameObjects.Rectangle; name: Phaser.GameObjects.Text; uid: number } | null = null;
+  private last = { lives: -1, money: -1, wave: -1, state: '', cdn: -2, hold: false };
+  private abilSec: number[] = [-1, -1, -1];
 
   constructor() {
     super('Game');
@@ -87,12 +88,14 @@ export class GameScene extends Phaser.Scene {
     this.popup = null;
     this.popupTower = null;
     this.pauseMenu = null;
+    this.bossBar = null;
     this.previewIcons = [];
-    this.previewKey = '';
+    this.previewWave = -2;
     this.towerBtns = [];
     this.abilBtns = [];
     this.tutorial = null;
-    this.last = { lives: -1, money: -1, wave: -1, state: '', cd: '' };
+    this.last = { lives: -1, money: -1, wave: -1, state: '', cdn: -2, hold: false };
+    this.abilSec = [-1, -1, -1];
   }
 
   create(data: { levelId: number; abilities?: string[] }): void {
@@ -143,11 +146,11 @@ export class GameScene extends Phaser.Scene {
     this.add.text(PANEL_X + PANEL_W / 2 + 40, 36, `FASE ${this.level.id}`, textStyle(26, CSS.yellow)).setOrigin(0.5).setDepth(d);
   }
 
+  private previewWave = -2;
   private updatePreview(): void {
+    if (this.sim.waveIdx === this.previewWave) return;
+    this.previewWave = this.sim.waveIdx;
     const prev = this.sim.nextWavePreview();
-    const key = `${this.sim.waveIdx}|${prev.map((p) => p.id + p.count).join(',')}`;
-    if (key === this.previewKey) return;
-    this.previewKey = key;
     for (const o of this.previewIcons) o.destroy();
     this.previewIcons = [];
     if (!prev.length) {
@@ -219,19 +222,26 @@ export class GameScene extends Phaser.Scene {
       b.cost.setColor(afford ? CSS.yellow : CSS.red);
       b.bg.setTint(this.buildId === b.id ? 0xffc27a : 0xffffff);
     }
-    this.abilBtns.forEach((b, i) => {
+    for (let i = 0; i < this.abilBtns.length; i++) {
+      const b = this.abilBtns[i];
       const s = g.abilities[i];
-      if (!s) return;
+      if (!s) continue;
       const f = s.cd / s.maxCd;
       b.cdRect.setScale(1, f).setVisible(f > 0);
-      b.cdText.setText(s.cd > 0 ? String(Math.ceil(s.cd)) : '').setVisible(s.cd > 0);
+      const sec = Math.ceil(s.cd);
+      if (sec !== this.abilSec[i]) {
+        this.abilSec[i] = sec;
+        b.cdText.setText(sec > 0 ? String(sec) : '').setVisible(sec > 0);
+      }
       b.bg.setTint(this.mode === 'ability' && this.abilitySlot === i ? 0xffc27a : 0xffffff);
-    });
+    }
     const st = g.state;
-    const cd = st === 'countdown' ? `${Math.ceil(g.countdown)}` : '';
-    if (st !== this.last.state || cd !== this.last.cd) {
+    const cdn = st === 'countdown' ? Math.ceil(g.countdown) : -1;
+    if (st !== this.last.state || cdn !== this.last.cdn || g.holdCountdown !== this.last.hold) {
       this.last.state = st;
-      this.last.cd = cd;
+      this.last.cdn = cdn;
+      this.last.hold = g.holdCountdown;
+      const cd = String(cdn);
       if (st === 'countdown' && !g.holdCountdown) {
         this.callBtn.setEnabled(true).setText(g.waveIdx < 0 ? 'INICIAR\nONDA 1' : 'CHAMAR\nONDA');
         const b = g.earlyBonus();
@@ -522,7 +532,7 @@ export class GameScene extends Phaser.Scene {
       up.setEnabled(!maxed && g.money >= upCost);
     };
     this.popup = c;
-    this.popupKey = '';
+    this.popupKey = -1;
   }
 
   // ------------------------------------------------------------------ ondas, velocidade, pausa
@@ -542,7 +552,15 @@ export class GameScene extends Phaser.Scene {
     this.speedBtn.setStyle(this.speed === 2 ? 'laranja' : 'cinza');
   }
 
-  private openPause(): void {
+  /** Botão voltar do Android. */
+  onBack(): void {
+    if (this.pauseMenu) this.closePause();
+    else if (this.mode !== 'normal') this.cancelModes();
+    else if (this.popup) this.closePopup();
+    else this.openPause();
+  }
+
+  openPause(): void {
     if (this.ended || this.pauseMenu) return;
     this.paused = true;
     const c = this.add.container(0, 0).setDepth(5000);
@@ -597,6 +615,17 @@ export class GameScene extends Phaser.Scene {
 
   // ------------------------------------------------------------------ laço principal
   update(_time: number, delta: number): void {
+    const t0 = performance.now();
+    this.frameUpdate(delta);
+    // medição de desempenho (ms gastos em lógica + visual por quadro)
+    const perf = ((window as any).__perf ??= { ema: 0, max: 0, n: 0 });
+    const ms = performance.now() - t0;
+    perf.ema = perf.ema * 0.95 + ms * 0.05;
+    perf.n++;
+    if (perf.n > 60) perf.max = Math.max(perf.max * 0.999, ms);
+  }
+
+  private frameUpdate(delta: number): void {
     const dt = Math.min(delta, 100) / 1000;
     if (!this.paused && !this.ended) {
       this.acc += dt * this.speed;
@@ -617,7 +646,7 @@ export class GameScene extends Phaser.Scene {
       const t = this.popupTower;
       if (!t || !t.active) this.closePopup();
       else {
-        const key = `${t.level}|${Math.floor(this.sim.money / 5)}|${Math.round(t.dmgDealt / 10)}|${t.kills}`;
+        const key = t.level * 1e9 + Math.floor(this.sim.money / 5) * 1e5 + (Math.round(t.dmgDealt / 10) % 1000) * 100 + (t.kills % 100);
         if (key !== this.popupKey) {
           this.popupKey = key;
           (this.popup as any)._upd?.();
@@ -630,7 +659,41 @@ export class GameScene extends Phaser.Scene {
       this.ghostOk.setEnabled(ok);
     }
     this.tutorial?.update();
+    this.updateBossBar();
     if (!this.ended && this.sim.over) this.finish();
+  }
+
+  /** Barra de vida do chefe no topo do mapa. */
+  private updateBossBar(): void {
+    let boss = null as null | (typeof this.sim.alive)[number];
+    const al = this.sim.alive;
+    for (let i = 0; i < al.length; i++) if (al[i].active && al[i].def.boss) {
+      boss = al[i];
+      break;
+    }
+    if (!boss) {
+      if (this.bossBar) this.bossBar.c.setVisible(false);
+      return;
+    }
+    if (!this.bossBar) {
+      const c = this.add.container(MAP_W / 2, MAP_Y + MAP_H - 46).setDepth(930);
+      c.add(this.add.rectangle(0, 0, 820, 46, 0x1b1f22, 0.85).setStrokeStyle(4, 0x1b1f22));
+      const fill = this.add.rectangle(-404, 4, 808, 18, 0xe0453a).setOrigin(0, 0.5);
+      const shield = this.add.rectangle(-404, 15, 808, 6, 0x3fd0ff).setOrigin(0, 0.5);
+      const name = this.add.text(0, -12, '', textStyle(20, CSS.yellow)).setOrigin(0.5);
+      c.add([fill, shield, name]);
+      this.bossBar = { c, fill, shield, name, uid: -1 };
+    }
+    const b = this.bossBar;
+    b.c.setVisible(true);
+    if (b.uid !== boss.uid) {
+      b.uid = boss.uid;
+      b.name.setText(`CHEFE: ${boss.def.name.toUpperCase()}`);
+      Sfx.play('boss');
+    }
+    b.fill.setScale(Math.max(0, boss.hp / boss.maxHp), 1);
+    const sm = boss.bossShieldMax;
+    b.shield.setVisible(sm > 0).setScale(sm > 0 ? boss.shield / sm : 0, 1);
   }
 
   private updateHudValues(): void {

@@ -8,7 +8,7 @@
  },
  "startMoney": 940,
  "lives": 20,
- "hpMult": 1,
+ "hpMult": 0.835,
  "waveGap": 15,
  "towers": [
   "mg",

@@ -245,6 +245,7 @@ export class Game {
   private healT = 0;
   private uidSeq = 1;
   private auraDirty = true;
+  private tmpPos = { x: 0, y: 0, a: 0, seg: 0 };
   private revealSrc: { x: number; y: number; r2: number }[] = [];
   private slowSrc: { x: number; y: number; r2: number; slow: number }[] = [];
 
@@ -1075,7 +1076,7 @@ export class Game {
     const eff = raw * MATRIX[dtype][o.def.cls];
     if (eff <= 0) return;
     o.hp -= eff;
-    this.events.push(EV.OBST_HIT, o.x, o.y, eff, dtype);
+    this.events.push(EV.OBST_HIT, o.x, o.y, eff, dtype, o.idx);
     if (o.hp <= 0) {
       o.alive = false;
       o.marked = false;
@@ -1085,7 +1086,7 @@ export class Game {
       this.obstacleAt[idx] = -1;
       this.money += o.def.reward;
       this.stat.earnObst += o.def.reward;
-      this.events.push(EV.OBST_DOWN, o.x, o.y, o.def.reward, o.def.id);
+      this.events.push(EV.OBST_DOWN, o.x, o.y, o.def.reward, o.def.id, o.idx);
       this.events.push(EV.MONEY, o.x, o.y, o.def.reward, '');
       if (o.def.explode) {
         this.explode(o.x, o.y, o.def.explode.radius, o.def.explode.dmg, null, false);
@@ -1248,7 +1249,8 @@ export class Game {
             if (e) {
               // mira preditiva: onde o alvo estará ao fim do voo
               const fut = e.dist + e.def.speed * e.speedMult * (1 - e.slow) * t.stats.flight * (e.stun > 0 ? 0 : 1);
-              const pos = { x: 0, y: 0, a: 0, seg: e.seg };
+              const pos = this.tmpPos;
+              pos.seg = e.seg;
               e.path.posAt(Math.min(fut, e.path.length), pos);
               px = pos.x;
               py = pos.y;

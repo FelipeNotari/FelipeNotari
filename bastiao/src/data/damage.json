@@ -3,7 +3,7 @@
     "BAL": {
       "name": "Balístico",
       "color": "#ffd23f",
-      "desc": "Projéteis comuns. Ótimo contra infantaria, fraco contra veículos e aéreos, quase inútil contra blindagem pesada."
+      "desc": "Projéteis comuns. Ótimo contra infantaria; fraco contra veículos e quase inútil contra blindagem pesada e aéreos."
     },
     "PER": {
       "name": "Perfurante",
@@ -53,7 +53,7 @@
       "INF": 1.5,
       "LEV": 0.5,
       "PES": 0.25,
-      "AER": 0.5,
+      "AER": 0.25,
       "ESC": 0.5
     },
     "PER": {

@@ -26,14 +26,18 @@ Paleta: verde-oliva, areia, aço escuro, laranja de sinalização e amarelo de p
 
 | Dano \ Defesa | Infantaria | Blind. leve | Blind. pesada | Aéreo | Escudo de energia |
 |---|---|---|---|---|---|
-| **Balístico** | **1,5** | 0,75 | 0,25 | 1,0 | 0,5 |
-| **Perfurante** | 0,5 | **1,5** | **2,0** | 1,0 | 0,5 |
+| **Balístico** | **1,5** | 0,5 | 0,25 | 0,25 | 0,5 |
+| **Perfurante** | 0,25 | **1,5** | **2,0** | 1,0 | 0,5 |
 | **Explosivo** (área) | 1,25 | 1,25 | 0,75 | não atinge | 0,5 |
-| **Energia** | 0,75 | 1,0 | 0,75 | 1,0 | **2,0** |
-| **Fogo** | **2,0** | 1,0 | nulo (0) | 0,5 | 0,25 |
+| **Energia** | 0,5 | 0,5 | 0,5 | 0,75 | **2,0** |
+| **Fogo** | **2,0** | 0,5 | nulo (0) | 0,5 | 0,25 |
 
 Escudo de energia: enquanto um inimigo tem escudo (do Gerador ou do chefe), o dano usa a coluna
 "Escudo de energia"; o que sobra passa para a vida com a classe original.
+
+Leitura rápida dos papéis (por isso nenhuma torre resolve tudo):
+infantaria → Metralhadora / Lança-chamas / Morteiro; blindados → Antitanque / Sniper (Morteiro para leves em grupo);
+aéreos → Bateria Antiaérea (Laser como apoio); escudos → Laser.
 
 ## 3. Torres (`src/data/towers.json`)
 
@@ -43,31 +47,18 @@ Custo do nível 1 = construir; níveis 2 e 3 = custo do upgrade. Dano por tiro (
 |---|---|---|---|---|---|---|---|---|
 | Metralhadora | Balístico | terra+ar | fase 1 | 100 / 75 / 120 | 8 → 16 | 5 → 6,5/s | 2,8 → 3,1 | barata, rajada |
 | Canhão Antitanque | Perfurante | terra | fase 2 | 200 / 150 / 230 | 160 → 380 | 0,5 → 0,55/s | 3,2 → 3,5 | projétil único |
-| Morteiro | Explosivo | terra | fase 3 | 175 / 130 / 200 | 50 → 120 | 0,5 → 0,6/s | 5,0 → 5,5 | área 1,1→1,35; ponto cego 1,6; voo 1,1 s |
-| Bateria Antiaérea | Perfurante | só ar | fase 4 | 160 / 120 / 190 | 2×55 → 2×125 | 0,83 → 1 salva/s | 4,5 → 5,2 | teleguiado, fragmentação 0,5 |
-| Sniper | Perfurante | terra+ar | fase 5 | 150 / 110 / 170 | 45 → 110 | 0,5 → 0,6/s | 6,0 → 6,8 | N3 revela camuflados |
-| Lança-chamas | Fogo | terra | fase 6 | 130 / 100 / 160 | 30 → 68/s | contínuo | 1,8 → 2,1 | cone 50°→60°, queimadura 10→22/s por 3 s |
+| Bateria Antiaérea | Perfurante | só ar | fase 3 | 160 / 120 / 190 | 2×55 → 2×125 | 0,83 → 1 salva/s | 4,5 → 5,2 | teleguiado, fragmentação 0,5 |
+| Morteiro | Explosivo | terra | fase 4 | 175 / 130 / 200 | 50 → 120 | 0,5 → 0,6/s | 5,0 → 5,5 | área 1,1→1,35; ponto cego 1,6; voo 1,1 s |
+| Sniper | Perfurante | terra | fase 5 | 150 / 110 / 170 | 36 → 88 | 0,5 → 0,6/s | 5,5 → 6,2 | N3 revela camuflados |
+| Lança-chamas | Fogo | terra | fase 6 | 130 / 100 / 160 | 18 → 42/s | contínuo | 1,8 → 2,1 | cone 50°→60°, queimadura 8→18/s por 3 s |
 | Radar de Suporte | — | — | fase 7 | 150 / 120 / 180 | — | — | 3,5 → 4,5 | revela camuflados; −15→−30% vel. de veículos; +10→+20% alcance às vizinhas (raio 2); N3 +10% dano |
-| Laser | Energia | terra+ar | fase 8 | 220 / 170 / 250 | 30 → 70/s | contínuo | 3,2 → 3,6 | dano sobe até ×3 (×3,5 no N3) em 2,5 s no mesmo alvo |
+| Laser | Energia | terra+ar | fase 8 | 220 / 170 / 250 | 30 → 70/s | contínuo | 3,2 → 3,6 | dano sobe até ×2,5 (×3 no N3) em 2,5 s no mesmo alvo |
 
-### Custo-benefício por classe (DPS efetivo a cada 100 de custo, nível 1)
+### Custo-benefício por classe
 
-DPS efetivo = DPS × multiplicador da matriz. Valores teóricos (sem área/cobertura); o simulador recalcula
-com a cobertura real de caminho em `BALANCE.md`.
-
-| Torre | Infantaria | Blind. leve | Blind. pesada | Aéreo | Escudo |
-|---|---|---|---|---|---|
-| Metralhadora (40 DPS) | **60** | 30 | 10 | 40 | 20 |
-| Antitanque (80 DPS) | 20* | **60** | **80** | — | 20 |
-| Morteiro (25 DPS, área ×~3) | 18 (≈54 em grupo) | 18 (≈54) | 11 | — | 7 |
-| Antiaérea (92 DPS) | — | — | — | **57** | — |
-| Sniper (22,5 DPS, alcance 2×) | 7,5 | 22,5 (≈45 c/ alcance) | 30 (≈60) | 15 (≈30) | 7,5 |
-| Lança-chamas (≈40 DPS c/ queima, cone) | **62** (×2–3 alvos) | 31 | 0 | — | 8 |
-| Laser (30→90 DPS) | 10–30 | 14–41 | 10–31 | 14–41 | **27–82** |
-
-\* tiro de 80 de dano em soldado de 70 de vida: desperdício por excesso.
-Nenhuma torre fica entre as duas melhores em mais de duas classes, e todas têm pelo menos duas classes
-em que rendem menos da metade da melhor opção.
+A tabela calculada (DPS efetivo a cada 100 de custo, nos níveis 1 e 3, e a cobertura real de caminho
+nas 20 fases) é gerada pelo simulador em `BALANCE.md`. Regra usada: cada torre é a melhor (ou segunda melhor)
+em no máximo duas classes e rende menos da metade da melhor opção (ou não atinge) em pelo menos duas.
 
 ## 4. Inimigos (`src/data/enemies.json`)
 
@@ -76,11 +67,11 @@ em que rendem menos da metade da melhor opção.
 | Soldado | Infantaria | 70 | 1,2 | 5 | 1 | 1 | — |
 | Moto Rápida | Leve | 110 | 2,5 | 8 | 1 | 2 | muito rápida |
 | Jipe | Leve | 320 | 1,7 | 16 | 2 | 2 | — |
-| Soldado de Elite | Infantaria | 190 | 1,3 | 12 | 1 | 3 | — |
-| Tropa c/ Escudo Balístico | Leve | 260 | 0,85 | 14 | 1 | 3 | infantaria que conta como blindagem leve |
+| Soldado de Elite | Infantaria | 190 | 1,3 | 12 | 1 | 4 | — |
+| Tropa c/ Escudo Balístico | Leve | 260 | 0,85 | 14 | 1 | 4 | infantaria que conta como blindagem leve |
 | Tanque Leve | Pesada | 900 | 1,05 | 38 | 3 | 3 | — |
-| Enxame de Drones | Aéreo | 45 | 1,9 | 3 | 1 | 4 | grupos grandes |
-| Helicóptero | Aéreo | 800 | 1,25 | 40 | 3 | 4 | — |
+| Enxame de Drones | Aéreo | 45 | 1,9 | 3 | 1 | 3 | grupos grandes |
+| Helicóptero | Aéreo | 800 | 1,25 | 40 | 3 | 3 | — |
 | Caminhão Blindado | Leve | 750 | 0,95 | 30 | 2 | 5 | solta 4 soldados ao morrer |
 | Veículo de Reparo | Leve | 550 | 1,0 | 28 | 2 | 6 | cura 3%/s da vida dos aliados (raio 2,2) |
 | Unidade Camuflada | Infantaria | 200 | 1,45 | 18 | 1 | 7 | invisível até ser revelada |
@@ -92,19 +83,21 @@ em que rendem menos da metade da melhor opção.
 | **Fortaleza Polar** | Pesada + Escudo | 22000 | 0,45 | 600 | 20 | 15 | escudo de 30% regenerando; quando cai, trava 2 s e fica 8 s exposta |
 | **Ciclope** | Aéreo | 30000 | 0,4 | 800 | 20 | 20 | EMP a cada 10 s (desliga torres 3 s, raio 3); 6 drones a cada 14 s |
 
-A vida de cada fase é multiplicada pelo `hpMult` do JSON da fase (curva de dificuldade).
+A vida é multiplicada pelo `hpMult` do JSON da fase e cresce 2,5% a cada onda dentro da fase.
+A partir da fase 3 toda fase tem ~30% da vida em infantaria, ~40% em blindados e ~25% em aéreos
+(e ~10% em escudos a partir da fase 8), para exigir pelo menos 3 tipos de torre.
 
 ## 5. Habilidades especiais (`src/data/abilities.json`) — 3 por partida
 
 | Habilidade | Desbloq. | Recarga | Efeito |
 |---|---|---|---|
-| Ataque Aéreo | 1 | 45 s | 300 Explosivo, raio 1,8, após 1,2 s |
-| Minas Terrestres | 1 | 30 s | 4 minas de 140 Explosivo (raio 0,9) na estrada |
+| Ataque Aéreo | 1 | 60 s | 200 Explosivo, raio 1,8, após 1,2 s |
+| Minas Terrestres | 1 | 40 s | 4 minas de 110 Explosivo (raio 0,9) na estrada |
 | Caixa de Suprimentos | 1 | 120 s | +100 dinheiro, +2 vidas |
-| Arame Farpado | 3 | 30 s | −50% velocidade terrestre, raio 1,6, 15 s |
-| Napalm | 6 | 40 s | 70 Fogo/s, raio 1,5, 6 s |
+| Arame Farpado | 3 | 30 s | −50% velocidade terrestre (−30% veículos), raio 1,6, 15 s |
+| Napalm | 6 | 50 s | 50 Fogo/s, raio 1,5, 6 s |
 | Pulso EMP | 9 | 50 s | 60 Energia, atordoa veículos/aéreos 3 s, apaga escudos (raio 2,5) |
-| Reforços | 12 | 60 s | esquadrão de 70 DPS Balístico, alcance 2,5, 20 s |
+| Reforços | 12 | 60 s | esquadrão de 50 DPS Balístico, alcance 2,5, 20 s |
 
 ## 6. Árvore de pesquisa (`src/data/research.json`)
 

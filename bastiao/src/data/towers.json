@@ -3,7 +3,7 @@
   "id": "mg",
   "name": "Metralhadora",
   "short": "Metral.",
-  "role": "Barata e de cadência alta. Arrasa infantaria; fraca contra veículos e aéreos, inútil contra tanques.",
+  "role": "Barata e de cadência alta. Arrasa infantaria; fraca contra veículos e quase inútil contra tanques e aéreos.",
   "dmgType": "BAL",
   "targets": "both",
   "attack": "hitscan",
@@ -152,21 +152,21 @@
   "levels": [
    {
     "cost": 150,
-    "dmg": 45,
+    "dmg": 36,
     "rate": 0.5,
-    "range": 6.0
+    "range": 5.5
    },
    {
     "cost": 110,
-    "dmg": 72,
+    "dmg": 58,
     "rate": 0.55,
-    "range": 6.3
+    "range": 5.8
    },
    {
     "cost": 170,
-    "dmg": 110,
+    "dmg": 88,
     "rate": 0.6,
-    "range": 6.8,
+    "range": 6.2,
     "revealCamo": true
    }
   ]

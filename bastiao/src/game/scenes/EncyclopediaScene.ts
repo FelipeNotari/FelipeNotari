@@ -109,7 +109,7 @@ export class EncyclopediaScene extends Phaser.Scene {
     this.a(this.add.text(70, y + 8, `${e.name.toUpperCase()} — ${DAMAGE.armorClasses[e.cls].name}${e.air ? ' (aéreo)' : ''}${e.camo ? ' (camuflado)' : ''}`, textStyle(26, CSS.yellow)));
     this.a(this.add.text(70, y + 48, `Vida base ${e.hp}  •  Velocidade ${fmt(e.speed, 2)} casas/s  •  Recompensa $${e.reward}  •  Tira ${e.lives} vida${e.lives > 1 ? 's' : ''} se chegar à base  •  Aparece na fase ${e.intro}`, textStyle(21, CSS.white, false)));
     this.a(this.add.text(70, y + 84, e.desc, { ...textStyle(21, CSS.green, false), wordWrap: { width: W - 160 } }));
-    this.a(this.add.text(W / 2, H - 40, 'A vida dos inimigos aumenta com a "blindagem inimiga" de cada fase (mostrada antes de começar).', textStyle(20, CSS.grey, false)).setOrigin(0.5));
+    this.a(this.add.text(W / 2, H - 40, 'A vida dos inimigos é multiplicada por um fator de cada fase (mostrado na tela antes de começar).', textStyle(20, CSS.grey, false)).setOrigin(0.5));
   }
 
   private matrix(): void {

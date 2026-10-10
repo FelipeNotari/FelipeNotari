@@ -82,6 +82,19 @@ function tuneLevel(level: LevelData, start: number): { h: number; cap: number } 
     lo *= 0.96;
     cLo = capAt(level, lo);
   }
+  // busca local se ficou fora da faixa (a resposta do bot não é perfeitamente monótona)
+  if (Math.abs(cLo - target) > 0.028) {
+    let best = { h: lo, c: cLo, d: Math.abs(cLo - target) };
+    for (const f of [1.04, 0.96, 1.08, 0.92, 1.12, 0.88, 1.16, 0.84]) {
+      const h2 = lo * f;
+      const c2 = capAt(level, h2);
+      const d2 = Math.abs(c2 - target);
+      if (d2 < best.d && robust(level, h2)) best = { h: h2, c: c2, d: d2 };
+      if (best.d <= 0.02) break;
+    }
+    lo = best.h;
+    cLo = best.c;
+  }
   return { h: Math.round(lo * 1000) / 1000, cap: cLo };
 }
 

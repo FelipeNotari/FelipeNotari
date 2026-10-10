@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { ABILITY_BY_ID, DAMAGE, ENEMY_BY_ID, TOWER_BY_ID } from '../../core/data';
 import { Sfx } from '../audio';
 import { drawMap } from '../art/mapart';
-import { ABIL_SHORT, C, CSS, H, MAP_H, MAP_W, TILE, W, textStyle } from '../config';
+import { ABIL_SHORT, C, CSS, H, MAP_H, MAP_W, TILE, W, fmt, textStyle } from '../config';
 import { levelById } from '../levels';
 import { Save } from '../save';
 import { Button, panel, screenBackground, towerIcon } from '../ui/ui';
@@ -38,8 +38,7 @@ export class PreLevelScene extends Phaser.Scene {
     this.add.image(mx + (end[0] + 0.5) * TILE * ms, my + 10 + (end[1] + 0.5) * TILE * ms, 'base_qg').setDisplaySize(90 * ms * 1.4, 90 * ms * 1.4);
     const by = my + MAP_H * ms + 60;
     this.add.text(mx, by, `${BIOME_NAMES[level.biome]}  •  ${level.waves.length} ondas  •  ${level.paths.length} entrada${level.paths.length > 1 ? 's' : ''}${level.airPaths.length ? `  •  ${level.airPaths.length} rota${level.airPaths.length > 1 ? 's' : ''} aérea${level.airPaths.length > 1 ? 's' : ''}` : ''}`, textStyle(26, CSS.white)).setOrigin(0, 0);
-    const threat = Math.round((level.hpMult - 1) * 100);
-    this.add.text(mx, by + 40, `Blindagem inimiga: ${threat >= 0 ? '+' : ''}${threat}% de vida  •  Dinheiro inicial: $${level.startMoney}`, textStyle(24, CSS.grey, false));
+    this.add.text(mx, by + 40, `Vida dos inimigos nesta fase: ×${fmt(level.hpMult, 2)}  •  Dinheiro inicial: $${level.startMoney}`, textStyle(24, CSS.grey, false));
     this.add.text(mx, by + 80, level.briefing ?? '', { ...textStyle(26, CSS.white, false), wordWrap: { width: MAP_W * ms + 20 } });
 
     // painel direito
