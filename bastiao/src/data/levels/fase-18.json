@@ -3,12 +3,12 @@
  "name": "Altos-Fornos",
  "biome": "industrial",
  "map": {
-  "x": 0.859,
-  "y": 0.5
+  "x": 0.82,
+  "y": 0.52
  },
  "startMoney": 980,
  "lives": 20,
- "hpMult": 1.371,
+ "hpMult": 2.458,
  "waveGap": 15,
  "towers": [
   "mg",
@@ -314,18 +314,39 @@
    "bonus": 61,
    "groups": [
     {
-     "enemy": "gerador",
-     "count": 3,
-     "interval": 3,
+     "enemy": "tanque_pesado",
+     "count": 1,
+     "interval": 1,
      "delay": 0,
      "path": 0
     },
     {
-     "enemy": "escudo",
+     "enemy": "reparo",
      "count": 1,
-     "interval": 1.2,
-     "delay": 1.5,
+     "interval": 1,
+     "delay": 1.6,
      "path": 1
+    },
+    {
+     "enemy": "elite",
+     "count": 3,
+     "interval": 1,
+     "delay": 3.5,
+     "path": 2
+    },
+    {
+     "enemy": "drone",
+     "count": 8,
+     "interval": 0.35,
+     "delay": 6.1,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 1,
+     "interval": 1,
+     "delay": 8,
+     "path": 0
     }
    ]
   },
@@ -333,24 +354,38 @@
    "bonus": 67,
    "groups": [
     {
-     "enemy": "camuflado",
-     "count": 3,
-     "interval": 1.1,
-     "delay": 0,
-     "path": 2
-    },
-    {
-     "enemy": "elite",
-     "count": 4,
+     "enemy": "tanque_leve",
+     "count": 1,
      "interval": 1,
-     "delay": 3.2,
+     "delay": 0,
      "path": 0
     },
     {
-     "enemy": "heli",
+     "enemy": "reparo",
      "count": 1,
-     "interval": 2.6,
-     "delay": 6.7,
+     "interval": 1,
+     "delay": 1.5,
+     "path": 1
+    },
+    {
+     "enemy": "elite",
+     "count": 5,
+     "interval": 1,
+     "delay": 3.6,
+     "path": 2
+    },
+    {
+     "enemy": "drone",
+     "count": 9,
+     "interval": 0.35,
+     "delay": 5.7,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 1,
+     "interval": 1,
+     "delay": 7.4,
      "path": 0
     }
    ]
@@ -359,18 +394,39 @@
    "bonus": 73,
    "groups": [
     {
-     "enemy": "elite",
-     "count": 10,
+     "enemy": "tanque_pesado",
+     "count": 1,
      "interval": 1,
      "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "moto",
+     "count": 3,
+     "interval": 3.67,
+     "delay": 2.2,
      "path": 1
     },
     {
-     "enemy": "escudo",
-     "count": 3,
-     "interval": 1.2,
-     "delay": 5,
+     "enemy": "soldado",
+     "count": 10,
+     "interval": 0.8,
+     "delay": 4.5,
      "path": 2
+    },
+    {
+     "enemy": "drone",
+     "count": 11,
+     "interval": 0.35,
+     "delay": 7,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 1,
+     "interval": 1,
+     "delay": 9.5,
+     "path": 0
     }
    ]
   },
@@ -378,25 +434,53 @@
    "bonus": 79,
    "groups": [
     {
-     "enemy": "escudo",
-     "count": 5,
-     "interval": 1.2,
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 1,
      "delay": 0,
      "path": 0
     },
     {
-     "enemy": "elite",
-     "count": 6,
+     "enemy": "caminhao",
+     "count": 1,
      "interval": 1,
-     "delay": 4.5,
+     "delay": 2.2,
      "path": 1
     },
     {
-     "enemy": "jipe",
-     "count": 5,
-     "interval": 1.5,
-     "delay": 8.5,
+     "enemy": "soldado",
+     "count": 6,
+     "interval": 0.8,
+     "delay": 3.8,
      "path": 2
+    },
+    {
+     "enemy": "elite",
+     "count": 3,
+     "interval": 1,
+     "delay": 6.1,
+     "path": 0
+    },
+    {
+     "enemy": "heli",
+     "count": 1,
+     "interval": 1,
+     "delay": 7.5,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 7,
+     "interval": 0.35,
+     "delay": 9.6,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 1,
+     "interval": 1,
+     "delay": 11.3,
+     "path": 0
     }
    ]
   },
@@ -404,31 +488,45 @@
    "bonus": 85,
    "groups": [
     {
-     "enemy": "kamikaze",
-     "count": 6,
-     "interval": 1.4,
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 1,
      "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "moto",
+     "count": 4,
+     "interval": 3,
+     "delay": 1.8,
+     "path": 2
+    },
+    {
+     "enemy": "soldado",
+     "count": 6,
+     "interval": 0.8,
+     "delay": 4.3,
      "path": 0
     },
     {
-     "enemy": "heli",
-     "count": 1,
-     "interval": 2.6,
-     "delay": 5.7,
-     "path": 0
+     "enemy": "elite",
+     "count": 3,
+     "interval": 1,
+     "delay": 6.7,
+     "path": 1
     },
     {
      "enemy": "drone",
-     "count": 21,
+     "count": 24,
      "interval": 0.35,
-     "delay": 8.5,
+     "delay": 8.3,
      "path": 0
     },
     {
-     "enemy": "tanque_leve",
+     "enemy": "kamikaze",
      "count": 1,
-     "interval": 2.4,
-     "delay": 13.3,
+     "interval": 1,
+     "delay": 9.7,
      "path": 0
     }
    ]
@@ -437,24 +535,45 @@
    "bonus": 91,
    "groups": [
     {
-     "enemy": "reparo",
+     "enemy": "tanque_leve",
      "count": 1,
-     "interval": 3,
+     "interval": 1,
      "delay": 0,
-     "path": 1
-    },
-    {
-     "enemy": "moto",
-     "count": 12,
-     "interval": 0.7,
-     "delay": 1.5,
      "path": 2
     },
     {
-     "enemy": "tanque_leve",
+     "enemy": "tanque_pesado",
+     "count": 1,
+     "interval": 1,
+     "delay": 1.5,
+     "path": 0
+    },
+    {
+     "enemy": "moto",
+     "count": 4,
+     "interval": 3.13,
+     "delay": 3.3,
+     "path": 1
+    },
+    {
+     "enemy": "elite",
      "count": 3,
-     "interval": 2.4,
-     "delay": 7.6,
+     "interval": 1,
+     "delay": 5.9,
+     "path": 2
+    },
+    {
+     "enemy": "heli",
+     "count": 1,
+     "interval": 1,
+     "delay": 7.4,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 1,
+     "interval": 1,
+     "delay": 9.7,
      "path": 0
     }
    ]
@@ -463,17 +582,38 @@
    "bonus": 97,
    "groups": [
     {
-     "enemy": "gerador",
-     "count": 4,
-     "interval": 3,
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 1,
      "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "jipe",
+     "count": 3,
+     "interval": 4.33,
+     "delay": 1.6,
      "path": 1
     },
     {
-     "enemy": "drone",
-     "count": 40,
-     "interval": 0.35,
-     "delay": 1.5,
+     "enemy": "soldado",
+     "count": 18,
+     "interval": 0.8,
+     "delay": 3.7,
+     "path": 2
+    },
+    {
+     "enemy": "heli",
+     "count": 2,
+     "interval": 6.5,
+     "delay": 5.7,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 2,
+     "interval": 6.5,
+     "delay": 7.3,
      "path": 0
     }
    ]
@@ -482,17 +622,45 @@
    "bonus": 103,
    "groups": [
     {
-     "enemy": "tanque_leve",
-     "count": 2,
-     "interval": 2.4,
+     "enemy": "tanque_pesado",
+     "count": 1,
+     "interval": 1,
      "delay": 0,
-     "path": 2
+     "path": 0
+    },
+    {
+     "enemy": "caminhao",
+     "count": 1,
+     "interval": 1,
+     "delay": 2.1,
+     "path": 1
     },
     {
      "enemy": "elite",
-     "count": 16,
+     "count": 11,
      "interval": 1,
+     "delay": 3.4,
+     "path": 2
+    },
+    {
+     "enemy": "heli",
+     "count": 1,
+     "interval": 1,
+     "delay": 4.8,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 10,
+     "interval": 0.35,
      "delay": 6.3,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 1,
+     "interval": 1,
+     "delay": 9,
      "path": 0
     }
    ]
@@ -501,18 +669,60 @@
    "bonus": 109,
    "groups": [
     {
-     "enemy": "tanque_pesado",
-     "count": 2,
-     "interval": 3.8,
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 1,
      "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_pesado",
+     "count": 1,
+     "interval": 1,
+     "delay": 2,
      "path": 1
     },
     {
-     "enemy": "moto",
-     "count": 21,
-     "interval": 0.7,
-     "delay": 5.3,
+     "enemy": "jipe",
+     "count": 3,
+     "interval": 4.67,
+     "delay": 4.3,
      "path": 2
+    },
+    {
+     "enemy": "soldado",
+     "count": 10,
+     "interval": 0.8,
+     "delay": 6,
+     "path": 0
+    },
+    {
+     "enemy": "elite",
+     "count": 4,
+     "interval": 1,
+     "delay": 8.2,
+     "path": 1
+    },
+    {
+     "enemy": "heli",
+     "count": 1,
+     "interval": 1,
+     "delay": 10.5,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 11,
+     "interval": 0.35,
+     "delay": 12.1,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 2,
+     "interval": 7,
+     "delay": 14.4,
+     "path": 0
     }
    ]
   },
@@ -520,17 +730,59 @@
    "bonus": 115,
    "groups": [
     {
-     "enemy": "heli",
-     "count": 6,
-     "interval": 2.6,
+     "enemy": "tanque_pesado",
+     "count": 1,
+     "interval": 1,
      "delay": 0,
+     "path": 2
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 1,
+     "delay": 2.5,
      "path": 0
     },
     {
-     "enemy": "escudo",
-     "count": 7,
-     "interval": 1.2,
-     "delay": 8,
+     "enemy": "jipe",
+     "count": 4,
+     "interval": 3.63,
+     "delay": 5.1,
+     "path": 1
+    },
+    {
+     "enemy": "soldado",
+     "count": 12,
+     "interval": 0.8,
+     "delay": 7.2,
+     "path": 2
+    },
+    {
+     "enemy": "elite",
+     "count": 5,
+     "interval": 1,
+     "delay": 8.5,
+     "path": 0
+    },
+    {
+     "enemy": "gerador",
+     "count": 1,
+     "interval": 1,
+     "delay": 10.5,
+     "path": 1
+    },
+    {
+     "enemy": "heli",
+     "count": 2,
+     "interval": 7.25,
+     "delay": 12.4,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 2,
+     "interval": 7.25,
+     "delay": 14,
      "path": 0
     }
    ]
@@ -539,25 +791,67 @@
    "bonus": 121,
    "groups": [
     {
-     "enemy": "heli",
-     "count": 3,
-     "interval": 2.6,
+     "enemy": "tanque_pesado",
+     "count": 1,
+     "interval": 1,
      "delay": 0,
+     "path": 2
+    },
+    {
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 1,
+     "delay": 2.5,
+     "path": 0
+    },
+    {
+     "enemy": "caminhao",
+     "count": 2,
+     "interval": 7.5,
+     "delay": 4,
+     "path": 1
+    },
+    {
+     "enemy": "camuflado",
+     "count": 3,
+     "interval": 1.1,
+     "delay": 5.4,
+     "path": 2
+    },
+    {
+     "enemy": "soldado",
+     "count": 11,
+     "interval": 0.8,
+     "delay": 6.7,
+     "path": 0
+    },
+    {
+     "enemy": "gerador",
+     "count": 1,
+     "interval": 1,
+     "delay": 9.1,
+     "path": 1
+    },
+    {
+     "enemy": "heli",
+     "count": 2,
+     "interval": 7.5,
+     "delay": 11.5,
      "path": 0
     },
     {
      "enemy": "drone",
-     "count": 59,
+     "count": 21,
      "interval": 0.35,
-     "delay": 5.4,
+     "delay": 13.9,
      "path": 0
     },
     {
-     "enemy": "escudo",
-     "count": 5,
-     "interval": 1.2,
-     "delay": 13.4,
-     "path": 1
+     "enemy": "kamikaze",
+     "count": 2,
+     "interval": 7.5,
+     "delay": 16.1,
+     "path": 0
     }
    ]
   },
@@ -565,25 +859,53 @@
    "bonus": 127,
    "groups": [
     {
-     "enemy": "caminhao",
-     "count": 5,
-     "interval": 3,
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 1,
      "delay": 0,
      "path": 2
     },
     {
-     "enemy": "moto",
-     "count": 14,
-     "interval": 0.7,
-     "delay": 8,
+     "enemy": "tanque_pesado",
+     "count": 1,
+     "interval": 1,
+     "delay": 1.5,
      "path": 0
     },
     {
-     "enemy": "elite",
-     "count": 17,
-     "interval": 1,
-     "delay": 15.8,
+     "enemy": "jipe",
+     "count": 6,
+     "interval": 2.58,
+     "delay": 2.8,
      "path": 1
+    },
+    {
+     "enemy": "elite",
+     "count": 10,
+     "interval": 1,
+     "delay": 4.2,
+     "path": 2
+    },
+    {
+     "enemy": "gerador",
+     "count": 1,
+     "interval": 1,
+     "delay": 5.8,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 29,
+     "interval": 0.35,
+     "delay": 7.1,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 2,
+     "interval": 7.75,
+     "delay": 8.8,
+     "path": 0
     }
    ]
   },
@@ -591,25 +913,53 @@
    "bonus": 133,
    "groups": [
     {
-     "enemy": "camuflado",
-     "count": 10,
-     "interval": 1.1,
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 1,
      "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "tanque_pesado",
+     "count": 1,
+     "interval": 1,
+     "delay": 2.4,
      "path": 2
     },
     {
-     "enemy": "tanque_leve",
-     "count": 2,
-     "interval": 2.4,
-     "delay": 5.9,
+     "enemy": "jipe",
+     "count": 4,
+     "interval": 4,
+     "delay": 4.5,
      "path": 0
     },
     {
-     "enemy": "soldado",
-     "count": 35,
-     "interval": 0.8,
-     "delay": 12.2,
+     "enemy": "camuflado",
+     "count": 8,
+     "interval": 1.1,
+     "delay": 6.6,
      "path": 1
+    },
+    {
+     "enemy": "gerador",
+     "count": 1,
+     "interval": 1,
+     "delay": 8.7,
+     "path": 2
+    },
+    {
+     "enemy": "drone",
+     "count": 17,
+     "interval": 0.35,
+     "delay": 10.6,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 3,
+     "interval": 5.33,
+     "delay": 12.4,
+     "path": 0
     }
    ]
   },
@@ -617,17 +967,66 @@
    "bonus": 139,
    "groups": [
     {
-     "enemy": "soldado",
-     "count": 41,
-     "interval": 0.8,
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 1,
      "delay": 0,
+     "path": 0
+    },
+    {
+     "enemy": "tanque_pesado",
+     "count": 1,
+     "interval": 1,
+     "delay": 1.6,
+     "path": 1
+    },
+    {
+     "enemy": "jipe",
+     "count": 2,
+     "interval": 8.25,
+     "delay": 3.5,
      "path": 2
     },
     {
+     "enemy": "moto",
+     "count": 4,
+     "interval": 4.13,
+     "delay": 5.7,
+     "path": 0
+    },
+    {
+     "enemy": "elite",
+     "count": 17,
+     "interval": 1,
+     "delay": 7.2,
+     "path": 1
+    },
+    {
+     "enemy": "gerador",
+     "count": 1,
+     "interval": 1,
+     "delay": 9.7,
+     "path": 2
+    },
+    {
+     "enemy": "heli",
+     "count": 1,
+     "interval": 1,
+     "delay": 11.7,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 15,
+     "interval": 0.35,
+     "delay": 13,
+     "path": 0
+    },
+    {
      "enemy": "kamikaze",
-     "count": 28,
-     "interval": 1.4,
-     "delay": 8,
+     "count": 2,
+     "interval": 8.25,
+     "delay": 14.9,
      "path": 0
     }
    ]
@@ -636,18 +1035,46 @@
    "bonus": 145,
    "groups": [
     {
-     "enemy": "moto",
-     "count": 33,
-     "interval": 0.7,
+     "enemy": "tanque_pesado",
+     "count": 2,
+     "interval": 8.5,
      "delay": 0,
      "path": 0
     },
     {
-     "enemy": "tanque_leve",
-     "count": 7,
-     "interval": 2.4,
-     "delay": 8,
+     "enemy": "escudo",
+     "count": 5,
+     "interval": 3.4,
+     "delay": 2.1,
      "path": 1
+    },
+    {
+     "enemy": "elite",
+     "count": 12,
+     "interval": 1,
+     "delay": 4.1,
+     "path": 2
+    },
+    {
+     "enemy": "gerador",
+     "count": 1,
+     "interval": 1,
+     "delay": 6.7,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 17,
+     "interval": 0.35,
+     "delay": 8.5,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 3,
+     "interval": 5.67,
+     "delay": 9.8,
+     "path": 0
     }
    ]
   },
@@ -655,24 +1082,52 @@
    "bonus": 151,
    "groups": [
     {
-     "enemy": "soldado",
-     "count": 30,
-     "interval": 0.8,
+     "enemy": "tanque_pesado",
+     "count": 1,
+     "interval": 1,
      "delay": 0,
+     "path": 1
+    },
+    {
+     "enemy": "reparo",
+     "count": 2,
+     "interval": 8.75,
+     "delay": 2.1,
      "path": 2
     },
     {
-     "enemy": "elite",
-     "count": 15,
-     "interval": 1,
-     "delay": 8,
+     "enemy": "escudo",
+     "count": 3,
+     "interval": 5.83,
+     "delay": 4.8,
      "path": 0
     },
     {
-     "enemy": "drone",
-     "count": 72,
-     "interval": 0.35,
-     "delay": 16,
+     "enemy": "elite",
+     "count": 14,
+     "interval": 1,
+     "delay": 6.2,
+     "path": 1
+    },
+    {
+     "enemy": "gerador",
+     "count": 1,
+     "interval": 1,
+     "delay": 7.9,
+     "path": 2
+    },
+    {
+     "enemy": "heli",
+     "count": 3,
+     "interval": 5.83,
+     "delay": 10.4,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 3,
+     "interval": 5.83,
+     "delay": 12.7,
      "path": 0
     }
    ]
@@ -681,25 +1136,53 @@
    "bonus": 157,
    "groups": [
     {
-     "enemy": "kamikaze",
-     "count": 23,
-     "interval": 1.4,
+     "enemy": "tanque_leve",
+     "count": 2,
+     "interval": 9,
      "delay": 0,
      "path": 0
     },
     {
-     "enemy": "drone",
-     "count": 79,
-     "interval": 0.35,
-     "delay": 8,
+     "enemy": "jipe",
+     "count": 2,
+     "interval": 9,
+     "delay": 1.3,
+     "path": 1
+    },
+    {
+     "enemy": "caminhao",
+     "count": 1,
+     "interval": 1,
+     "delay": 3,
+     "path": 2
+    },
+    {
+     "enemy": "soldado",
+     "count": 32,
+     "interval": 0.8,
+     "delay": 5.3,
      "path": 0
     },
     {
-     "enemy": "escudo",
-     "count": 6,
-     "interval": 1.2,
-     "delay": 16,
+     "enemy": "gerador",
+     "count": 1,
+     "interval": 1,
+     "delay": 6.7,
      "path": 1
+    },
+    {
+     "enemy": "heli",
+     "count": 4,
+     "interval": 4.5,
+     "delay": 9.2,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 3,
+     "interval": 6,
+     "delay": 11.3,
+     "path": 0
     }
    ]
   },
@@ -707,25 +1190,60 @@
    "bonus": 163,
    "groups": [
     {
-     "enemy": "jipe",
-     "count": 9,
-     "interval": 1.5,
+     "enemy": "tanque_pesado",
+     "count": 1,
+     "interval": 1,
      "delay": 0,
      "path": 2
     },
     {
-     "enemy": "moto",
-     "count": 20,
-     "interval": 0.7,
-     "delay": 8,
+     "enemy": "tanque_leve",
+     "count": 1,
+     "interval": 1,
+     "delay": 2.2,
      "path": 0
     },
     {
-     "enemy": "elite",
-     "count": 23,
-     "interval": 1,
-     "delay": 16,
+     "enemy": "jipe",
+     "count": 4,
+     "interval": 4.63,
+     "delay": 3.8,
      "path": 1
+    },
+    {
+     "enemy": "moto",
+     "count": 9,
+     "interval": 2.06,
+     "delay": 5.7,
+     "path": 2
+    },
+    {
+     "enemy": "elite",
+     "count": 14,
+     "interval": 1,
+     "delay": 7,
+     "path": 0
+    },
+    {
+     "enemy": "gerador",
+     "count": 1,
+     "interval": 1,
+     "delay": 8.9,
+     "path": 1
+    },
+    {
+     "enemy": "drone",
+     "count": 40,
+     "interval": 0.35,
+     "delay": 11.1,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 3,
+     "interval": 6.17,
+     "delay": 12.5,
+     "path": 0
     }
    ]
   },
@@ -733,25 +1251,53 @@
    "bonus": 169,
    "groups": [
     {
-     "enemy": "escudo",
-     "count": 10,
-     "interval": 1.2,
+     "enemy": "tanque_leve",
+     "count": 3,
+     "interval": 6.33,
      "delay": 0,
      "path": 2
     },
     {
-     "enemy": "elite",
-     "count": 19,
-     "interval": 1,
-     "delay": 8,
+     "enemy": "jipe",
+     "count": 6,
+     "interval": 3.17,
+     "delay": 2.7,
      "path": 0
     },
     {
      "enemy": "camuflado",
-     "count": 13,
+     "count": 5,
      "interval": 1.1,
-     "delay": 16,
+     "delay": 4.7,
      "path": 1
+    },
+    {
+     "enemy": "soldado",
+     "count": 20,
+     "interval": 0.8,
+     "delay": 6.2,
+     "path": 2
+    },
+    {
+     "enemy": "gerador",
+     "count": 1,
+     "interval": 1,
+     "delay": 7.5,
+     "path": 0
+    },
+    {
+     "enemy": "drone",
+     "count": 46,
+     "interval": 0.35,
+     "delay": 8.7,
+     "path": 0
+    },
+    {
+     "enemy": "kamikaze",
+     "count": 3,
+     "interval": 6.33,
+     "delay": 10.1,
+     "path": 0
     }
    ]
   }

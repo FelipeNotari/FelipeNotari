@@ -15,15 +15,19 @@ const TUNING = path.resolve(import.meta.dirname, 'tuning.json');
 export function capTarget(level: LevelData): number {
   const boss = level.waves[level.waves.length - 1].groups.some((g) => g.enemy.startsWith('boss_'));
   // curva crescente e suave: 0,77 na fase 1 até ~0,855 na 20; chefes um pouco acima (pico)
-  return Math.min(0.865, 0.77 + 0.0045 * (level.id - 1) + (boss ? 0.015 : 0));
+  // curva crescente e suave até o limite da faixa econômica (renda >= 1,15x); chefes no topo
+  const base = Math.min(0.84, 0.775 + 0.011 * (level.id - 1));
+  return Math.min(0.855, base + (boss ? 0.015 : 0));
 }
 
+const r3 = (h: number) => Math.round(h * 1000) / 1000;
+
 function capAt(level: LevelData, h: number): number {
-  return minWinningCap({ ...level, hpMult: h }, 6).cap;
+  return minWinningCap({ ...level, hpMult: r3(h) }, 7).cap;
 }
 
 function robust(level: LevelData, h: number): boolean {
-  for (let s = 0; s < 5; s++) if (!runGame({ ...level, hpMult: h }, 'strategist', { seed: 100 + s }).won) return false;
+  for (let s = 0; s < 5; s++) if (!runGame({ ...level, hpMult: r3(h) }, 'strategist', { seed: 100 + s }).won) return false;
   return true;
 }
 
@@ -83,9 +87,9 @@ function tuneLevel(level: LevelData, start: number): { h: number; cap: number } 
     cLo = capAt(level, lo);
   }
   // busca local se ficou fora da faixa (a resposta do bot não é perfeitamente monótona)
-  if (Math.abs(cLo - target) > 0.028) {
+  if (Math.abs(cLo - target) > 0.02 || cLo < 0.771 || cLo > 0.868) {
     let best = { h: lo, c: cLo, d: Math.abs(cLo - target) };
-    for (const f of [1.04, 0.96, 1.08, 0.92, 1.12, 0.88, 1.16, 0.84]) {
+    for (const f of [1.02, 0.98, 1.04, 0.96, 1.07, 0.93, 1.1, 0.9, 1.14, 0.86]) {
       const h2 = lo * f;
       const c2 = capAt(level, h2);
       const d2 = Math.abs(c2 - target);
@@ -95,7 +99,7 @@ function tuneLevel(level: LevelData, start: number): { h: number; cap: number } 
     lo = best.h;
     cLo = best.c;
   }
-  return { h: Math.round(lo * 1000) / 1000, cap: cLo };
+  return { h: r3(lo), cap: cLo };
 }
 
 function loadTuning(): { hp: Record<string, number>; money: Record<string, number> } {

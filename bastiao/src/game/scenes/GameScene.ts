@@ -17,6 +17,8 @@ interface TowerBtn {
   icon: Phaser.GameObjects.Container;
   cost: Phaser.GameObjects.Text;
   lock?: Phaser.GameObjects.Image;
+  afford?: boolean;
+  sel?: boolean;
 }
 
 interface AbilBtn {
@@ -68,7 +70,7 @@ export class GameScene extends Phaser.Scene {
   private leakFlash!: Phaser.GameObjects.Rectangle;
   private pauseMenu: Phaser.GameObjects.Container | null = null;
   private bossBar: { c: Phaser.GameObjects.Container; fill: Phaser.GameObjects.Rectangle; shield: Phaser.GameObjects.Rectangle; name: Phaser.GameObjects.Text; uid: number } | null = null;
-  private last = { lives: -1, money: -1, wave: -1, state: '', cdn: -2, hold: false };
+  private last = { lives: -1, money: -1, wave: -9, state: '', cdn: -2, hold: false };
   private abilSec: number[] = [-1, -1, -1];
 
   constructor() {
@@ -94,7 +96,7 @@ export class GameScene extends Phaser.Scene {
     this.towerBtns = [];
     this.abilBtns = [];
     this.tutorial = null;
-    this.last = { lives: -1, money: -1, wave: -1, state: '', cdn: -2, hold: false };
+    this.last = { lives: -1, money: -1, wave: -9, state: '', cdn: -2, hold: false };
     this.abilSec = [-1, -1, -1];
   }
 
@@ -216,11 +218,15 @@ export class GameScene extends Phaser.Scene {
     const g = this.sim;
     for (const b of this.towerBtns) {
       if (b.lock) continue;
-      const cost = g.buildCost(b.id);
-      const afford = g.money >= cost;
-      b.icon.setAlpha(afford ? 1 : 0.45);
-      b.cost.setColor(afford ? CSS.yellow : CSS.red);
-      b.bg.setTint(this.buildId === b.id ? 0xffc27a : 0xffffff);
+      const afford = g.money >= g.buildCost(b.id);
+      const sel = this.buildId === b.id;
+      if (afford !== b.afford || sel !== b.sel) {
+        b.afford = afford;
+        b.sel = sel;
+        b.icon.setAlpha(afford ? 1 : 0.45);
+        b.cost.setColor(afford ? CSS.yellow : CSS.red);
+        b.bg.setTint(sel ? 0xffc27a : 0xffffff);
+      }
     }
     for (let i = 0; i < this.abilBtns.length; i++) {
       const b = this.abilBtns[i];
@@ -335,12 +341,8 @@ export class GameScene extends Phaser.Scene {
       this.toast(this.sim.money < this.sim.buildCost(this.buildId) ? 'Dinheiro insuficiente.' : 'Não dá para construir aí.');
       return;
     }
-    const id = this.buildId;
-    this.hideGhost();
-    this.ghost = null;
+    this.cancelModes();
     this.tutorial?.onEvent('construiu');
-    // continua no modo construção se ainda houver dinheiro
-    if (this.sim.money < this.sim.buildCost(id)) this.cancelModes();
   }
 
   private hideGhost(): void {
@@ -428,6 +430,12 @@ export class GameScene extends Phaser.Scene {
       if (tw) {
         this.cancelModes();
         this.selectTower(tw);
+        return;
+      }
+      const obs = this.sim.obstacleAtCell(cx, cy);
+      if (obs) {
+        this.cancelModes();
+        this.markObstacle(obs);
         return;
       }
       this.placeGhost(cx, cy);
@@ -589,6 +597,8 @@ export class GameScene extends Phaser.Scene {
   private onLeak(n: number): void {
     this.leakFlash.setAlpha(0.9);
     this.tweens.add({ targets: this.leakFlash, alpha: 0, duration: 450 });
+    this.tweens.killTweensOf(this.livesIcon);
+    this.livesIcon.setDisplaySize(46, 46);
     this.tweens.add({ targets: this.livesIcon, scale: this.livesIcon.scale * 1.4, yoyo: true, duration: 120 });
     this.view.number(140, MAP_Y + 30, `-${n}`, 0xff5a4a, 1.4);
   }
@@ -719,6 +729,7 @@ export class GameScene extends Phaser.Scene {
     this.ended = true;
     this.cancelModes();
     this.closePopup();
+    this.toastText.setVisible(false);
     Sfx.setLoops(0, 0);
     const won = this.sim.state === 'won';
     const st = this.sim.stars;

@@ -20,7 +20,7 @@ Paleta: verde-oliva, areia, aço escuro, laranja de sinalização e amarelo de p
 | Obstáculos | Bloqueiam construção. Toque marca como alvo; torres no alcance atiram nele (deixando de atirar nos inimigos). Ao cair liberam a casa e dão dinheiro. Só obstáculos marcados recebem dano |
 | Ondas | Contagem de 15 s entre ondas. Chamar antes = bônus de `(2 + 0,3 × onda) × segundos restantes` |
 | Prévia | O HUD mostra os tipos (e quantidades) da próxima onda |
-| Estrelas | ≥ 18 vidas = 3★; ≥ 10 = 2★; vitória com menos = 1★ |
+| Estrelas | 20 vidas (nenhuma perdida) = 3★; ≥ 10 = 2★; vitória com menos = 1★ |
 
 ## 2. Matriz de dano (`src/data/damage.json`)
 
@@ -29,7 +29,7 @@ Paleta: verde-oliva, areia, aço escuro, laranja de sinalização e amarelo de p
 | **Balístico** | **1,5** | 0,5 | 0,25 | 0,25 | 0,5 |
 | **Perfurante** | 0,25 | **1,5** | **2,0** | 1,0 | 0,5 |
 | **Explosivo** (área) | 1,25 | 1,25 | 0,75 | não atinge | 0,5 |
-| **Energia** | 0,5 | 0,5 | 0,5 | 0,75 | **2,0** |
+| **Energia** | 0,5 | 0,5 | 0,5 | 0,5 | **2,0** |
 | **Fogo** | **2,0** | 0,5 | nulo (0) | 0,5 | 0,25 |
 
 Escudo de energia: enquanto um inimigo tem escudo (do Gerador ou do chefe), o dano usa a coluna
@@ -37,7 +37,7 @@ Escudo de energia: enquanto um inimigo tem escudo (do Gerador ou do chefe), o da
 
 Leitura rápida dos papéis (por isso nenhuma torre resolve tudo):
 infantaria → Metralhadora / Lança-chamas / Morteiro; blindados → Antitanque / Sniper (Morteiro para leves em grupo);
-aéreos → Bateria Antiaérea (Laser como apoio); escudos → Laser.
+aéreos → Bateria Antiaérea; escudos → Laser.
 
 ## 3. Torres (`src/data/towers.json`)
 
@@ -52,7 +52,7 @@ Custo do nível 1 = construir; níveis 2 e 3 = custo do upgrade. Dano por tiro (
 | Sniper | Perfurante | terra | fase 5 | 150 / 110 / 170 | 36 → 88 | 0,5 → 0,6/s | 5,5 → 6,2 | N3 revela camuflados |
 | Lança-chamas | Fogo | terra | fase 6 | 130 / 100 / 160 | 18 → 42/s | contínuo | 1,8 → 2,1 | cone 50°→60°, queimadura 8→18/s por 3 s |
 | Radar de Suporte | — | — | fase 7 | 150 / 120 / 180 | — | — | 3,5 → 4,5 | revela camuflados; −15→−30% vel. de veículos; +10→+20% alcance às vizinhas (raio 2); N3 +10% dano |
-| Laser | Energia | terra+ar | fase 8 | 220 / 170 / 250 | 30 → 70/s | contínuo | 3,2 → 3,6 | dano sobe até ×2,5 (×3 no N3) em 2,5 s no mesmo alvo |
+| Laser | Energia | terra+ar | fase 8 | 220 / 170 / 250 | 30 → 70/s | contínuo | 3,2 → 3,6 | dano sobe até ×2 (×2,5 no N3) em 2,5 s no mesmo alvo |
 
 ### Custo-benefício por classe
 
@@ -75,7 +75,7 @@ em no máximo duas classes e rende menos da metade da melhor opção (ou não at
 | Caminhão Blindado | Leve | 750 | 0,95 | 30 | 2 | 5 | solta 4 soldados ao morrer |
 | Veículo de Reparo | Leve | 550 | 1,0 | 28 | 2 | 6 | cura 3%/s da vida dos aliados (raio 2,2) |
 | Unidade Camuflada | Infantaria | 200 | 1,45 | 18 | 1 | 7 | invisível até ser revelada |
-| Gerador de Escudo | Escudo | 600 | 0,95 | 32 | 2 | 8 | dá escudo (35% da vida, máx. 500) aos vizinhos |
+| Gerador de Escudo | Escudo | 600 | 0,95 | 32 | 2 | 8 | dá escudo (25% da vida, máx. 300, recarrega 25/s) aos vizinhos |
 | Tanque Pesado | Pesada | 2600 | 0,7 | 90 | 5 | 9 | — |
 | Drone Kamikaze | Aéreo | 140 | 2,3 | 10 | 1 | 11 | mergulha e desliga torres por 5 s |
 | **Escorpião do Deserto** | Pesada | 9000 | 0,55 | 300 | 20 | 5 | cortina de fumaça a cada 12 s: imune a mira 3,5 s |
@@ -85,19 +85,19 @@ em no máximo duas classes e rende menos da metade da melhor opção (ou não at
 
 A vida é multiplicada pelo `hpMult` do JSON da fase e cresce 2,5% a cada onda dentro da fase.
 A partir da fase 3 toda fase tem ~30% da vida em infantaria, ~40% em blindados e ~25% em aéreos
-(e ~10% em escudos a partir da fase 8), para exigir pelo menos 3 tipos de torre.
+(e ~7% em escudos a partir da fase 8), para exigir pelo menos 3 tipos de torre.
 
 ## 5. Habilidades especiais (`src/data/abilities.json`) — 3 por partida
 
 | Habilidade | Desbloq. | Recarga | Efeito |
 |---|---|---|---|
-| Ataque Aéreo | 1 | 60 s | 200 Explosivo, raio 1,8, após 1,2 s |
-| Minas Terrestres | 1 | 40 s | 4 minas de 110 Explosivo (raio 0,9) na estrada |
+| Ataque Aéreo | 1 | 75 s | 120 Explosivo, raio 1,8, após 1,2 s |
+| Minas Terrestres | 1 | 50 s | 4 minas de 70 Explosivo (raio 0,9) na estrada |
 | Caixa de Suprimentos | 1 | 120 s | +100 dinheiro, +2 vidas |
 | Arame Farpado | 3 | 30 s | −50% velocidade terrestre (−30% veículos), raio 1,6, 15 s |
-| Napalm | 6 | 50 s | 50 Fogo/s, raio 1,5, 6 s |
-| Pulso EMP | 9 | 50 s | 60 Energia, atordoa veículos/aéreos 3 s, apaga escudos (raio 2,5) |
-| Reforços | 12 | 60 s | esquadrão de 50 DPS Balístico, alcance 2,5, 20 s |
+| Napalm | 6 | 70 s | 25 Fogo/s, raio 1,5, 6 s |
+| Pulso EMP | 9 | 60 s | 60 Energia, atordoa veículos/aéreos 3 s, apaga escudos (raio 2,5) |
+| Reforços | 12 | 75 s | esquadrão de 50 DPS Balístico, alcance 2,5, 20 s |
 
 ## 6. Árvore de pesquisa (`src/data/research.json`)
 
@@ -174,3 +174,8 @@ HABILIDADES), Enciclopédia (torres, inimigos, matriz de dano), Configurações.
   Passo fixo de 1/60 s, RNG com semente, pools de objetos (sem alocação por frame).
 - `src/game/` — cenas Phaser, arte vetorial gerada por código (SVG), áudio WebAudio, save local.
 - `tools/` — gerador de fases, simulador com bots (estrategista e aleatório) e ajustador automático.
+
+## 11. Habilidades x torres
+
+As habilidades são apoio para emergências (recargas de 30–120 s). Elas foram calibradas para não substituir
+um tipo de torre: o teste de pares do simulador roda **com** as habilidades ligadas.

@@ -3,11 +3,11 @@
   "id": "aereo",
   "name": "Ataque Aéreo",
   "unlock": 1,
-  "cooldown": 60,
+  "cooldown": 75,
   "target": "any",
-  "desc": "Bombardeio no ponto escolhido após 1,2 s: 200 de dano Explosivo em área (não atinge aéreos).",
+  "desc": "Bombardeio no ponto escolhido após 1,2 s: 120 de dano Explosivo em área (não atinge aéreos).",
   "params": {
-   "dmg": 200,
+   "dmg": 120,
    "radius": 1.8,
    "delay": 1.2
   }
@@ -16,11 +16,11 @@
   "id": "minas",
   "name": "Minas Terrestres",
   "unlock": 1,
-  "cooldown": 40,
+  "cooldown": 50,
   "target": "path",
-  "desc": "Planta 4 minas na estrada (110 de dano Explosivo cada). Explodem no primeiro inimigo terrestre que passar.",
+  "desc": "Planta 4 minas na estrada (70 de dano Explosivo cada). Explodem no primeiro inimigo terrestre que passar.",
   "params": {
-   "dmg": 110,
+   "dmg": 70,
    "radius": 0.9,
    "count": 4,
    "life": 90
@@ -55,11 +55,11 @@
   "id": "napalm",
   "name": "Napalm",
   "unlock": 6,
-  "cooldown": 50,
+  "cooldown": 70,
   "target": "any",
-  "desc": "Incendeia a área por 6 s: 50 de dano de Fogo por segundo em inimigos terrestres.",
+  "desc": "Incendeia a área por 6 s: 25 de dano de Fogo por segundo em inimigos terrestres.",
   "params": {
-   "dps": 50,
+   "dps": 25,
    "radius": 1.5,
    "duration": 6
   }
@@ -68,7 +68,7 @@
   "id": "emp",
   "name": "Pulso EMP",
   "unlock": 9,
-  "cooldown": 50,
+  "cooldown": 60,
   "target": "any",
   "desc": "Pulso de Energia: atordoa veículos e aéreos por 3 s e apaga escudos de energia na área.",
   "params": {
@@ -81,7 +81,7 @@
   "id": "reforcos",
   "name": "Reforços",
   "unlock": 12,
-  "cooldown": 60,
+  "cooldown": 75,
   "target": "any",
   "desc": "Esquadrão temporário (20 s) com fuzis Balísticos (50 de dano/s) que atira em terra e ar.",
   "params": {

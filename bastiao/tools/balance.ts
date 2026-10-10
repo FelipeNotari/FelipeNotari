@@ -48,7 +48,7 @@ function blockedTop(level: LevelData): number {
 }
 
 function analyze(level: LevelData): LevelReport {
-  const { cap, full } = minWinningCap(level, 6);
+  const { cap, full } = minWinningCap(level, 7);
   // robustez: o estrategista com sementes diferentes (variação de deslocamentos/críticos)
   const stratSeeds = { won: 0, stars: [] as number[], lives: [] as number[] };
   for (let s = 0; s < 5; s++) {

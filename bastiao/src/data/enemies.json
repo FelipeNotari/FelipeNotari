@@ -162,11 +162,11 @@
   "intro": 8,
   "shieldAura": {
    "radius": 2.5,
-   "pct": 0.35,
-   "cap": 500,
-   "regen": 40
+   "pct": 0.25,
+   "cap": 300,
+   "regen": 25
   },
-  "desc": "Protegido por escudo de energia e projeta escudos nos vizinhos. Use Energia."
+  "desc": "Protegido por escudo de energia e projeta escudos (25% da vida, até 300) nos vizinhos. Use Energia."
  },
  {
   "id": "tanque_pesado",

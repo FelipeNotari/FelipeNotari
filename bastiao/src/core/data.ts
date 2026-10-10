@@ -38,7 +38,7 @@ export const GRID_W = 24;
 export const GRID_H = 14;
 export const DT = 1 / 60;
 export const SELL_RATE = 0.7;
-export const STAR_LIVES = [10, 18]; // >=10 vidas: 2 estrelas; >=18: 3 estrelas
+export const STAR_LIVES = [10, 20]; // >=10 vidas: 2 estrelas; 20 (nenhuma perdida): 3 estrelas
 export const MAX_LIVES_DEFAULT = 20;
 
 export function starsFor(lives: number): number {

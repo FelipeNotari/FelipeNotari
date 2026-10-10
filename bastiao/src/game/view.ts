@@ -110,7 +110,7 @@ export class BattleView {
       this.tracers.push({ img, life: 0 });
     }
     for (let i = 0; i < 46; i++) {
-      const t = scene.add.bitmapText(0, 0, 'dano', '', 26).setOrigin(0.5).setVisible(false).setDepth(D.numbers);
+      const t = scene.add.bitmapText(0, 0, 'dano', '', 26).setOrigin(0.5).setVisible(false).setDepth(D.numbers).setLetterSpacing(-9);
       this.floaters.push({ t, life: 0, vy: 0 });
     }
     // obstáculos
@@ -503,7 +503,7 @@ export class BattleView {
         case EV.MONEY:
           if (ev.k === 'onda' || ev.k === 'cedo' || ev.k === 'sup') {
             Sfx.play('coin');
-          } else if (st.numbers && ev.v >= 1) this.number(x, y - 24, `+$${Math.round(ev.v)}`, 0xffcc33, 0.9);
+          } else if (st.numbers && ev.v >= 15) this.number(x, y - 24, `+$${Math.round(ev.v)}`, 0xffcc33, 0.9);
           break;
         case EV.LEAK:
           Sfx.play('leak');
@@ -682,7 +682,7 @@ export class BattleView {
   }
 
   number(x: number, y: number, text: string, tint: number, scale = 1): void {
-    if (this.numCount > 40) return;
+    if (this.numCount > 22) return;
     let f: Floater | null = null;
     for (let i = 0; i < this.floaters.length; i++)
       if (this.floaters[i].life <= 0) {

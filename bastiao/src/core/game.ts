@@ -24,6 +24,7 @@ export class Enemy {
   maxHp = 0;
   shield = 0;
   auraShieldMax = 0;
+  auraRegen = 0;
   bossShieldMax = 0;
   path!: Path;
   pathIdx = 0;
@@ -111,6 +112,8 @@ export class Tower {
   numT = 0;
   temp = false;
   life = 0;
+  tmpDmg = 0;
+  tmpRange = 0;
   dmgDealt = 0;
   kills = 0;
   shots = 0; // contador para a camada visual (recuo)
@@ -370,7 +373,7 @@ export class Game {
     this.stat.spent += cost;
     this.towers.push(t);
     this.grid[cy * GRID_W + cx] = CELL_TOWER;
-    this.auraDirty = true;
+    this.recomputeAuras();
     this.events.push(EV.BUILD, t.x, t.y, 0, id);
     return t;
   }
@@ -382,7 +385,7 @@ export class Game {
     this.stat.spent += cost;
     t.invested += cost;
     t.level++;
-    this.auraDirty = true;
+    this.recomputeAuras();
     this.events.push(EV.UPGRADE, t.x, t.y, t.level + 1, t.def.id);
     return true;
   }
@@ -395,7 +398,7 @@ export class Game {
     const i = this.towers.indexOf(t);
     if (i >= 0) this.towers.splice(i, 1);
     this.grid[t.cy * GRID_W + t.cx] = CELL_FREE;
-    this.auraDirty = true;
+    this.recomputeAuras();
     this.events.push(EV.SELL, t.x, t.y, v, t.def.id);
     return v;
   }
@@ -521,9 +524,9 @@ export class Game {
       t.cx = -10;
       t.cy = -10;
       t.life = p.duration * dur;
+      t.tmpDmg = (p.dps / 5) * power;
+      t.tmpRange = p.range * rad;
       this.computeStats(t);
-      t.stats.dmg = (p.dps / 5) * power;
-      t.stats.range = p.range * rad;
       this.towers.push(t);
       this.events.push(EV.ABILITY, x, y, t.stats.range, def.id);
     } else if (def.id === 'suprimentos') {
@@ -746,9 +749,9 @@ export class Game {
   computeStats(t: Tower): void {
     if (t.temp) {
       const b = t.def.levels[0];
-      t.stats.dmg = b.dmg!;
+      t.stats.dmg = t.tmpDmg || b.dmg!;
       t.stats.rate = b.rate!;
-      t.stats.range = b.range;
+      t.stats.range = t.tmpRange || b.range;
       return;
     }
     const b = t.def.levels[t.level];
@@ -806,7 +809,10 @@ export class Game {
         if (e === g || !e.active || e.def.boss) continue;
         const dx = e.x - g.x;
         const dy = e.y - g.y;
-        if (dx * dx + dy * dy <= r2) e.auraShieldMax = Math.max(e.auraShieldMax, Math.min(sa.cap, e.maxHp * sa.pct));
+        if (dx * dx + dy * dy <= r2) {
+          e.auraShieldMax = Math.max(e.auraShieldMax, Math.min(sa.cap, e.maxHp * sa.pct));
+          e.auraRegen = sa.regen;
+        }
       }
     }
   }
@@ -846,10 +852,7 @@ export class Game {
         if (!e.active) continue;
       }
       // escudo do gerador
-      if (e.auraShieldMax > 0 && e.shield < e.auraShieldMax) {
-        const regen = 40;
-        e.shield = Math.min(e.auraShieldMax, e.shield + regen * dt);
-      }
+      if (e.auraShieldMax > 0 && e.shield < e.auraShieldMax) e.shield = Math.min(e.auraShieldMax, e.shield + e.auraRegen * dt);
       if (e.def.boss) {
         this.updateBoss(e, dt);
         if (!e.active) continue;
@@ -1107,7 +1110,7 @@ export class Game {
       const d2 = dx * dx + dy * dy;
       if (d2 > r2) continue;
       const f = 1 - 0.5 * (Math.sqrt(d2) / r);
-      this.damageEnemy(e, dmg * f, 'EXP', src);
+      this.damageEnemy(e, dmg * f, 'EXP', src, false);
     }
     if (hitObstacle && this.markedObs) {
       const o = this.markedObs;
@@ -1425,7 +1428,7 @@ export class Game {
             if (!e.active || !e.def.air || e === tgt) continue;
             const ex = e.x - p.x;
             const ey = e.y - p.y;
-            if (ex * ex + ey * ey <= r2) this.damageEnemy(e, p.dmg * 0.5, p.dtype, p.tower);
+            if (ex * ex + ey * ey <= r2) this.damageEnemy(e, p.dmg * 0.5, p.dtype, p.tower, false);
           }
           this.events.push(EV.EXPLOSION, p.x, p.y, p.aoe, 'ar');
         }

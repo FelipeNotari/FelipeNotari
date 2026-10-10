@@ -30,12 +30,16 @@
 12. **Obstáculos**: só recebem dano quando marcados pelo jogador (um por vez). Torres no alcance atiram neles em vez dos
     inimigos — essa é a decisão "gastar tiros agora ou defender". Barris explodem e ferem inimigos próximos.
 13. **Primeira onda**: começa sozinha após 30 s (ou quando o jogador chamar). Evita limpar o mapa de graça antes de começar.
-14. **Estrelas**: 3★ com 18+ vidas, 2★ com 10+ vidas, 1★ com menos. Pontos: vitória vale 2, cada estrela 1
+14. **Estrelas**: 3★ só com defesa perfeita (20 vidas), 2★ com 10+ vidas, 1★ com menos (jogo difícil). Pontos: vitória vale 2, cada estrela 1
     (máximo 100 no jogo). Um ramo completo de todas as árvores custa 192 pontos: é preciso escolher especialização.
 15. **"Defesa vencedora de referência"**: definida como o menor gasto com que o bot estrategista ainda vence a fase
     (busca binária). Detalhes e resultados em `BALANCE.md`.
 16. **Dificuldade por fase**: cada fase tem um multiplicador de vida dos inimigos (`hpMult`) calculado pelo ajustador
-    automático para que a fase exija uma fração crescente da renda (fase 1 mais folgada, fase 20 mais apertada, picos nos chefes).
+    automático para que a fase exija uma fração crescente da renda: 77,5% na fase 1, subindo 1,2 ponto por fase até ~85,6%
+    (limite da faixa econômica de 1,15×), com os chefes no topo.
+21. **Composição das ondas**: a partir da fase 3 toda onda traz infantaria, blindagem leve, blindagem pesada e aéreos
+    (e escudos a partir da 8). O tema de cada onda só inclina a proporção. Assim nenhuma dupla de torres resolve.
+22. **Habilidades** são apoio, não substituem torres: o teste de "nenhuma dupla vence" roda com as habilidades ligadas.
 17. **Save**: `localStorage` do próprio app (persiste ao fechar e ao atualizar o APK, pois a assinatura é a mesma).
 18. **Áudio**: tudo sintetizado com WebAudio (tiros, explosões, música marcial simples). Botão de mudo no menu e opções em
     Configurações e na pausa.

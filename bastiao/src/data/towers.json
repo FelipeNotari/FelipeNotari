@@ -257,21 +257,21 @@
     "cost": 220,
     "dmg": 30,
     "range": 3.2,
-    "rampMax": 2.5,
+    "rampMax": 2.0,
     "rampTime": 2.5
    },
    {
     "cost": 170,
     "dmg": 46,
     "range": 3.4,
-    "rampMax": 2.5,
+    "rampMax": 2.2,
     "rampTime": 2.5
    },
    {
     "cost": 250,
     "dmg": 70,
     "range": 3.6,
-    "rampMax": 3.0,
+    "rampMax": 2.5,
     "rampTime": 2.5
    }
   ]
