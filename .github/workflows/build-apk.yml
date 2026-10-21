@@ -32,6 +32,8 @@ jobs:
 
       - name: Configurar Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: "platform-tools"
 
       - name: Dar permissao ao gradlew
         run: chmod +x ./gradlew
