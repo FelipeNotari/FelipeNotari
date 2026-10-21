@@ -340,6 +340,9 @@ fun ResumoScreen(
     val totSales = totPix + totCash + totCard
     val totExpenses = monthEntries.sumOf { it.expensesCents }
     val lucro = totSales - totExpenses
+    // Media de vendas por dia: considera so os dias com venda lancada
+    val diasComVenda = monthEntries.count { it.salesTotalCents > 0 }
+    val mediaPorDia = if (diasComVenda > 0) totSales / diasComVenda else 0L
 
     var confirmDelete by remember { mutableStateOf<String?>(null) }
 
@@ -372,6 +375,13 @@ fun ResumoScreen(
 
         Spacer(Modifier.height(12.dp))
         TotalCard("Vendas do mes", totSales, Verde, big = true)
+
+        Spacer(Modifier.height(8.dp))
+        TotalCard(
+            "Media de vendas por dia ($diasComVenda ${if (diasComVenda == 1) "dia" else "dias"})",
+            mediaPorDia,
+            Verde
+        )
 
         Spacer(Modifier.height(8.dp))
         // Resumo por tipo de venda

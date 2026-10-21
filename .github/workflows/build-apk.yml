@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "claude/lanchonete-sales-expenses-app-80kcf4"
+      - "claude/daily-average-sales-balance-ak7yia"
     paths-ignore:
       - "README.md"
   workflow_dispatch:
