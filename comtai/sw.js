@@ -1,4 +1,4 @@
-const CACHE = 'comtai-v1';
+const CACHE = 'contai-v2';
 const ARQUIVOS = [
   './', './index.html', './styles.css', './app.js', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './icons/favicon-32.png'
@@ -11,7 +11,7 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys()
-      .then(ks => Promise.all(ks.filter(k => k.startsWith('comtai-') && k !== CACHE).map(k => caches.delete(k))))
+      .then(ks => Promise.all(ks.filter(k => (k.startsWith("contai-") || k.startsWith("comtai-")) && k !== CACHE).map(k => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });

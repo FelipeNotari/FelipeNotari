@@ -1,19 +1,17 @@
-# Comtai — minhas finanças (iPhone)
+# Contaí — contas, gastos e lista de compras (iPhone)
 
-App de finanças pessoais (PWA). Funciona offline; os dados ficam salvos só no aparelho.
+App de finanças (PWA) com visual feminino. Funciona offline; os dados ficam salvos só no aparelho de quem usa (quem abrir o mesmo link em outro celular não vê nada).
 
 ## Instalar no iPhone
 1. Abra no **Safari**: `https://felipenotari.github.io/FelipeNotari/comtai/`
 2. **Compartilhar** → **Adicionar à Tela de Início** → **Adicionar**.
-3. Use sempre pelo ícone da tela inicial (assim o iPhone mantém os dados salvos).
 
-## O que tem
-- **Início** — saldo do mês, entradas/saídas, saldo por conta, gastos por categoria, últimos lançamentos.
-- **+** — lançar gasto ou ganho: valor, categoria, descrição, data, conta e “repetir todo mês”.
-- **Extrato** — por mês, com busca e filtro por categoria; toque para editar, duplicar ou excluir.
-- **Metas** — objetivos de economia e limite mensal de gasto por categoria.
-- **Ajustes** — nome, moeda, cor, tema claro/escuro, categorias (nome, ícone, cor, limite), contas, lançamentos fixos, backup/restauração, exportar planilha (CSV) e apagar tudo.
-- 👁 no topo esconde os valores.
+## Telas
+- **Início** — resumo do mês (previsto, pago, pendente, % quitado, gastos variáveis, total), lista de compras, gastos por categoria e próximos vencimentos (7 dias).
+- **Contas** — contas do mês (todo mês, só este mês ou parceladas), marcar como paga, filtros Todas/Pagas/Pendentes/Vencendo, valor diferente só num mês.
+- **Gastos** — gastos variáveis por categoria (criar, editar, excluir categorias com ícone e cor).
+- **Relatório** — gráfico dos últimos 6 meses, médias, mês de maior/menor gasto e média por categoria.
+- **Ajustes** — nome, cor, tema claro/escuro, categorias, backup, restaurar, planilha CSV, apagar tudo.
 
 ## Dados
-- `localStorage`, chave `comtai.v1`. Backup em arquivo `.json` (Ajustes → Salvar backup).
+- `localStorage`, chave `contai.v1`.

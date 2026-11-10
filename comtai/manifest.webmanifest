@@ -1,13 +1,13 @@
 {
-  "name": "Comtai — Minhas Finanças",
-  "short_name": "Comtai",
+  "name": "Contaí — Minhas Finanças",
+  "short_name": "Contaí",
   "description": "Controle simples das suas finanças.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#F4F3FB",
-  "theme_color": "#5B4BDB",
+  "background_color": "#FFF5F8",
+  "theme_color": "#D9468A",
   "lang": "pt-BR",
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
