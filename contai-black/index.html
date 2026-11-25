@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Contaí</title>
+<meta name="description" content="Contas, gastos e lista de compras num só lugar.">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Contaí">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="main"></main>
+
+<button class="fab" id="fab" aria-label="Adicionar">+</button>
+
+<nav class="abas">
+  <button data-tela="inicio" class="ativa"><span>🏠</span>Início</button>
+  <button data-tela="contas"><span>🧾</span>Contas</button>
+  <button data-tela="gastos"><span>💸</span>Gastos</button>
+  <button data-tela="relatorio"><span>📊</span>Relatório</button>
+  <button data-tela="ajustes"><span>⚙️</span>Ajustes</button>
+</nav>
+
+<div class="fundo" id="fundo" hidden></div>
+<div class="folha" id="folha" hidden></div>
+<div class="aviso" id="aviso" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -32,6 +32,7 @@ jobs:
           cp -r icons _site/icons
           cp -r frigobar _site/frigobar
           cp -r comtai _site/comtai
+          cp -r contai-black _site/contai-black
           touch _site/.nojekyll
           ls -la _site
 
